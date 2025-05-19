@@ -1,0 +1,24 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    title Thông báo đăng ký tài khoản phụ huynh
+  body(style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f7fa; margin: 0; padding: 40px 0;")
+    table(align="center", width="600", cellpadding="0", cellspacing="0", style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); padding: 30px;")
+      tr
+        td(style="text-align: center; padding-bottom: 25px; border-bottom: 2px solid #004aad;")
+          h1(style="color: #004aad; font-weight: 700; font-size: 28px; margin: 0; letter-spacing: 1px;") Phòng Y Tế Trường THCS Trần Hưng Đạo
+      tr
+        td(style="padding: 30px 30px 40px 30px; color: #444; font-size: 16px; line-height: 1.6;")
+          p Kính gửi quý phụ huynh #[strong #{parentName}],
+          p Chúng tôi đã lưu thông tin của quý phụ huynh liên quan đến học sinh #[strong #{studentName}].
+          p Để thuận tiện theo dõi sức khỏe và các thông báo y tế của con, xin quý phụ huynh vui lòng truy cập vào trang web dưới đây để đăng ký tài khoản phụ huynh:
+          p(style="text-align: center; margin: 30px 0;")
+            a(href=registrationLink, style="background-color: #004aad; color: #fff; padding: 14px 26px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; display: inline-block; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.4); transition: background-color 0.3s ease;")
+              | Đăng ký tài khoản phụ huynh
+          p Sau khi đăng ký thành công, quý phụ huynh có thể cập nhật hồ sơ sức khỏe, nhận thông báo và liên hệ với phòng y tế trường học một cách nhanh chóng và tiện lợi hơn.
+          p(style="margin-top: 50px; font-size: 14px; color: #999; border-top: 1px solid #ddd; padding-top: 15px;")
+            | Phòng Y Tế Trường THCS Trần Hưng Đạo
+      tr
+        td(style="background-color: #004aad; color: #ffffff; text-align: center; padding: 18px 0; border-radius: 0 0 10px 10px; font-size: 13px; letter-spacing: 0.05em;")
+          | © 2025 Phòng Y Tế Trường THCS Trần Hưng Đạo. Bản quyền thuộc về Trường học THCS Trần Hưng Đạo.

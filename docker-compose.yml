@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: wywcorp15082004
+      POSTGRES_DB: SWD
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5433:5432' # Port host 5433 map vào 5432 container, rất chuẩn
+
+  backend:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:wywcorp15082004@db:5432/SWD # Kết nối tới db qua hostname 'db' đúng
+      NODE_ENV: production
+      PORT: 8000
+    ports:
+      - '8000:8000'
+
+volumes:
+  pgdata:

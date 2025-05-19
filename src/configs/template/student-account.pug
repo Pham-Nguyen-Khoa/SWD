@@ -1,0 +1,34 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    title Thông tin tài khoản học sinh
+  body(style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #e3e8ef; margin: 0; padding: 40px 0;")
+    table(align="center", width="600", cellpadding="0", cellspacing="0", style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); padding: 30px;")
+      tr
+        td(style="text-align: center; padding-bottom: 25px; border-bottom: 2px solid #004aad;")
+          h1(style="color: #004aad; font-weight: 700; font-size: 28px; margin: 0; letter-spacing: 1px;") Phòng Y Tế Trường THCS 
+            br 
+            | Trần Hưng Đạo 
+      tr
+        td(style="padding: 30px 30px 40px 30px; color: #444; font-size: 16px; line-height: 1.6;")
+          p(style="margin-bottom: 20px;") Chào #[strong #{studentName}],
+          p(style="margin-bottom: 30px;") Tài khoản học sinh của bạn đã được tạo thành công. Dưới đây là thông tin đăng nhập của bạn:
+          table(cellpadding="12", cellspacing="0", style="width: 100%; background-color: #e8f0fe; border-radius: 8px; font-size: 16px; color: #004aad;")
+            tr
+              td(style="font-weight: 600; width: 40%;") Email đăng nhập:
+              td #{studentEmail}
+            tr
+              td(style="font-weight: 600;") Mật khẩu tạm thời:
+              td #{rawPassword}
+          p(style="font-style: italic; margin-top: 25px; margin-bottom: 30px; color: #666; font-size: 14px;") Vui lòng đăng nhập lần đầu và đổi mật khẩu để bảo mật tài khoản.
+          p(style="margin-bottom: 30px;") Truy cập vào trang web của trường tại:
+            a(href="https://yourwebsite.com", style="color: #007bff; text-decoration: none;") https://yourwebsite.com
+          p(style="margin-bottom: 10px; font-size: 16px; color: #333;") Chúc bạn một ngày học tập thật hiệu quả!
+          p(style="margin-top: 50px; font-size: 14px; color: #999; border-top: 1px solid #ddd; padding-top: 15px;")
+            | Trân trọng,
+            br
+            | Phòng Y Tế Trường THCS Trần Hưng Đạo
+      tr
+        td(style="background-color: #004aad; color: #ffffff; text-align: center; padding: 18px 0; border-radius: 0 0 10px 10px; font-size: 13px; letter-spacing: 0.05em;")
+          | © 2025 Phòng Y Tế Trường THCS Trần Hưng Đạo. Bản quyền thuộc về Trường học THCS Trần Hưng Đạo.

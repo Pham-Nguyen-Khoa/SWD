@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountStatus {
+  ACTIVE
+  PENDING
+  Block
+}
+
+model Account {
+  id        Int           @id @default(autoincrement())
+  fullname  String
+  email     String        @unique
+  password  String
+  status    AccountStatus @default(ACTIVE)
+  roleID    Int
+  role      Role          @relation(fields: [roleID], references: [id])
+  createdAt DateTime?     @default(now()) @db.Timestamptz(3)
+  createdBy Int?
+  updatedAt DateTime?     @updatedAt @db.Timestamptz(3)
+  updatedBy Int?
+  Parent    Parent?
+  Student   Student?
+}
+
+model Role {
+  id    Int       @id @default(autoincrement())
+  name  String    @unique
+  users Account[]
+}
+
+model Student {
+  id           Int         @id @default(autoincrement())
+  dateOfBirth  DateTime
+  class        String
+  gender       String
+  accountID    Int         @unique
+  account      Account     @relation(fields: [accountID], references: [id])
+  parentId     Int?
+  Parent       Parent?     @relation(fields: [parentId], references: [id])
+  createdAt    DateTime?   @default(now()) @db.Timestamptz(3)
+  createdBy    Int?
+  updatedAt    DateTime?   @updatedAt @db.Timestamptz(3)
+  updatedBy    Int?
+  parentInfoID Int
+  ParentInfo   ParentInfo? @relation(fields: [parentInfoID], references: [id])
+}
+
+model ParentInfo {
+  id           Int       @id @default(autoincrement())
+  fullname     String
+  email        String    @unique
+  phone        String
+  isRegistered Boolean   @default(false)
+  student      Student[]
+  createdAt    DateTime? @default(now()) @db.Timestamptz(3)
+  createdBy    Int?
+}
+
+model Parent {
+  id        Int       @id @default(autoincrement())
+  fullname  String
+  email     String    @unique
+  phone     String
+  student   Student[]
+  accountID Int       @unique
+  account   Account   @relation(fields: [accountID], references: [id])
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  createdBy Int?
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+  updatedBy Int?
+}
