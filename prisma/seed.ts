@@ -25,16 +25,24 @@ async function main() {
   const plainPassword = '123456';
   const saltRounds = 10;
 
-  const hashedPassword = await hash(plainPassword, saltRounds);
-  await prisma.account.create({
-    data: {
-      fullname: 'admin',
-      email: 'admin@gmail.com',
-      password: hashedPassword,
-      roleID: 1
+  const existingAdmin = await prisma.account.findUnique({
+    where: { email: 'admin@gmail.com' },
+  });
 
-    }
-  })
+  if (!existingAdmin) {
+    const hashedPassword = await hash(plainPassword, saltRounds);
+    await prisma.account.create({
+      data: {
+        fullname: 'admin',
+        email: 'admin@gmail.com',
+        password: hashedPassword,
+        roleID: 1,
+      },
+    });
+    console.log('Admin account created');
+  } else {
+    console.log('Admin account already exists, skipping creation');
+  }
 
   console.log('Seed roles done!');
 }

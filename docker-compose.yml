@@ -25,5 +25,14 @@ services:
     ports:
       - '8000:8000'
 
+  seed:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:wywcorp15082004@db:5433/SWD
+    command: npm run seed
+    # Chỉ chạy 1 lần để seed dữ liệu
+
 volumes:
   pgdata:
