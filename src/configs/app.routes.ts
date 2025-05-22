@@ -1,5 +1,5 @@
 const authRoot = 'auth';
-const user = 'user';
+const user = 'account';
 
 const baseRoutes = (root: string) => {
     return {
@@ -32,7 +32,10 @@ export const routesV1 = {
     admin: {
         user: {
             ...baseRoutes(`${user}`),
-            importStudent: `/import-student`
+            changeStatus: `/${user}/change-status/:id/:status`,
+            importStudent: `/import-student`,
+            createStudent: `/student`,
+            updateStudent: `/student/:idStudent`
         },
 
     },

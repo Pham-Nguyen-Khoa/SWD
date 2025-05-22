@@ -45,18 +45,44 @@ export const resourcesV1 = {
         CREATE_USER: {
             name: 'Create user',
             displayName: 'Create user',
-            parent: 'User',
+            parent: 'Account',
         },
         GET_ALL_USERS: {
             name: 'Get All User',
             displayName: 'Get All User',
-            parent: 'User',
+            parent: 'Account',
+        },
+        GET_DETAIL_USER: {
+            name: 'Get Detail User',
+            displayName: 'Get Detail User',
+            parent: 'Account',
+        },
+        UPDATE_STATUS_USER: {
+            name: 'Change Status User',
+            displayName: 'Change status user',
+            parent: 'Account',
+        },
+        DELETE_USER: {
+            name: 'Delete User',
+            displayName: 'Delete User',
+            parent: 'Account',
         },
         IMPORT_STUDENT: {
             name: 'Import Student',
             displayName: 'Import Student',
-            parent: 'User',
+            parent: 'Student',
         },
+        CREATE_STUDENT: {
+            name: 'Create Student',
+            displayName: 'Create Student',
+            parent: 'Student',
+        },
+        UPDATE_STUDENT: {
+            name: 'Update Student',
+            displayName: 'Update Student',
+            parent: 'Student',
+        },
+
 
     }
 

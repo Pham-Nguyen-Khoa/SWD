@@ -18,13 +18,10 @@ export class GetAllUserAdminController {
 
     ) {
     }
-
     @ApiOperation({ summary: resourcesV1.Admin.GET_ALL_USERS.displayName })
     @ApiBearerAuth()
-
-
-    // @UseGuards(JWTGuard, RolesGuard)
-    // @Roles(1)
+    // @UseGuards(JWTGuard, RolesGuard) 
+    @Roles(1,2,3)
     @Get(routesV1.admin.user.root)
     async getAllUser(@Query() query: GetAllUserQuery) {
         return await this.getAllUserService.getAll(query)

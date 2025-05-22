@@ -18,11 +18,11 @@ export class CreateUserAdminController {
     ) { }
     @ApiOperation({ summary: resourcesV1.Admin.CREATE_USER.displayName })
     @ApiBearerAuth()
-
-    @UseGuards(JWTGuard, RolesGuard)
+    // @UseGuards(JWTGuard, RolesGuard)
     @Roles(1)
     @Post(routesV1.admin.user.root)
-    async create(@Body() data: CreateUserDto, @GetUser() user) {
-        return await this.createUserService.create(data, user)
+    // async create(@Body() data: CreateUserDto, @GetUser() user) {
+    async create(@Body() data: CreateUserDto) {
+        return await this.createUserService.create(data)
     }
 }
