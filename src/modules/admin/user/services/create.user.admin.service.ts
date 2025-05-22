@@ -9,7 +9,7 @@ export class CreateUserService {
     constructor(
         private readonly prisma: PrismaService
     ) { }
-    async create(data: CreateUserDto, reqUser) {
+    async create(data: CreateUserDto) {
         try {
             // check Email Exist 
             const user = await this.prisma.account.findUnique({
@@ -17,25 +17,22 @@ export class CreateUserService {
                     email: data.email
                 }
             })
-            console.log(user)
-            if (user) {
-                throw errorResponse(400, 'Email đã tồn tại')
+            if (user) {     
+                return errorResponse(400, `Email ${user.email} đã tồn tại`)
             }
             const hashPassword = await hash(data.password, 10);
-            console.log(hashPassword)
-            console.log(reqUser)
             const newUser = await this.prisma.account.create({
                 data: {
                     fullname: data.fullname,
                     email: data.email,
                     password: hashPassword,
                     roleID: Number(data.roleID),
-                    createdBy: reqUser.id
+                    // createdBy: reqUser.id
                 }
             })
             const { password, ...result } = newUser
             if (!newUser) {
-                throw new BadRequestException('Tạo user không thành công');
+                return new BadRequestException('Tạo user không thành công');
             }
             return successResponse(200, result, 'Tạo user  thành công')
         } catch (error) {

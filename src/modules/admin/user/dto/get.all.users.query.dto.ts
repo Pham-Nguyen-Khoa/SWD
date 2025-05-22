@@ -3,6 +3,14 @@ import { Transform } from "class-transformer";
 import { IsIn, IsNumber, IsNumberString, IsOptional, IsString } from "class-validator";
 import { TransformToInt } from "src/common/utils/transfomers";
 
+export enum RoleID {
+    Admin = 1,
+    Manager = 2,
+    Nurse = 3,
+    Parent = 4,
+    Student = 5,
+}
+
 
 export class GetAllUserQuery {
     @ApiPropertyOptional({
@@ -14,12 +22,17 @@ export class GetAllUserQuery {
     search?: string
 
     @ApiPropertyOptional({
-        description: 'Tìm kiếm theo role ( Admin = 1 , User = 2) ',
-        example: 2
+        description: 'Tìm kiếm theo role (1=Admin, 2=Manager, 3=Nurse, 4=Parent, 5=Student)',
+        example: 2,
+        enum: RoleID,
+        enumName: 'roleID',
     })
     @IsOptional()
     @TransformToInt()
     @IsNumber()
+    @IsIn([1, 2, 3, 4, 5], {
+        message: 'roleID phải là một trong các giá trị: 1, 2, 3, 4, 5',
+    })
     roleID?: string
 
     @ApiPropertyOptional({

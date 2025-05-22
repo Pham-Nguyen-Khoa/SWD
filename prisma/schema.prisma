@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,24 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum AccountStatus {
-  ACTIVE
-  PENDING
-  Block
-}
-
 model Account {
-  id        Int           @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   fullname  String
-  email     String        @unique
+  email     String    @unique
   password  String
-  status    AccountStatus @default(ACTIVE)
+  status    String    @default("ACTIVE")
   roleID    Int
-  role      Role          @relation(fields: [roleID], references: [id])
-  createdAt DateTime?     @default(now()) @db.Timestamptz(3)
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
   createdBy Int?
-  updatedAt DateTime?     @updatedAt @db.Timestamptz(3)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
   updatedBy Int?
+  role      Role      @relation(fields: [roleID], references: [id])
   Parent    Parent?
   Student   Student?
 }
@@ -42,20 +30,21 @@ model Role {
 }
 
 model Student {
-  id           Int         @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
+  student_code String    @unique
   dateOfBirth  DateTime
   class        String
   gender       String
-  accountID    Int         @unique
-  account      Account     @relation(fields: [accountID], references: [id])
+  accountID    Int        @unique
   parentId     Int?
-  Parent       Parent?     @relation(fields: [parentId], references: [id])
-  createdAt    DateTime?   @default(now()) @db.Timestamptz(3)
+  createdAt    DateTime?  @default(now()) @db.Timestamptz(3)
   createdBy    Int?
-  updatedAt    DateTime?   @updatedAt @db.Timestamptz(3)
+  updatedAt    DateTime?  @updatedAt @db.Timestamptz(3)
   updatedBy    Int?
   parentInfoID Int
-  ParentInfo   ParentInfo? @relation(fields: [parentInfoID], references: [id])
+  account      Account    @relation(fields: [accountID], references: [id])
+  Parent       Parent?    @relation(fields: [parentId], references: [id])
+  ParentInfo   ParentInfo @relation(fields: [parentInfoID], references: [id])
 }
 
 model ParentInfo {
@@ -64,9 +53,9 @@ model ParentInfo {
   email        String    @unique
   phone        String
   isRegistered Boolean   @default(false)
-  student      Student[]
   createdAt    DateTime? @default(now()) @db.Timestamptz(3)
   createdBy    Int?
+  student      Student[]
 }
 
 model Parent {
@@ -74,11 +63,11 @@ model Parent {
   fullname  String
   email     String    @unique
   phone     String
-  student   Student[]
   accountID Int       @unique
-  account   Account   @relation(fields: [accountID], references: [id])
   createdAt DateTime? @default(now()) @db.Timestamptz(3)
   createdBy Int?
   updatedAt DateTime? @updatedAt @db.Timestamptz(3)
   updatedBy Int?
+  account   Account   @relation(fields: [accountID], references: [id])
+  student   Student[]
 }

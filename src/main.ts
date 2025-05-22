@@ -1,4 +1,4 @@
-import './configs/pg-type-parser'; 
+import './configs/pg-type-parser';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { setupSwagger } from "./configs/swagger.config"
@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import * as bodyParser from 'body-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { types } from 'pg';
+// import { NoLogHttpExceptionFilter } from './configs/no-log-http-exception.filter';
 // import * as dotenv from 'dotenv';
 // import * as bodyParser from 'body-parser';
 // dotenv.config();
@@ -24,6 +25,8 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  // app.useGlobalFilters(new NoLogHttpExceptionFilter());
 
   // Tăng giới hạn kích thước payload
   app.use(bodyParser.json({ limit: '50mb' }));

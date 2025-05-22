@@ -7,6 +7,7 @@ import { badRequest, errorResponse, notFound, successResponse } from "src/common
 import { MailService } from "src/modules/common/mail/mail.service";
 import { join } from "path";
 import * as pug from 'pug';
+import { generateStudentCode } from "src/helpers/studentCode";
 
 const rawPassword = "123456";
 
@@ -38,6 +39,11 @@ export class ImportStudentService {
                 if (!studentName || !studentEmail || !dateOfBirth || !className || !gender || !parentName || !parentEmail || !parentPhone) {
                     // throw new BadRequestException(`Trong file excel không được bỏ trống trường tại hàng ${index + 2}`);
                     throw new NotFoundException(`Trong file excel không được bỏ trống trường tại hàng ${index + 2}`);
+                }
+                // Check email học sinh đã tồn tại chưa
+                const existingAccount = await this.prisma.account.findUnique({ where: { email: studentEmail } });
+                if (existingAccount) {
+                    throw errorResponse(400, `Email ${studentEmail} của học sinh tại hàng ${index + 2} đã tồn tại trong hệ thống`);
                 }
             }
             // End Check file excel có bị trống chỗ nào không 
@@ -112,9 +118,11 @@ export class ImportStudentService {
                     throw errorResponse(400, `Tạo tài khoản cho học sinh có email ${studentEmail} tại hàng ${index + 2} bị lỗi`)
                 }
                 // Tạo bảng ghi Student 
+                const student_code = await generateStudentCode(this.prisma);
                 const student = await this.prisma.student.create({
                     data: {
                         accountID: account.id,
+                        student_code,
                         parentInfoID: parentInfoID,
                         dateOfBirth,
                         class: className,
@@ -126,20 +134,9 @@ export class ImportStudentService {
                     await this.mailService.sendStudentAccountMail(studentEmail, studentName, rawPassword);
                     console.log(`Gửi mail thành công tới ${studentEmail}`);
                 } catch (error) {
-                      console.error(`Gửi mail tới ${studentEmail} thất bại:`, error);
+                    console.error(`Gửi mail tới ${studentEmail} thất bại:`, error);
                     throw new BadRequestException(error)
                 }
-
-
-
-
-
-
-                // Admin - 1
-                // Manager - 2
-                // School Nurse - 3 
-                // Parent - 4 
-                // Student - 5 
 
                 results.push({ username: studentEmail, password: rawPassword });
             }
