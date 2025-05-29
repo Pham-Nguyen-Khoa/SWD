@@ -23,29 +23,41 @@ export class DeleteUserAdminService {
             if (!account) {
                 return errorResponse(400, `Tài khoản id ${id} không tồn tại`);
             }
-            if (account.Student) {
-                await this.prisma.student.delete({
-                    where: { accountID: id }
-                })
-                if (account.Student.parentId) {
-                    await this.prisma.parent.delete({
+
+            // Nếu là học sinh hoặc phụ huynh xử lý nhiều hơn
+            await this.prisma.$transaction(async (tx) => {
+                if (account.Student) {
+                    await tx.studentClassAssignment.deleteMany({
+                        where: { studentID: account.Student.id },
+                    });
+
+                    await tx.student.delete({
+                        where: { accountID: id }
+                    })
+                    if (account.Student.parentId) {
+                        await tx.parent.delete({
+                            where: { accountID: id }
+                        })
+                    }
+                } else if (account.Parent) {
+                    await tx.student.updateMany({
+                        where: { parentId: account.Parent.id },
+                        data: {
+                            parentId: null
+                        }
+                    })
+                    await tx.parent.delete({
                         where: { accountID: id }
                     })
                 }
-            } else if (account.Parent) {
-                await this.prisma.student.updateMany({
-                    where: { parentId: account.Parent.id },
-                    data: {
-                        parentId: null
-                    }
+                // Cuối cùng vẫn là xóa account đó
+                await tx.account.delete({
+                    where: { id }
                 })
-                await this.prisma.parent.delete({
-                    where: { accountID: id }
-                })
-            }
-            await this.prisma.account.delete({
-                where: { id }
             })
+
+
+
             return successResponse(200, 'Xóa tài khoản thành công')
         } catch (error) {
             console.log(error)

@@ -27,6 +27,7 @@ export class CreateStudentAdminController {
     @Post(routesV1.admin.user.createStudent)
     async createStudent(@Body() data: CreateStudentDto, @GetUser() user) {
         return await this.createStudentAdminService.create(data, user)
+        // return "tạo hs"
     }
 
 }

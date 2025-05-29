@@ -25,16 +25,24 @@ export class UpdateStudentDto {
     @IsDateString()
     dateOfBirth?: string;
 
-    @ApiPropertyOptional({ example: '12C11', description: 'Tên lớp học' })
-    @IsOptional()
-    @IsString()
-    className?: string
-
     @ApiPropertyOptional({ example: 'Nam', description: 'Giới tính' })
     @IsOptional()
     @IsEnum(['Nam', 'Nữ'])
     @IsString()
     gender?: string
+
+
+    @ApiPropertyOptional({ example: '12C11', description: 'Tên lớp' })
+    @IsOptional()
+    @IsString()
+    className?: string;        
+
+    // @ApiPropertyOptional({ example: '2025-2026', description: 'Năm học' })
+    // @IsOptional()
+    // @IsString()
+    // academicYearName?: string; 
+
+
 
 
     @ApiPropertyOptional({ example: 'Phụ Huynh A', description: 'Tên phụ huynh' })

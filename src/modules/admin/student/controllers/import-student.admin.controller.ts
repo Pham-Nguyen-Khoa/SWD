@@ -29,6 +29,7 @@ export class ImportStudentAdminController {
         }),
     )
     async importStudent(@UploadedFile() file: any,@GetUser() user) {
-        return this.importStudentService.importStudent(file.path,user)
+        // return this.importStudentService.importStudent(file.path,user)
+        return "import học sinh"
     }
 }

@@ -21,6 +21,7 @@ export class GetAllUserQuery {
     @IsString()
     search?: string
 
+
     @ApiPropertyOptional({
         description: 'Tìm kiếm theo role (1=Admin, 2=Manager, 3=Nurse, 4=Parent, 5=Student)',
         example: 2,
@@ -63,7 +64,7 @@ export class GetAllUserQuery {
 
     @ApiPropertyOptional({
         description: 'Thứ tự sắp xếp: asc ( tăng dần ) hoặc desc ( giảm dần )',
-        example: 'desc',
+        example: 'asc',
     })
     @IsOptional()
     @IsIn(['asc', 'desc'])

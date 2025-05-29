@@ -29,6 +29,7 @@ export class GetDetailUserAdminController {
     @Get(routesV1.admin.user.getOne)
     async getDetailUser(@Param('id') id: number) {
         return await this.getDetailService.getDetailUser(+id)
+        // return "Lấy chi tiết user"
     }
 
 }

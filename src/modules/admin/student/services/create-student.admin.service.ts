@@ -18,8 +18,30 @@ export class CreateStudentAdminService {
 
     async create(data: CreateStudentDto, reqUser) {
         try {
-            // Kiểm tra phụ huynh này đã tồn tại chưa
+
             const { fullname, email, gender, className, dateOfBirth, parentEmail, parentName, parentPhone } = data
+
+            // Kiểm tra học sinh đã tồn tại chưa 
+            const studentExist = await this.prisma.account.findUnique({
+                where: {
+                    email: email
+                }
+            })
+            if (studentExist) {
+                throw errorResponse(400, `Học sinh ${studentExist.fullname} đã có tài khoản`)
+            }
+            const [classEntity, academicYearEntity] = await Promise.all([
+                this.prisma.class.findUnique({ where: { name: className } }),
+                this.prisma.academicYear.findFirst({
+                    orderBy: {
+                        createdAt: "desc"
+                    },
+                }),
+            ]);
+            if (!classEntity) return errorResponse(200, 'Lớp không tồn tại');
+            if (!academicYearEntity) return errorResponse(200, 'Năm học không tồn tại');
+            // Kiểm tra phụ huynh này đã tồn tại chưa
+
             const parentInfo = await this.prisma.parentInfo.findUnique({
                 where: {
                     email: parentEmail
@@ -36,25 +58,14 @@ export class CreateStudentAdminService {
                     }
                 })
                 parentInfoID = newParentInfo.id
-                try {
-                    await this.mailService.sendParentRegistrationMail(parentEmail, parentName, fullname, 'http://localhost:5173/');
-                    console.log(`Gửi mail thành công tới ${parentEmail}`);
-                } catch (error) {
-                    console.error(`Gửi mail tới ${parentEmail} thất bại:`, error);
-                }
+                this.mailService.sendParentRegistrationMail(parentEmail, parentName, fullname, 'http://localhost:5173/').catch(err => {
+                    console.error(`Gửi mail phụ huynh thất bại:`, err);
+                });
             } else {
                 parentInfoID = parentInfo.id
 
             }
-            // Kiểm tra học sinh đã tồn tại chưa 
-            const studentExist = await this.prisma.account.findUnique({
-                where: {
-                    email: email
-                }
-            })
-            if (studentExist) {
-                throw errorResponse(400, `Học sinh ${studentExist.fullname} đã có tài khoản`)
-            }
+
             const hashedPassword = await hash(rawPassword, 10)
             const account = await this.prisma.account.create({
                 data: {
@@ -66,24 +77,28 @@ export class CreateStudentAdminService {
                 }
             })
             const student_code = await generateStudentCode(this.prisma);
+
             const newStudent = await this.prisma.student.create({
                 data: {
                     dateOfBirth: DateHelper.parseDateStringToDate(dateOfBirth),
-                    class: className,
                     gender,
                     accountID: account.id,
                     parentInfoID: parentInfoID,
                     createdBy: reqUser.id,
-                    student_code
+                    student_code,
                 }
             })
-            try {
-                await this.mailService.sendStudentAccountMail(email, fullname, rawPassword);
-                console.log(`Gửi mail thành công tới ${email}`);
-            } catch (error) {
-                console.error(`Gửi mail tới ${email} thất bại:`, error);
-                throw new BadRequestException(error)
-            }
+            this.mailService.sendStudentAccountMail(email, fullname, rawPassword).catch(err => {
+                console.error(`Gửi mail học sinh thất bại:`, err);
+            });
+            // Tạo phân lớp
+            await this.prisma.studentClassAssignment.create({
+                data: {
+                    studentID: newStudent.id,
+                    academicYearID: academicYearEntity.id,
+                    classID: classEntity.id,
+                },
+            });
 
             return successResponse(200, data, 'Tạo tài khoản học sinh thành công')
         } catch (error) {

@@ -17,135 +17,148 @@ export class ImportStudentService {
     constructor(private readonly prisma: PrismaService,
         private readonly mailService: MailService
     ) { }
-    async importStudent(filePath: string, reqUser) {
-        try {
-            const workbook = XLSX.readFile(filePath);
-            const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const rawData = XLSX.utils.sheet_to_json(sheet);
-            const clearData = cleanAndFormatExcelData(rawData);
-            const results: any = [];
-            // Check file excel có bị trống chỗ nào không 
-            for (const [index, row] of (clearData as any[]).entries()) {
-                // const { fullName, dateOfBirth, class: className, email } = row;
-                const studentName = row['Tên học sinh'];
-                const studentEmail = row['Email'];
-                const dateOfBirth = row['Ngày sinh'];
-                const className = row['Lớp'];
-                const gender = row['Giới tính'];
+    // async importStudent(filePath: string, reqUser) {
+    //     try {
+    //         const workbook = XLSX.readFile(filePath);
+    //         const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    //         const rawData = XLSX.utils.sheet_to_json(sheet);
+    //         const clearData = cleanAndFormatExcelData(rawData);
+    //         const results: any = [];
+    //         // Check file excel có bị trống chỗ nào không 
+    //         for (const [index, row] of (clearData as any[]).entries()) {
+    //             // const { fullName, dateOfBirth, class: className, email } = row;
+    //             const studentName = row['Tên học sinh'];
+    //             const studentEmail = row['Email'];
+    //             const dateOfBirth = row['Ngày sinh'];
+    //             const className = row['Lớp'];
+    //             const gender = row['Giới tính'];
+    //             const academicYear = row['Năm học'];
 
-                const parentName = row['Tên phụ huynh'];
-                const parentEmail: string = row['Email phụ huynh'];
-                const parentPhone = row['Số điện thoại'];
-                if (!studentName || !studentEmail || !dateOfBirth || !className || !gender || !parentName || !parentEmail || !parentPhone) {
-                    // throw new BadRequestException(`Trong file excel không được bỏ trống trường tại hàng ${index + 2}`);
-                    throw new NotFoundException(`Trong file excel không được bỏ trống trường tại hàng ${index + 2}`);
-                }
-                // Check email học sinh đã tồn tại chưa
-                const existingAccount = await this.prisma.account.findUnique({ where: { email: studentEmail } });
-                if (existingAccount) {
-                    throw errorResponse(400, `Email ${studentEmail} của học sinh tại hàng ${index + 2} đã tồn tại trong hệ thống`);
-                }
-            }
-            // End Check file excel có bị trống chỗ nào không 
+    //             const parentName = row['Tên phụ huynh'];
+    //             const parentEmail: string = row['Email phụ huynh'];
+    //             const parentPhone = row['Số điện thoại'];
+    //             if (!studentName || !studentEmail || !dateOfBirth || !className || !gender || !parentName || !parentEmail || !parentPhone) {
+    //                 // throw new BadRequestException(`Trong file excel không được bỏ trống trường tại hàng ${index + 2}`);
+    //                 throw new NotFoundException(`Trong file excel không được bỏ trống trường tại hàng ${index + 2}`);
+    //             }
+    //             // Check email học sinh đã tồn tại chưa
+    //             const existingAccount = await this.prisma.account.findUnique({ where: { email: studentEmail } });
+    //             if (existingAccount) {
+    //                 throw errorResponse(400, `Email ${studentEmail} của học sinh tại hàng ${index + 2} đã tồn tại trong hệ thống`);
+    //             }
+    //         }
+    //         // End Check file excel có bị trống chỗ nào không 
 
-            // Bắt đầu xử lý
-            for (const [index, row] of (clearData as any[]).entries()) {
-                // const { fullName, dateOfBirth, class: className, email } = row;
-                const studentName = row['Tên học sinh'];
-                const studentEmail = row['Email'];
-                const dateOfBirth = row['Ngày sinh'];
-                const className = row['Lớp'];
-                const gender = row['Giới tính'];
-
-                const parentName = row['Tên phụ huynh'];
-                const parentEmail: string = row['Email phụ huynh'];
-                const parentPhone = row['Số điện thoại'];
-                // End Check file excel có bị trống chỗ nào không 
-
-                // Lưu thông tin parent tạm vào bảng parentInfo 
-                /* Bước 1 - Kiểm tra đã có thông tin parent tạm này chưa vì có thể 1 cha mẹ có nhiều học sinh */
-                const parentInfoExist = await this.prisma.parentInfo.findUnique({
-                    where: { email: parentEmail }
-                })
-                let parentInfoID: number;
-                if (!parentInfoExist) {
-                    try {
-                        const parentInfo = await this.prisma.parentInfo.create({
-                            data: {
-                                fullname: parentName,
-                                email: parentEmail,
-                                phone: parentPhone
-                            }
-                        })
-                        parentInfoID = parentInfo.id
-                        try {
-                            await this.mailService.sendParentRegistrationMail(parentEmail, parentName, studentName, 'http://localhost:5173/');
-                            console.log(`Gửi mail thành công tới ${parentEmail}`);
-                        } catch (error) {
-                            console.error(`Gửi mail tới ${parentEmail} thất bại:`, error);
-                        }
-                    } catch (error) {
-                        console.log(error)
-                        throw new BadRequestException(error)
-                    }
-                } else {
-                    parentInfoID = parentInfoExist.id
-                }
+    //         // Bắt đầu xử lý
+    //         for (const [index, row] of (clearData as any[]).entries()) {
+    //             // const { fullName, dateOfBirth, class: className, email } = row;
+    //             const studentName = row['Tên học sinh'];
+    //             const studentEmail = row['Email'];
+    //             const dateOfBirth = row['Ngày sinh'];
+    //             const className = row['Lớp'];
+    //             const gender = row['Giới tính'];
+    //             const academicYear = row['Năm học'];
 
 
-                // Kiểm tra xem email của học sinh đã tồn tại trong hệ thống chưa 
-                const existingAccount = await this.prisma.account.findUnique({
-                    where: { email: studentEmail },
-                });
-                if (existingAccount) {
-                    throw errorResponse(400, `Email ${studentEmail} của học sinh  tại hàng  ${index + 2} đã tồn tại trong hệ thống`)
-                }
-                // End  Kiểm tra xem email của học sinh đã tồn tại trong hệ thống chưa 
+    //             const parentName = row['Tên phụ huynh'];
+    //             const parentEmail: string = row['Email phụ huynh'];
+    //             const parentPhone = row['Số điện thoại'];
+    //             // End Check file excel có bị trống chỗ nào không 
 
-                const hashedPassword = await hash(rawPassword, 10);
+    //             // Lưu thông tin parent tạm vào bảng parentInfo 
+    //             /* Bước 1 - Kiểm tra đã có thông tin parent tạm này chưa vì có thể 1 cha mẹ có nhiều học sinh */
+    //             const parentInfoExist = await this.prisma.parentInfo.findUnique({
+    //                 where: { email: parentEmail }
+    //             })
+    //             let parentInfoID: number;
+    //             if (!parentInfoExist) {
+    //                 try {
+    //                     const parentInfo = await this.prisma.parentInfo.create({
+    //                         data: {
+    //                             fullname: parentName,
+    //                             email: parentEmail,
+    //                             phone: parentPhone
+    //                         }
+    //                     })
+    //                     parentInfoID = parentInfo.id
+    //                     try {
+    //                         await this.mailService.sendParentRegistrationMail(parentEmail, parentName, studentName, 'http://localhost:5173/');
+    //                         console.log(`Gửi mail thành công tới ${parentEmail}`);
+    //                     } catch (error) {
+    //                         console.error(`Gửi mail tới ${parentEmail} thất bại:`, error);
+    //                     }
+    //                 } catch (error) {
+    //                     console.log(error)
+    //                     throw new BadRequestException(error)
+    //                 }
+    //             } else {
+    //                 parentInfoID = parentInfoExist.id
+    //             }
 
-                // Tạo account Student 
-                const account = await this.prisma.account.create({
-                    data: {
-                        fullname: studentName,
-                        email: studentEmail,
-                        password: hashedPassword,
-                        roleID: 5,
-                        createdBy: reqUser.id
-                    }
-                })
-                if (!account) {
-                    throw errorResponse(400, `Tạo tài khoản cho học sinh có email ${studentEmail} tại hàng ${index + 2} bị lỗi`)
-                }
-                // Tạo bảng ghi Student 
-                const student_code = await generateStudentCode(this.prisma);
-                const student = await this.prisma.student.create({
-                    data: {
-                        accountID: account.id,
-                        student_code,
-                        parentInfoID: parentInfoID,
-                        dateOfBirth,
-                        class: className,
-                        gender,
-                        createdBy: reqUser.id
-                    }
-                })
-                try {
-                    await this.mailService.sendStudentAccountMail(studentEmail, studentName, rawPassword);
-                    console.log(`Gửi mail thành công tới ${studentEmail}`);
-                } catch (error) {
-                    console.error(`Gửi mail tới ${studentEmail} thất bại:`, error);
-                    throw new BadRequestException(error)
-                }
 
-                results.push({ username: studentEmail, password: rawPassword });
-            }
-            return successResponse(200, results, 'Import file excel thành công')
-        } catch (error) {
-            throw error;
-            // throw new BadRequestException()
-        }
-    }
+    //             // Kiểm tra xem email của học sinh đã tồn tại trong hệ thống chưa 
+    //             const existingAccount = await this.prisma.account.findUnique({
+    //                 where: { email: studentEmail },
+    //             });
+    //             if (existingAccount) {
+    //                 throw errorResponse(400, `Email ${studentEmail} của học sinh  tại hàng  ${index + 2} đã tồn tại trong hệ thống`)
+    //             }
+    //             // End  Kiểm tra xem email của học sinh đã tồn tại trong hệ thống chưa 
+
+    //             const hashedPassword = await hash(rawPassword, 10);
+
+    //             // Tạo account Student 
+    //             const account = await this.prisma.account.create({
+    //                 data: {
+    //                     fullname: studentName,
+    //                     email: studentEmail,
+    //                     password: hashedPassword,
+    //                     roleID: 5,
+    //                     createdBy: reqUser.id
+    //                 }
+    //             })
+    //             if (!account) {
+    //                 throw errorResponse(400, `Tạo tài khoản cho học sinh có email ${studentEmail} tại hàng ${index + 2} bị lỗi`)
+    //             }
+    //             // Tạo bảng ghi Student 
+    //             const student_code = await generateStudentCode(this.prisma);
+    //             const academicYearID = await this.prisma.academicYear.findUnique({
+    //                 where: {
+    //                     name: academicYear
+    //                 },
+    //                 select: { id: true }
+    //             })
+    //             if (!academicYearID) {
+    //                 return errorResponse(200, 'Năm học không tồn tại')
+    //             }
+    //             const student = await this.prisma.student.create({
+    //                 data: {
+    //                     accountID: account.id,
+    //                     student_code,
+    //                     parentInfoID: parentInfoID,
+    //                     dateOfBirth,
+    //                     class: className,
+    //                     gender,
+    //                     createdBy: reqUser.id,
+    //                     academicYearID: academicYearID.id
+    //                 }
+    //             })
+    //             try {
+    //                 await this.mailService.sendStudentAccountMail(studentEmail, studentName, rawPassword);
+    //                 console.log(`Gửi mail thành công tới ${studentEmail}`);
+    //             } catch (error) {
+    //                 console.error(`Gửi mail tới ${studentEmail} thất bại:`, error);
+    //                 throw new BadRequestException(error)
+    //             }
+
+    //             results.push({ username: studentEmail, password: rawPassword });
+    //         }
+    //         return successResponse(200, results, 'Import file excel thành công')
+    //     } catch (error) {
+    //         throw error;
+    //         // throw new BadRequestException()
+    //     }
+    // }
 }
 
 

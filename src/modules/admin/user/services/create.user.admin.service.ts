@@ -17,7 +17,7 @@ export class CreateUserService {
                     email: data.email
                 }
             })
-            if (user) {     
+            if (user) {
                 return errorResponse(400, `Email ${user.email} đã tồn tại`)
             }
             const hashPassword = await hash(data.password, 10);

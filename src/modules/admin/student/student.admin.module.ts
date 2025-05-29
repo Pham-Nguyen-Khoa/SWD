@@ -8,6 +8,10 @@ import { CreateStudentAdminController } from './controllers/create-student.admin
 import { CreateStudentAdminService } from './services/create-student.admin.service';
 import { UpdateStudentAdminController } from './controllers/update-student.admin.controller';
 import { UpdateStudentAdminService } from './services/update-student.admin.service';
+import { GetAllStudentAdminService } from './services/getAll-student.admin.service';
+import { GetAllStudentAdminController } from './controllers/getAll-student.admin.controller';
+import { GetDetailStudentAdminController } from './controllers/get-detail-student.admin.controller';
+import { GetDetailStudentAdminService } from './services/get-detail-student.admin.service';
 
 
 
@@ -15,13 +19,17 @@ import { UpdateStudentAdminService } from './services/update-student.admin.servi
 const httpController = [
     ImportStudentAdminController,
     CreateStudentAdminController,
-    UpdateStudentAdminController
+    UpdateStudentAdminController,
+    GetAllStudentAdminController,
+    GetDetailStudentAdminController
 ]
 
 const Services = [
     ImportStudentService,
     CreateStudentAdminService,
     UpdateStudentAdminService,
+    GetAllStudentAdminService,
+    GetDetailStudentAdminService,
     JwtService,
     MailService
 ]

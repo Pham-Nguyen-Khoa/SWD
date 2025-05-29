@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDateString, IsEmail, IsEnum, IsString, Matches } from "class-validator";
+import { IsDateString, IsEmail, IsEnum, IsInt, IsString, Matches } from "class-validator";
 
 
 export class CreateStudentDto {
@@ -16,9 +16,13 @@ export class CreateStudentDto {
     @IsDateString()
     dateOfBirth: string;
 
-    @ApiProperty({ example: '12C11', description: 'Tên lớp học' })
+    @ApiProperty({ example: '12C11', description: 'Tên lớp' })
     @IsString()
-    className: string
+    className: string;       
+
+    // @ApiProperty({ example: '2025-2026', description: 'Năm học' })
+    // @IsString()
+    // academicYearName: string; 
 
     @ApiProperty({ example: 'Nam', description: 'Giới tính' })
     @IsEnum(['Nam', 'Nữ'])

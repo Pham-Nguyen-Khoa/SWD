@@ -25,6 +25,7 @@ export class GetAllUserAdminController {
     @Get(routesV1.admin.user.root)
     async getAllUser(@Query() query: GetAllUserQuery) {
         return await this.getAllUserService.getAll(query)
+        // return "Get all user"
     }
 
 }
