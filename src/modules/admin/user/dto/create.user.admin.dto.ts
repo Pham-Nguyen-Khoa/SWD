@@ -31,7 +31,7 @@ export class CreateUserDto {
     @TransformToInt()
     @IsNumber()
     @IsIn([1, 2, 3], {
-        message: 'roleID phải là một trong các giá trị: 1, 2',
+        message: 'roleID phải là một trong các giá trị: 1, 2,3',
     })
     roleID: string
 }

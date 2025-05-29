@@ -82,7 +82,95 @@ export const resourcesV1 = {
             displayName: 'Update Student',
             parent: 'Student',
         },
-
+        GET_ALL_STUDENT: {
+            name: 'Get All Student',
+            displayName: 'Get All Student',
+            parent: 'Student',
+        },
+        GET_DETAIL_STUDENT: {
+            name: 'Get Detail Student',
+            displayName: 'Get Detail Student',
+            parent: 'Student',
+        },
+    },
+    Parent: {
+        root: "Parent",
+        CREATE_HEALTH_PROFILE: {
+            name: 'Create Health Profile',
+            displayName: 'Create Health Profile',
+            parent: 'Health',
+        },
+        UPDATE_HEALTH_PROFILE: {
+            name: 'Update Health Profile',
+            displayName: 'Update Health Profile',
+            parent: 'Health',
+        },
+        GET_ALL_HEALTH_PROFILE: {
+            name: 'Get All Health Profile',
+            displayName: 'Get All Health Profile',
+            parent: 'Health',
+        },
+        GET_DETAIL_HEALTH_PROFILE: {
+            name: 'Get Detail Health Profile',
+            displayName: 'Get Detail Health Profile',
+            parent: 'Health',
+        },
+        FROM_DATA_HEALTH_PROFILE: {
+            name: 'Form Data Health Profile',
+            displayName: 'Form Data Health Profile',
+            parent: 'Health',
+        },
+        STUDENT_OF_PARENT: {
+            name: 'Student Of Parent',
+            displayName: 'Student Of Parent',
+            parent: 'Health',
+        },
+    },
+    Nurse: {
+        root: "Nurse",
+        GET_ALL_HEALTH_PROFILE: {
+            name: 'Get All Health Profile',
+            displayName: 'Get All Health Profile',
+            parent: 'Health',
+        },
+        GET_DETAIL_HEALTH_PROFILE: {
+            name: 'Get Detail Health Profile',
+            displayName: 'Get Detail Health Profile',
+            parent: 'Health',
+        },
+    },
+    Manager: {
+        root: "Manager",
+        CREATE_VACCINATION_EVENT: {
+            name: 'Create Vaccination Event',
+            displayName: 'Create Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        UPDATE_VACCINATION_EVENT: {
+            name: 'Update Vaccination Event',
+            displayName: 'Update Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        DELETE_VACCINATION_EVENT: {
+            name: 'Delete Vaccination Event',
+            displayName: 'Delete Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        CONFIRM_VACCINATION_EVENT: {
+            name: 'Confirm Vaccination Event',
+            displayName: 'Confirm Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        GET_DETAIL_VACCINATION_EVENT: {
+            name: 'Get Detail Vaccination Event',
+            displayName: 'Get Detail Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        GET_ALL_CLASS: {
+            name: 'Get All Class',
+            displayName: 'Get All Class',
+            parent: 'Vaccination Event',
+        },
 
     }
 

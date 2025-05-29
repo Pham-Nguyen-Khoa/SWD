@@ -30,21 +30,61 @@ model Role {
 }
 
 model Student {
-  id           Int        @id @default(autoincrement())
-  student_code String    @unique
-  dateOfBirth  DateTime
-  class        String
-  gender       String
-  accountID    Int        @unique
-  parentId     Int?
-  createdAt    DateTime?  @default(now()) @db.Timestamptz(3)
-  createdBy    Int?
-  updatedAt    DateTime?  @updatedAt @db.Timestamptz(3)
-  updatedBy    Int?
-  parentInfoID Int
-  account      Account    @relation(fields: [accountID], references: [id])
-  Parent       Parent?    @relation(fields: [parentId], references: [id])
-  ParentInfo   ParentInfo @relation(fields: [parentInfoID], references: [id])
+  id               Int                      @id @default(autoincrement())
+  student_code     String                   @unique
+  dateOfBirth      DateTime
+  gender           String
+  graduated        Boolean                  @default(false)
+  createdAt        DateTime?                @default(now()) @db.Timestamptz(3)
+  createdBy        Int?
+  updatedAt        DateTime?                @updatedAt @db.Timestamptz(3)
+  updatedBy        Int?
+  accountID        Int                      @unique
+  account          Account                  @relation(fields: [accountID], references: [id])
+  parentId         Int?
+  Parent           Parent?                  @relation(fields: [parentId], references: [id])
+  parentInfoID     Int
+  ParentInfo       ParentInfo               @relation(fields: [parentInfoID], references: [id])
+  classAssignments StudentClassAssignment[]
+  healthProfile    HealthProfile?
+}
+
+model Class {
+  id                 Int                      @id @default(autoincrement())
+  name               String                   @unique
+  grade              Int
+  createdAt          DateTime?                @default(now()) @db.Timestamptz(3)
+  studentAssignments StudentClassAssignment[]
+}
+
+model StudentClassAssignment {
+  id             Int @id @default(autoincrement())
+  studentID      Int
+  academicYearID Int
+  classID        Int
+
+  student      Student      @relation(fields: [studentID], references: [id])
+  academicYear AcademicYear @relation(fields: [academicYearID], references: [id])
+  class        Class        @relation(fields: [classID], references: [id])
+
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+
+  @@unique([studentID, academicYearID])
+}
+
+model AcademicYear {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  createdBy Int?
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+  updatedBy Int?
+
+  studentAssignments StudentClassAssignment[]
+  VaccinationEvent   VaccinationEvent[]
 }
 
 model ParentInfo {
@@ -56,6 +96,106 @@ model ParentInfo {
   createdAt    DateTime? @default(now()) @db.Timestamptz(3)
   createdBy    Int?
   student      Student[]
+}
+
+model HealthProfile {
+  id Int @id @default(autoincrement())
+
+  height                String
+  weight                String
+  bloodGroup            String
+  treatmentHistory      String?
+  additionalNote        String?
+  hasNoAllergies        Boolean                 @default(false)
+  healthAllergies       HealthAllergies[]
+  detailAllergies       String?
+  methodAllergies       String?
+  hasNochronicDiseases  Boolean                 @default(false)
+  healthChronicDiseases HealthChronicDiseases[]
+  detailChronicDiseases String?
+  methodChronicDiseases String?
+  medicationNote        String?
+  visionLeft            String?
+  visionRight           String?
+  wearGlasses           Boolean                 @default(false)
+  noteVision            String?
+
+  hearingLeft  String?
+  hearingRight String?
+  hearingAid   Boolean @default(false)
+  noteHearing  String?
+
+  healthVaccination  HealthVaccination[]
+  vaccinationHistory String?
+  sideEffect         Boolean             @default(false)
+  DetailSideEffect   String?
+
+  studentID Int     @unique
+  student   Student @relation(fields: [studentID], references: [id])
+
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  createdBy Int?
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+  updatedBy Int?
+}
+
+model HealthVaccination {
+  id              Int           @id @default(autoincrement())
+  healthProfileID Int
+  vaccinationID   Int
+  healthProfile   HealthProfile @relation(fields: [healthProfileID], references: [id])
+  vaccination     Vaccination   @relation(fields: [vaccinationID], references: [id])
+
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+
+  @@unique([healthProfileID, vaccinationID])
+}
+
+model Vaccination {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  healthVaccination HealthVaccination[]
+}
+
+model Allergies {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  healthAllergies HealthAllergies[]
+}
+
+model ChronicDiseases {
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @unique
+  HealthChronicDiseases HealthChronicDiseases[]
+}
+
+model HealthAllergies {
+  id              Int @id @default(autoincrement())
+  healthProfileID Int
+  allergiesID     Int
+
+  healthProfile HealthProfile @relation(fields: [healthProfileID], references: [id])
+  allergies     Allergies     @relation(fields: [allergiesID], references: [id])
+
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+
+  @@unique([healthProfileID, allergiesID])
+}
+
+model HealthChronicDiseases {
+  id                Int @id @default(autoincrement())
+  healthProfileID   Int
+  chronicDiseasesID Int
+
+  healthProfile   HealthProfile   @relation(fields: [healthProfileID], references: [id])
+  chronicDiseases ChronicDiseases @relation(fields: [chronicDiseasesID], references: [id])
+
+  createdAt DateTime? @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+
+  @@unique([healthProfileID, chronicDiseasesID])
 }
 
 model Parent {
@@ -70,4 +210,40 @@ model Parent {
   updatedBy Int?
   account   Account   @relation(fields: [accountID], references: [id])
   student   Student[]
+}
+
+enum EventStatus {
+  DRAFT
+  CONFIRMED
+  CANCELED
+}
+
+model VaccinationEvent {
+  id             Int          @id @default(autoincrement())
+  name           String
+  description    String?
+  scheduledAt    DateTime
+  status         EventStatus  @default(DRAFT)
+  academicYearID Int
+  academicYear   AcademicYear @relation(fields: [academicYearID], references: [id])
+  createdAt      DateTime?    @default(now()) @db.Timestamptz(3)
+  createdBy      Int?
+  updatedAt      DateTime?    @updatedAt @db.Timestamptz(3)
+  updatedBy      Int?
+
+  targets VaccinationTarget[]
+}
+
+model VaccinationTarget {
+  id                 Int              @id @default(autoincrement())
+  vaccinationEventID Int
+  targetType         TargetType
+  targetID           Int
+  vaccinationEvent   VaccinationEvent @relation(fields: [vaccinationEventID], references: [id])
+}
+
+enum TargetType {
+  SCHOOL
+  GRADE
+  CLASS
 }

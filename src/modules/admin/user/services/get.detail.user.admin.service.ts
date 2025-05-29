@@ -10,7 +10,6 @@ export class GetDetailUserAdminService {
         private readonly prisma: PrismaService
     ) { }
     async getDetailUser(id: number) {
-        console.log("hello")
         try {
             // Check coi có user có tồn tại ko 
             const userExist = await this.prisma.account.findUnique({
@@ -33,41 +32,70 @@ export class GetDetailUserAdminService {
             }
 
             // Nếu là học sinh join bảng student và parentInfo để lấy thêm thông tin 
-            if (userExist.roleID === 5) {
-                const student = await this.prisma.student.findUnique({
-                    where: {
-                        accountID: userExist.id
-                    },
-                    include: {
-                        ParentInfo: {
-                            select: {
-                                id: true,
-                                fullname: true,
-                                email: true,
-                                phone: true
-                            }
-                        },
+            // if (userExist.roleID === 5) {
+            //     const student = await this.prisma.student.findUnique({
+            //         where: {
+            //             accountID: userExist.id
+            //         },
+            //         include: {
+            //             ParentInfo: {
+            //                 select: {
+            //                     id: true,
+            //                     fullname: true,
+            //                     email: true,
+            //                     phone: true
+            //                 }
+            //             },
+            //             // classAssignments: {
+            //             //     select: {
+            //             //         class: {
+            //             //             select: {
+            //             //                 name: true,
+            //             //                 grade: true,
+            //             //             },
+            //             //         },
+            //             //         academicYear: {
+            //             //             select: {
+            //             //                 name: true,
+            //             //             },
+            //             //         },
+            //             //     },
+            //             //     orderBy: {
+            //             //         academicYear: {
+            //             //             startDate: 'desc',
+            //             //         },
+            //             //     },
+            //             // }
 
-                    }
-                })
-                result = {
-                    ...userExist,
-                    ...student,
-                }
+            //         }
+            //     })
+            //     const latestAssignment = await this.prisma.studentClassAssignment.findFirst({
+            //         where: { studentID: student?.id },
+            //         orderBy: { academicYear: { startDate: 'desc' } },
+            //         select: {
+            //             class: { select: { name: true, grade: true } },
+            //             academicYear: { select: { name: true } },
+            //         },
+            //     });
+            //     result = {
+            //         ...userExist,
+            //         ...student,
+            //         latestAssignment
+            //     }
 
-            }
-            // Nếu là 
-            if (userExist.roleID === 4) {
-                const parent = await this.prisma.parent.findUnique({
-                    where: {
-                        accountID: userExist.id
-                    }
-                })
-                result = {
-                    ...userExist,
-                    ...parent
-                }
-            }
+            // }
+            // // Nếu là 
+            // if (userExist.roleID === 4) {
+            //     const parent = await this.prisma.parent.findUnique({
+            //         where: {
+            //             accountID: userExist.id
+            //         }
+            //     })
+            //     result = {
+            //         ...userExist,
+            //         ...parent
+            //     }
+            // }
             return successResponse(200, result, 'Lấy thông tin chi tiết thành công')
         } catch (error) {
             console.log(error)
