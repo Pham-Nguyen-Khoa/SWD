@@ -30,23 +30,25 @@ model Role {
 }
 
 model Student {
-  id               Int                      @id @default(autoincrement())
-  student_code     String                   @unique
-  dateOfBirth      DateTime
-  gender           String
-  graduated        Boolean                  @default(false)
-  createdAt        DateTime?                @default(now()) @db.Timestamptz(3)
-  createdBy        Int?
-  updatedAt        DateTime?                @updatedAt @db.Timestamptz(3)
-  updatedBy        Int?
-  accountID        Int                      @unique
-  account          Account                  @relation(fields: [accountID], references: [id])
-  parentId         Int?
-  Parent           Parent?                  @relation(fields: [parentId], references: [id])
-  parentInfoID     Int
-  ParentInfo       ParentInfo               @relation(fields: [parentInfoID], references: [id])
-  classAssignments StudentClassAssignment[]
-  healthProfile    HealthProfile?
+  id                  Int                      @id @default(autoincrement())
+  student_code        String                   @unique
+  dateOfBirth         DateTime
+  gender              String
+  graduated           Boolean                  @default(false)
+  createdAt           DateTime?                @default(now()) @db.Timestamptz(3)
+  createdBy           Int?
+  updatedAt           DateTime?                @updatedAt @db.Timestamptz(3)
+  updatedBy           Int?
+  accountID           Int                      @unique
+  account             Account                  @relation(fields: [accountID], references: [id])
+  parentId            Int?
+  Parent              Parent?                  @relation(fields: [parentId], references: [id])
+  parentInfoID        Int
+  ParentInfo          ParentInfo               @relation(fields: [parentInfoID], references: [id])
+  classAssignments    StudentClassAssignment[]
+  vaccinationResponse VaccinationResponse[]
+  vaccinationResult   VaccinationResult[]
+  healthProfile       HealthProfile?
 }
 
 model Class {
@@ -219,19 +221,23 @@ enum EventStatus {
 }
 
 model VaccinationEvent {
-  id             Int          @id @default(autoincrement())
-  name           String
-  description    String?
-  scheduledAt    DateTime
-  status         EventStatus  @default(DRAFT)
-  academicYearID Int
-  academicYear   AcademicYear @relation(fields: [academicYearID], references: [id])
-  createdAt      DateTime?    @default(now()) @db.Timestamptz(3)
-  createdBy      Int?
-  updatedAt      DateTime?    @updatedAt @db.Timestamptz(3)
-  updatedBy      Int?
+  id              Int          @id @default(autoincrement())
+  name            String
+  description     String
+  scheduledAt     DateTime
+  status          EventStatus  @default(DRAFT)
+  customMailTitle String?
+  customMailBody  String?
+  academicYearID  Int
+  academicYear    AcademicYear @relation(fields: [academicYearID], references: [id])
+  createdAt       DateTime?    @default(now()) @db.Timestamptz(3)
+  createdBy       Int?
+  updatedAt       DateTime?    @updatedAt @db.Timestamptz(3)
+  updatedBy       Int?
 
-  targets VaccinationTarget[]
+  targets             VaccinationTarget[]
+  vaccinationResponse VaccinationResponse[]
+  vaccinationResult   VaccinationResult[]
 }
 
 model VaccinationTarget {
@@ -242,8 +248,57 @@ model VaccinationTarget {
   vaccinationEvent   VaccinationEvent @relation(fields: [vaccinationEventID], references: [id])
 }
 
+model VaccinationResponse {
+  id                 Int            @id @default(autoincrement())
+  vaccinationEventID Int
+  studentID          Int
+  status             ResponseStatus @default(PENDING)
+  note               String?
+  respondedAt        DateTime?
+
+  vaccinationEvent VaccinationEvent @relation(fields: [vaccinationEventID], references: [id])
+  student          Student          @relation(fields: [studentID], references: [id])
+}
+
+model VaccinationResult {
+  id                 Int             @id @default(autoincrement())
+  vaccinationEventID Int
+  studentID          Int
+  status             InjectionStatus
+  result             InjectionResult
+  note               String?
+
+  respondedAt DateTime?
+  createdAt   DateTime? @default(now()) @db.Timestamptz(3)
+  createdBy   Int?
+  updatedAt   DateTime? @updatedAt @db.Timestamptz(3)
+  updatedBy   Int?
+
+  vaccinationEvent VaccinationEvent @relation(fields: [vaccinationEventID], references: [id])
+  student          Student          @relation(fields: [studentID], references: [id])
+
+  @@unique([vaccinationEventID, studentID])
+}
+
+enum ResponseStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
 enum TargetType {
   SCHOOL
   GRADE
   CLASS
+}
+
+enum InjectionResult {
+  GOOD
+  BAD
+  NOT_EVALUATED
+}
+
+enum InjectionStatus {
+  SUCCESS
+  SKIPPED
 }

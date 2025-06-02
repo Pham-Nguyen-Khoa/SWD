@@ -24,7 +24,9 @@ export class UpdateVaccinationEventManagerService {
         if (!vaccinationEvent) {
             return errorResponse(400, 'Không tìm thấy sự kiện tiêm chủng');
         }
-
+        if (vaccinationEvent.status === "CONFIRMED") {
+            return errorResponse(400, 'Cuộc tiêm chủng này đã được xác nhận và gửi thông báo đến phụ huynh học sinh')
+        }
         if (data.scheduledAt) {
             const newDate = DateHelper.parseDateStringToDate(data.scheduledAt);
             const now = new Date();

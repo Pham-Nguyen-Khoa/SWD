@@ -95,6 +95,7 @@ export const resourcesV1 = {
     },
     Parent: {
         root: "Parent",
+        // HEALTH_PROFILE
         CREATE_HEALTH_PROFILE: {
             name: 'Create Health Profile',
             displayName: 'Create Health Profile',
@@ -115,6 +116,23 @@ export const resourcesV1 = {
             displayName: 'Get Detail Health Profile',
             parent: 'Health',
         },
+        // VACCINATION_EVENT
+        GET_ALL_VACCINATION_EVENT: {
+            name: 'Get All Vaccination Event',
+            displayName: 'Get All Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        ACCEPTED_VACCINATION_EVENT: {
+            name: 'Accepted Vaccination Event',
+            displayName: 'Accepted Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        DECLIEND_VACCINATION_EVENT: {
+            name: 'Declined Vaccination Event',
+            displayName: 'Declined Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+
         FROM_DATA_HEALTH_PROFILE: {
             name: 'Form Data Health Profile',
             displayName: 'Form Data Health Profile',
@@ -128,6 +146,7 @@ export const resourcesV1 = {
     },
     Nurse: {
         root: "Nurse",
+        // Health Profile 
         GET_ALL_HEALTH_PROFILE: {
             name: 'Get All Health Profile',
             displayName: 'Get All Health Profile',
@@ -137,6 +156,32 @@ export const resourcesV1 = {
             name: 'Get Detail Health Profile',
             displayName: 'Get Detail Health Profile',
             parent: 'Health',
+        },
+        // Vacination Event
+        GET_ALL_VACCINATION_EVENT: {
+            name: 'Get All Vaccination Event',
+            displayName: 'Get All Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        GET_DETAIL_VACCINATION_EVENT: {
+            name: 'Get Detail Vaccination Event',
+            displayName: 'Get Detail Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        RESULT_VACCINATION_EVENT: {
+            name: 'Result Vaccination Event',
+            displayName: 'Result Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        GET_DETAIL_RESULT_VACCINATION_EVENT: {
+            name: 'Get Detail Result Vaccination Event',
+            displayName: 'Get Detail Result Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        UPDATE_RESULT_VACCINATION_EVENT: {
+            name: 'Update Result Vaccination Event',
+            displayName: 'Update Result Vaccination Event',
+            parent: 'Vaccination Event',
         },
     },
     Manager: {
@@ -171,7 +216,11 @@ export const resourcesV1 = {
             displayName: 'Get All Class',
             parent: 'Vaccination Event',
         },
-
+        GET_ALL_VACCINATION_EVENT: {
+            name: 'Get All Vaccination Event',
+            displayName: 'Get All Vaccination Event',
+            parent: 'Vaccination Event',
+        },
     }
 
     // End Admin

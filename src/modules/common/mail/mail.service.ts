@@ -55,4 +55,38 @@ export class MailService {
         // Gửi mail
         return this.sendMail(parentEmail, 'Thông báo đăng ký tài khoản phụ huynh', html);
     }
+
+
+    async sendVaccinationNoticeMail(
+        {
+            to,
+            fullname,
+            role,
+            scheduledAt,
+            body,
+            title
+        }: {
+            to: string;
+            fullname: string;
+            role: string;
+            scheduledAt: string;
+            title: string;
+            body: string;
+        }
+    ) {
+        const templatePath = join(process.cwd(), 'src/configs/template/vaccination-notification.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+        console.log(title)
+        const html = pug.renderFile(templatePath, {
+            role,
+            fullname,
+            scheduledAt,
+            body, 
+            title
+        });
+
+        return this.sendMail(to, title, html);
+
+
+    }
 }
