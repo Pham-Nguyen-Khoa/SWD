@@ -68,7 +68,7 @@ export class GetAllStudentQuery {
 
     @ApiPropertyOptional({
         description: 'Số lượng người dùng trên trang',
-        example: 1
+        example: 5
     })
     @IsOptional()
     @TransformToInt()

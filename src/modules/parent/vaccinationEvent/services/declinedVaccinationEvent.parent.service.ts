@@ -27,6 +27,9 @@ export class DeclinedVaccinationEventParentService {
             if (!response) {
                 return errorResponse(400, 'Không tìm thấy thông báo tiêm chủng nào có id này ')
             }
+            console.log(response)
+            console.log(response.student.parentId)
+            console.log(parentID?.id)
             if (response.student.parentId !== parentID?.id) {
                 return errorResponse(400, 'Bạn không có quyền phản hồi mục này.')
             }
@@ -43,6 +46,7 @@ export class DeclinedVaccinationEventParentService {
             })
             return successResponse(200, 'Đã ghi nhận phản hồi ')
         } catch (error) {
+            console.log(error)
             return errorResponse(400, 'Ghi nhận phản hồi thất bại')
 
         }

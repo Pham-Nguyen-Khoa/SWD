@@ -10,7 +10,6 @@ export class UpdateResultVaccinationNurseService {
         private readonly prisma: PrismaService
     ) { }
     async update(id: number, data: ResultVaccinationEventNurseDto, reqUser) {
-        try {
             const [vaccinationEvent, vaccinationResult] = await Promise.all([
                 this.prisma.vaccinationEvent.findUnique({
                     where: {
@@ -46,8 +45,6 @@ export class UpdateResultVaccinationNurseService {
                 })
             }))
             return successResponse(200, 'Cập nhật kết quả cuộc tiêm chủng thành công')
-        } catch (error) {
-            return errorResponse(400, 'Cập nhật kết quả tiêm chủng thất bại')
-        }
+       
     }
 }
