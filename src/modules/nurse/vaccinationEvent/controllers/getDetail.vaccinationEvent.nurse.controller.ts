@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Query, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { resourcesV1 } from "src/configs/app.permission";
 import { routesV1 } from "src/configs/app.routes";
@@ -7,6 +7,7 @@ import { Roles } from "src/modules/auth/guards/roles.decorator";
 import { RolesGuard } from "src/modules/auth/guards/roles.guard";
 import { GetUser } from "src/modules/auth/guards/get-user.decorator";
 import { GetDetailVaccinationEventNurseService } from "../services/getDetail.vaccinationEvent.nurse.service";
+import { GetDetailVaccinationEventQuery } from "../dtos/getDetail.vaccinationEvent.nurse.query";
 
 
 
@@ -29,8 +30,8 @@ export class GetDetailVaccinationEventNurseController {
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(3)
     @Get(routesV1.nurse.vaccinationEvent.getOne)
-    async getDetail(@Param('id') id: string) {
-        return await this.getDetailVaccinationEventNurseService.getDetail(+id)
+    async getDetail(@Param('id') id: string, @Query() query: GetDetailVaccinationEventQuery) {
+        return await this.getDetailVaccinationEventNurseService.getDetail(+id,query)
     }
 }
 
