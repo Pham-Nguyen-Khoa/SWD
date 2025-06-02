@@ -1,4 +1,4 @@
-import { Controller, Param, Patch, UseGuards } from "@nestjs/common";
+import { Body, Controller, Param, Patch, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { resourcesV1 } from "src/configs/app.permission";
 import { routesV1 } from "src/configs/app.routes";
@@ -7,6 +7,7 @@ import { Roles } from "src/modules/auth/guards/roles.decorator";
 import { RolesGuard } from "src/modules/auth/guards/roles.guard";
 import { GetUser } from "src/modules/auth/guards/get-user.decorator";
 import { ConfrimVaccinationEventManagerService } from "../services/confirm.vaccinationEvent.manager.service";
+import { SendMailVaccinationEventDTO } from "../dtos/sendMail.vaccinationEvent.manager.dto";
 
 
 
@@ -29,8 +30,8 @@ export class ConfirmVaccinationEventManagerController {
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(2)
     @Patch(routesV1.manager.vaccinationEvent.getOne)
-    async confirm(@Param('id') id: string) {
-        return await this.confrimVaccinationEventManagerService.confirm(+id)
+    async confirm(@Param('id') id: string, @Body() data: SendMailVaccinationEventDTO) {
+        return await this.confrimVaccinationEventManagerService.confirm(+id, data)
     }
 }
 

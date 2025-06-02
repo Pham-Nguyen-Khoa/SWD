@@ -10,7 +10,7 @@ enum VaccinationTargetType {
 }
 
 @Injectable()
-export class GetDetailVaccinationEventManagerService {
+export class GetDetailVaccinationEventNurseService {
     constructor(
         private readonly prisma: PrismaService
     ) { }
@@ -112,5 +112,4 @@ export class GetDetailVaccinationEventManagerService {
         }
         return successResponse(200, result, 'Lấy thông tin chi tiết tiêm chủng thành công');
     }
-
 }

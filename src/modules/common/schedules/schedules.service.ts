@@ -13,10 +13,13 @@ export class AcedemicYearScheduler {
     ) {
     }
     @Cron('0 0 0 31 5 *')
+    // @Cron('0 * * * * *')
     async handleNewAcademicYear() {
         this.logger.debug('Bắt đầu xử lý tạo năm học mới và lên lớp');
         const now = new Date();
         const startYear = now.getFullYear();
+        // const oldYearName = `${startYear}-${startYear + 1}`
+        // const newYearName = `${startYear + 1}-${startYear + 2}`
         const oldYearName = `${startYear - 1}-${startYear}`
         const newYearName = `${startYear}-${startYear + 1}`
 

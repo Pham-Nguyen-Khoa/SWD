@@ -58,12 +58,21 @@ export const routesV1 = {
             ...baseRoutes(`${health}`),
             formData: `/${health}/formData`,
             student: `/student`
+        },
+        vaccinationEvent: {
+            ...baseRoutes(`${vaccinationEvent}`),
+            accepted: `/:id/accepted`,
+            declined: `/:id/declined`
         }
     },
     nurse: {
         health: {
             ...baseRoutes(`${health}`),
             // formData: `/${health}/formData`
+        },
+        vaccinationEvent: {
+            ...baseRoutes(`${vaccinationEvent}`),
+            result: `/:id/result`
         }
     },
     manager: {

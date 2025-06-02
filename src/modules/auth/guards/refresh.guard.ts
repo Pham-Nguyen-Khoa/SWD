@@ -12,7 +12,6 @@ export class RefreshGuard implements CanActivate {
     ) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        console.log("refresh")
         const request = context.switchToHttp().getRequest();
         const token = await this.extractRefreshTokenFromHeader(request);
         if (!token) throw new UnauthorizedException();

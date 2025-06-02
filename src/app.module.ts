@@ -12,6 +12,8 @@ import { ScheduledModule } from './modules/common/schedules/schedules.module';
 import { HealthParentModule } from './modules/parent/health/health.parent.module';
 import { HealthNurseModule } from './modules/nurse/health/health.nurse.module';
 import { VaccinationEventModule } from './modules/manager/vaccinationEvent/vaccinationEvent.module';
+import { VaccinationEventNurseModule } from './modules/nurse/vaccinationEvent/vaccinationEvent.module';
+import { VaccinationEventParentModule } from './modules/parent/vaccinationEvent/vaccinationEvent.module';
 
 @Module({
   imports: [
@@ -29,8 +31,10 @@ import { VaccinationEventModule } from './modules/manager/vaccinationEvent/vacci
     UserModule,
     // Parent 
     HealthParentModule,
+    VaccinationEventParentModule,
     // Nurse 
     HealthNurseModule,
+    VaccinationEventNurseModule,
     // Manager 
     VaccinationEventModule,
 

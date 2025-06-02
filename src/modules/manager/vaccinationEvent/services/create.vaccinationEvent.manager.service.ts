@@ -25,6 +25,7 @@ export class CreateVaccinationEventManagerService {
         if (!academicYear) {
             return errorResponse(400, 'Không có năm học nào tồn tại')
         }
+      
         const newDate = DateHelper.parseDateStringToDate(data.scheduledAt);
         const now = new Date();
 

@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsArray, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export enum VaccinationTargetType {
@@ -15,11 +15,10 @@ export class CreateVaccinationEventDTO {
     name: string;
 
     @ApiProperty({ example: 'Tiêm vắc xin phòng cúm cho học sinh', description: 'Mô tả chi tiết sự kiện', required: false })
-    @IsOptional()
     @IsString()
-    description?: string;
+    description: string;
 
-    @ApiProperty({ example: '2025-6-30', description: 'Thời gian dự kiến tổ chức' })
+    @ApiProperty({ example: '2025-06-30', description: 'Thời gian dự kiến tổ chức' })
     @IsDateString()
     scheduledAt: string;
 
@@ -31,4 +30,6 @@ export class CreateVaccinationEventDTO {
     @IsArray()
     @IsOptional()
     targetIds?: number[];
+
+
 }

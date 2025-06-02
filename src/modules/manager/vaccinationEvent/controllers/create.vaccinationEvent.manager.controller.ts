@@ -25,7 +25,7 @@ export class CreateVaccinationEventManagerController {
     @Roles(2)
     @Post(routesV1.manager.vaccinationEvent.root)
     async create(@Body() data: CreateVaccinationEventDTO, @GetUser() user) {
-        return await this.createVaccinationEventManagerService.create(data,user)
+        return await this.createVaccinationEventManagerService.create(data, user)
     }
 }
 

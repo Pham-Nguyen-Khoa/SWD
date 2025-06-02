@@ -21,9 +21,9 @@ export class UpdateVaccinationEventDTO {
     @IsString()
     description?: string;
 
-    @ApiPropertyOptional({ example: '2025-6-30' })
+    @ApiPropertyOptional({ example: '2025-06-30' })
     @IsOptional()
-    @IsString()
+    @IsDateString()
     scheduledAt?: string;
 
     @ApiPropertyOptional({ enum: VaccinationTargetType, example: VaccinationTargetType.CLASS })

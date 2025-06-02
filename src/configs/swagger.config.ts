@@ -14,7 +14,7 @@ function serializeBigInt(obj) {
 export function setupSwagger(nestApp: INestApplication) {
     console.log('>>> Setting up Swagger');
     const options = new DocumentBuilder()
-        .setTitle('NestJS Base')
+        .setTitle('SWD')
         .setDescription('Neronmenn')
         .setVersion('1.2')
         .addBearerAuth();
