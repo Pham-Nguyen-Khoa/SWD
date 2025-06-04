@@ -34,6 +34,7 @@ export const routesV1 = {
         login: `/${authRoot}/login`,
         register: `/${authRoot}/register`,
         logout: `/${authRoot}/logout`,
+        changePassword: `/${authRoot}/change-password`,
         refreshToken: `/${authRoot}/refresh-token`,
     },
 
@@ -62,7 +63,8 @@ export const routesV1 = {
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
             accepted: `/:id/accepted`,
-            declined: `/:id/declined`
+            declined: `/:id/declined`,
+            resultVaccinationEvent: `/${vaccinationEvent}/result`
         }
     },
     nurse: {
@@ -72,13 +74,15 @@ export const routesV1 = {
         },
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
-            result: `/:id/result`
+            result: `/:id/result`,
+            sendResult: `/:id/notification/send-result`
         }
     },
     manager: {
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
-            allClass: '/class'
+            allClass: '/class',
+            success: '/:id/success'
         }
     }
 

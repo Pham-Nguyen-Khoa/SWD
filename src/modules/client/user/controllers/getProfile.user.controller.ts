@@ -24,7 +24,7 @@ export class GetProfileController {
     @ApiBearerAuth()
 
     @UseGuards(JWTGuard, RolesGuard)
-    @Roles(2)
+    @Roles(1,2,3,4,5)
     @Get(routesV1.client.user.profile)
     async getProfile(@GetUser() user) {
         return this.getProfileService.getProfile(user)

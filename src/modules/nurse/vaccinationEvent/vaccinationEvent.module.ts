@@ -13,6 +13,9 @@ import { GetDetailResultVaccinationEventNurseController } from "./controllers/ge
 import { GetDetailResultVaccinationEventNurseService } from "./services/getDetailResultVaccinationEvent.nurse.service"
 import { UpdateResultVaccinationEventNurseController } from "./controllers/updateResultVaccination.nurse.controller"
 import { UpdateResultVaccinationNurseService } from "./services/updateResultVaccination.nurse.service"
+import { SendNotificationResultVaccinationEventNurseController } from "./controllers/sendNotificationResultVaccinationEvent.nurse.controller"
+import { SendNotificationResultVaccinationEventNurseService } from "./services/sendNotificationResultVaccinationEvent.nurse.service"
+import { MailService } from "src/modules/common/mail/mail.service"
 
 
 
@@ -21,7 +24,8 @@ const httpController = [
     GetDetailVaccinationEventNurseController,
     ResultVaccinationEventNurseController,
     GetDetailResultVaccinationEventNurseController,
-    UpdateResultVaccinationEventNurseController
+    UpdateResultVaccinationEventNurseController,
+    SendNotificationResultVaccinationEventNurseController
 
 ]
 
@@ -31,6 +35,8 @@ const Services = [
     ResultVaccinationEventNurseService,
     GetDetailResultVaccinationEventNurseService,
     UpdateResultVaccinationNurseService,
+    SendNotificationResultVaccinationEventNurseService,
+    MailService,
     JwtService
 ]
 

@@ -31,6 +31,9 @@ export class ResultVaccinationEventNurseService {
         if (vaccinationResult) {
             return errorResponse(400, 'Đã có kết quả ghi nhận cho cuộc tiêm chủng này')
         }
+        if (vaccinationEventEntity.status === "SUCCESSED") {
+            return errorResponse(400, 'Cuộc tiêm chủng này hoàn tất')
+        }
 
 
         const result = data.result;

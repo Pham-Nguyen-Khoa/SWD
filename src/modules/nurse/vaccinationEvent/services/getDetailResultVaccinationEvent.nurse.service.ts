@@ -28,6 +28,7 @@ export class GetDetailResultVaccinationEventNurseService {
                             },
                             ParentInfo: {
                                 select: {
+                                    email: true,
                                     fullname: true,
                                 }
                             },

@@ -13,7 +13,7 @@ export class RefreshService {
 
         const accessToken = await this.jwtService.signAsync(payload, {
             secret: process.env.SECRET_KEY,
-            expiresIn: '1h'
+            expiresIn: '7d'
         })
 
         const refreshToken = await this.jwtService.signAsync(payload, {

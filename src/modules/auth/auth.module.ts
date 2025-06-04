@@ -7,18 +7,23 @@ import { RefreshTokenController } from './controllers/refresh-token.controller';
 import { RefreshService } from './services/refresh-token.service';
 import { PrismaModule } from 'src/libs/prisma/prisma.module';
 import { JwtService } from '@nestjs/jwt';
+import { ChangePasswordController } from './controllers/change-password.controller';
+import { ChangePasswordService } from './services/change-password.service';
 
 
 const httpController = [
   LoginController,
   RegisterController,
-  RefreshTokenController
+  RefreshTokenController,
+  ChangePasswordController
+
 ]
 
 const Services = [
   LoginService,
   RegisterService,
   RefreshService,
+  ChangePasswordService,
   JwtService
 ]
 
