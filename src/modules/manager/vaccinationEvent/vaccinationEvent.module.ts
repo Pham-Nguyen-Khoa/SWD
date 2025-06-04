@@ -17,6 +17,8 @@ import { ConfrimVaccinationEventManagerService } from "./services/confirm.vaccin
 import { MailService } from "src/modules/common/mail/mail.service"
 import { GetAllVaccinationEventNurseController } from "./controllers/getAllVaccinationEvent.manager.controller"
 import { GetAllVaccinationEventManagerService } from "./services/getAllVaccinationEvent.manager.service"
+import { SuccessVaccinationEventManagerController } from "./controllers/success.vaccinationEvent.manager.controller"
+import { SuccessVaccinationEventManagerService } from "./services/success.vaccinationEvent.manager.service"
 
 
 const httpController = [
@@ -26,7 +28,8 @@ const httpController = [
     GetDetailVaccinationEventManagerController,
     ConfirmVaccinationEventManagerController,
     DeleteVaccinationEventManagerController,
-    GetAllVaccinationEventNurseController
+    GetAllVaccinationEventNurseController,
+    SuccessVaccinationEventManagerController
 ]
 
 const Services = [
@@ -37,6 +40,7 @@ const Services = [
     ConfrimVaccinationEventManagerService,
     GetDetailVaccinationEventManagerService,
     GetAllVaccinationEventManagerService,
+    SuccessVaccinationEventManagerService,
     MailService,
     JwtService
 ]

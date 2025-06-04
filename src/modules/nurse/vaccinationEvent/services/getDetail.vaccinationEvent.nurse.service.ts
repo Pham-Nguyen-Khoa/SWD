@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/libs/prisma/prisma.service";
 import { DateHelper } from "src/helpers/date.helper";
 import { errorResponse, successResponse } from "src/common/utils/response.util";
+import { GetDetailVaccinationEventQuery } from "../dtos/getDetail.vaccinationEvent.nurse.query";
 
 enum VaccinationTargetType {
     SCHOOL = 'SCHOOL',
@@ -14,7 +15,8 @@ export class GetDetailVaccinationEventNurseService {
     constructor(
         private readonly prisma: PrismaService
     ) { }
-    async getDetail(id: number) {
+    async getDetail(id: number, query: GetDetailVaccinationEventQuery) {
+        const { search } = query
         const vaccinationEvent = await this.prisma.vaccinationEvent.findUnique({
             where: { id },
             include: {
@@ -56,17 +58,33 @@ export class GetDetailVaccinationEventNurseService {
                 startDate: "desc"
             }
         })
-
+        const whereClause: any = {
+            vaccinationEventID: id,
+        }
+        if (search) {
+            whereClause.OR = [
+                { student: { student_code: { contains: search, mode: 'insensitive' } } },
+                {
+                    student: {
+                        account: {
+                            OR: [
+                                { fullname: { contains: search, mode: 'insensitive' } },
+                                { email: { contains: search, mode: 'insensitive' } },
+                            ],
+                        },
+                    },
+                },
+            ];
+        }
         const studentResponseEntity = await this.prisma.vaccinationResponse.findMany({
-            where: {
-                vaccinationEventID: id
-            },
+            where: whereClause,
             select: {
                 status: true,
                 note: true,
                 student: {
                     select: {
                         id: true,
+                        student_code: true,
                         ParentInfo: true,
                         account: {
                             select: {

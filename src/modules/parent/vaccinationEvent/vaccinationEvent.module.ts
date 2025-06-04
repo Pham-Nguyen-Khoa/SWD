@@ -7,17 +7,21 @@ import { AcceptedVaccinationEventParentService } from "./services/acceptVaccinat
 import { AcceptedVaccinationEventParentController } from "./controllers/acceptVaccinationEvent.parent.controller"
 import { DeclinedVaccinationEventParentController } from "./controllers/declinedVaccinationEvent.parent.controller"
 import { DeclinedVaccinationEventParentService } from "./services/declinedVaccinationEvent.parent.service"
+import { GetAllResultVaccinationEventParentController } from "./controllers/getAllResultVaccination.parent.controller"
+import { GetAllResultVaccinationEventParentService } from "./services/getAllResultVaccination.parent.service"
 
 const httpController = [
     GetAllVaccinationEventParentController,
     AcceptedVaccinationEventParentController,
-    DeclinedVaccinationEventParentController
+    DeclinedVaccinationEventParentController,
+    GetAllResultVaccinationEventParentController
 ]
 
 const Services = [
     GetAllVaccinationEventParentService,
     AcceptedVaccinationEventParentService,
     DeclinedVaccinationEventParentService,
+    GetAllResultVaccinationEventParentService,
     JwtService
 ]
 

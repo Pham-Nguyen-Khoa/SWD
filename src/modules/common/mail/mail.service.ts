@@ -15,6 +15,10 @@ export class MailService {
                 user: 'pnkvlog1508@gmail.com',
                 pass: 'vpkl kqao sztj evdi',
             },
+            pool: true,              // ✅ dùng connection pool
+            maxConnections: 5,       // ✅ tối đa 5 kết nối SMTP song song
+            maxMessages: 100,        // ✅ mỗi kết nối gửi tối đa 100 mail
+            rateLimit: 5,            // ✅ không gửi quá 5 email mỗi giây (tuỳ nhà cung cấp)
         });
     }
 
@@ -81,12 +85,29 @@ export class MailService {
             role,
             fullname,
             scheduledAt,
-            body, 
+            body,
             title
         });
 
         return this.sendMail(to, title, html);
+    }
 
+    async sendNotificationResultVaccinationResultParent(vaccinationName: string, scheduledAt: string, parentEmail: string, parentName: string, studentName: string, status: string, result: string, note?: string) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/vaccination-result.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
 
+        const html = pug.renderFile(templatePath, {
+            vaccinationName,
+            scheduledAt,
+            parentName,
+            studentName,
+            status,
+            result,
+            note
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Kết quả tiêm chủng của bé ${studentName} - ${vaccinationName}`, html);
     }
 }

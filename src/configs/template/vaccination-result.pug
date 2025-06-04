@@ -1,0 +1,90 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Kết quả tiêm chủng
+    style.
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f6f9fc;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+      }
+      .header h2 {
+        color: #007bff;
+      }
+      .info {
+        line-height: 1.6;
+      }
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.9em;
+        margin-left: 8px;
+      }
+      .badge.success { background-color: #c8e6c9; color: #256029; }
+      .badge.skipped { background-color: #ffe082; color: #6d4c41; }
+      .badge.good { background-color: #a5d6a7; color: #1b5e20; }
+      .badge.bad { background-color: #ef9a9a; color: #b71c1c; }
+      .footer {
+        margin-top: 30px;
+        font-size: 0.9em;
+        text-align: center;
+        color: #888;
+      }
+
+  body
+    .container
+      .header
+        h2= 'Kết quả tiêm chủng: ' + vaccinationName
+        p Ngày tiêm: #{scheduledAt}
+      
+      .info
+        p Xin chào #{parentName},
+        if status === 'SUCCESS'
+          p Con bạn là 
+            strong #{studentName}
+            |  đã hoàn thành buổi tiêm chủng. Dưới đây là kết quả:
+          ul
+            li
+              strong Trạng thái:
+              span.badge.success Đã tiêm
+            li
+              strong Kết luận: 
+              if result === 'GOOD'
+                span.badge.good Tốt
+              else if result === 'BAD'
+                span.badge.bad Có phản ứng phụ
+              else
+                | Không đánh giá
+            if note
+              li
+                strong Ghi chú:
+                |  #{note}
+        else if status === 'SKIPPED'
+          p Con bạn là 
+            strong #{studentName}
+            |  đã 
+            span.badge.skipped vắng mặt 
+            |  trong buổi tiêm chủng ngày #{scheduledAt}. 
+          p Nếu đây là sự nhầm lẫn, vui lòng liên hệ với nhà trường để được hỗ trợ.
+
+      .footer
+        p Trân trọng,
+        p Ban quản lý y tế - Trường học

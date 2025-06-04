@@ -19,6 +19,11 @@ export const resourcesV1 = {
         displayName: 'Refresh Token',
         parent: 'Auth',
     },
+    CHANGE_PASSWORD: {
+        name: 'Change Password',
+        displayName: 'Change Password',
+        parent: 'Auth',
+    },
     // End Auth 
 
 
@@ -122,6 +127,11 @@ export const resourcesV1 = {
             displayName: 'Get All Vaccination Event',
             parent: 'Vaccination Event',
         },
+        GET_ALL_RESULT_VACCINATION_EVENT: {
+            name: 'Get All Result Vaccination Event',
+            displayName: 'Get All Result Vaccination Event',
+            parent: 'Vaccination Event',
+        },
         ACCEPTED_VACCINATION_EVENT: {
             name: 'Accepted Vaccination Event',
             displayName: 'Accepted Vaccination Event',
@@ -183,6 +193,11 @@ export const resourcesV1 = {
             displayName: 'Update Result Vaccination Event',
             parent: 'Vaccination Event',
         },
+        SEND_NOTIFICATION_RESULT_VACCINATION_EVENT: {
+            name: 'Send Notification Result Vaccination Event',
+            displayName: 'Send Notification Result Vaccination Event',
+            parent: 'Vaccination Event',
+        },
     },
     Manager: {
         root: "Manager",
@@ -204,6 +219,11 @@ export const resourcesV1 = {
         CONFIRM_VACCINATION_EVENT: {
             name: 'Confirm Vaccination Event',
             displayName: 'Confirm Vaccination Event',
+            parent: 'Vaccination Event',
+        },
+        SUCCESS_VACCINATION_EVENT: {
+            name: 'Success Vaccination Event',
+            displayName: 'Success Vaccination Event',
             parent: 'Vaccination Event',
         },
         GET_DETAIL_VACCINATION_EVENT: {

@@ -217,7 +217,7 @@ model Parent {
 enum EventStatus {
   DRAFT
   CONFIRMED
-  CANCELED
+  SUCCESSED
 }
 
 model VaccinationEvent {
@@ -267,12 +267,11 @@ model VaccinationResult {
   status             InjectionStatus
   result             InjectionResult
   note               String?
-
-  respondedAt DateTime?
-  createdAt   DateTime? @default(now()) @db.Timestamptz(3)
-  createdBy   Int?
-  updatedAt   DateTime? @updatedAt @db.Timestamptz(3)
-  updatedBy   Int?
+  isSend             Boolean         @default(false)
+  createdAt          DateTime?       @default(now()) @db.Timestamptz(3)
+  createdBy          Int?
+  updatedAt          DateTime?       @updatedAt @db.Timestamptz(3)
+  updatedBy          Int?
 
   vaccinationEvent VaccinationEvent @relation(fields: [vaccinationEventID], references: [id])
   student          Student          @relation(fields: [studentID], references: [id])
