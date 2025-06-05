@@ -11,6 +11,8 @@ import { GetDetailUserAdminService } from './services/get.detail.user.admin.serv
 import { ChangeStatusUserAdminService } from './services/change.status.user.admin.service';
 import { DeleteUserAdminController } from './controllers/delete.user.admin.controller';
 import { DeleteUserAdminService } from './services/delete.user.admin.service';
+import { UpdateUserAdminService } from './services/update.account.admin.service';
+import { UpdateUserAdminController } from './controllers/update.account.admin.controller';
 
 
 
@@ -19,6 +21,7 @@ const httpController = [
     GetAllUserAdminController,
     GetDetailUserAdminController,
     ChangeStatusUserAdminController,
+    UpdateUserAdminController,
     DeleteUserAdminController
 ]
 
@@ -28,6 +31,7 @@ const Services = [
     GetDetailUserAdminService,
     ChangeStatusUserAdminService,
     DeleteUserAdminService,
+    UpdateUserAdminService,
     JwtService
 ]
 
