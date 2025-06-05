@@ -52,6 +52,11 @@ export const resourcesV1 = {
             displayName: 'Create user',
             parent: 'Account',
         },
+        UPDATE_USER: {
+            name: 'Update user',
+            displayName: 'Update user',
+            parent: 'Account',
+        },
         GET_ALL_USERS: {
             name: 'Get All User',
             displayName: 'Get All User',

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { errorResponse } from "src/common/utils/response.util";
+import { successResponse } from "src/common/utils/response.util";
 import { PrismaService } from "src/libs/prisma/prisma.service";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class GetAllVaccinationEventNurseService {
         private readonly prisma: PrismaService
     ) { }
     async getAll() {
-        const vaccinationEvents = await this.prisma.vaccinationEvent.findMany({
+        const vaccinationEvents: any = await this.prisma.vaccinationEvent.findMany({
             where: {
                 status: "CONFIRMED"
             },
@@ -19,7 +19,9 @@ export class GetAllVaccinationEventNurseService {
                 targets: true
             }
         })
-
+        if (vaccinationEvents.length === 0) {
+            return successResponse(200, 'Không có sự kiện tiêm chủng nào ')
+        }
         for (const target of vaccinationEvents) {
             let formattedTargets: any[] = [];
             if (target.targets[0].targetType === 'CLASS') {
@@ -45,6 +47,22 @@ export class GetAllVaccinationEventNurseService {
                 formattedTargets = [];
             }
             target.targets = formattedTargets
+            const resultResponse = await this.prisma.vaccinationResponse.findMany({
+                where: {
+                    vaccinationEventID: target.id
+                }
+            })
+            const totalStudent = resultResponse.length;
+            const studentsAcceptCount = resultResponse.filter(student => student.status === "ACCEPTED").length;
+            const studentsDeclinedCount = resultResponse.filter(student => student.status === "DECLINED").length;
+            const studentPendingCount = totalStudent - studentsAcceptCount - studentsDeclinedCount;
+            target.studentResponseCount = {
+                totalStudent,
+                studentsAcceptCount,
+                studentsDeclinedCount,
+                studentPendingCount
+            }
+
         }
         const mostRecentVaccination = {
             id: vaccinationEvents[0].id,
@@ -56,6 +74,6 @@ export class GetAllVaccinationEventNurseService {
             mostRecentVaccination,
             vaccinationEvents,
         }
-        return result
+        return successResponse(200, result, 'Lấy Danh sách các cuộc tiêm chủng thành công')
     }
 }

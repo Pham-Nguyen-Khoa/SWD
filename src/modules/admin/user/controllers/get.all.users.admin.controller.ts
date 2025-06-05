@@ -7,6 +7,7 @@ import { Roles } from "src/modules/auth/guards/roles.decorator";
 import { RolesGuard } from "src/modules/auth/guards/roles.guard";
 import { GetAllUserAdminService } from "../services/get.all.users.admin.service";
 import { GetAllUserQuery } from "../dto/get.all.users.query.dto";
+import { GetUser } from "src/modules/auth/guards/get-user.decorator";
 
 
 @ApiTags(`${resourcesV1.Admin.root} - ${resourcesV1.Admin.GET_ALL_USERS.parent}`)
@@ -20,11 +21,11 @@ export class GetAllUserAdminController {
     }
     @ApiOperation({ summary: resourcesV1.Admin.GET_ALL_USERS.displayName })
     @ApiBearerAuth()
-    // @UseGuards(JWTGuard, RolesGuard) 
+    @UseGuards(JWTGuard, RolesGuard) 
     @Roles(1,2,3)
     @Get(routesV1.admin.user.root)
-    async getAllUser(@Query() query: GetAllUserQuery) {
-        return await this.getAllUserService.getAll(query)
+    async getAllUser(@Query() query: GetAllUserQuery,@GetUser() user) {
+        return await this.getAllUserService.getAll(query,user)
         // return "Get all user"
     }
 

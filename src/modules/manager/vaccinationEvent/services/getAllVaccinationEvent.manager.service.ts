@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { errorResponse } from "src/common/utils/response.util";
+import { errorResponse, successResponse } from "src/common/utils/response.util";
 import { PrismaService } from "src/libs/prisma/prisma.service";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class GetAllVaccinationEventManagerService {
         private readonly prisma: PrismaService
     ) { }
     async getAll() {
-        const vaccinationEvents = await this.prisma.vaccinationEvent.findMany({
+        const vaccinationEvents: any = await this.prisma.vaccinationEvent.findMany({
             orderBy: {
                 scheduledAt: "asc"
             },
@@ -51,14 +51,11 @@ export class GetAllVaccinationEventManagerService {
             const studentsAcceptCount = resultResponse.filter(student => student.status === "ACCEPTED").length;
             const studentsDeclinedCount = resultResponse.filter(student => student.status === "DECLINED").length;
             const studentPendingCount = totalStudent - studentsAcceptCount - studentsDeclinedCount;
-            return {
-                ...target,
-                studentResponseCount: {
-                    totalStudent,
-                    studentsAcceptCount,
-                    studentsDeclinedCount,
-                    studentPendingCount
-                }
+            target.studentResponseCount = {
+                totalStudent,
+                studentsAcceptCount,
+                studentsDeclinedCount,
+                studentPendingCount
             }
         }
 
@@ -72,6 +69,6 @@ export class GetAllVaccinationEventManagerService {
             mostRecentVaccination,
             vaccinationEvents,
         }
-        return result
+        return successResponse(200, result, 'Lấy Danh sách các cuộc tiêm chủng thành công')
     }
 }

@@ -11,7 +11,7 @@ export class GetAllUserAdminService {
         private prisma: PrismaService
     ) { }
 
-    async getAll(query: GetAllUserQuery) {
+    async getAll(query: GetAllUserQuery, reqUser) {
         try {
             const {
                 search,
@@ -38,6 +38,7 @@ export class GetAllUserAdminService {
             if (roleID) {
                 whereClause.roleID = roleID
             }
+            whereClause.id = { not: reqUser.id };
             const skip = (page - 1) * limit;
 
             const [accounts, total] = await Promise.all([
