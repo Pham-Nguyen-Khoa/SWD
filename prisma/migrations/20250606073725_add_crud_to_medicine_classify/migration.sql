@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "MedicineClassify" ADD COLUMN     "createdAt" TIMESTAMPTZ(3) DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "createdBy" INTEGER,
+ADD COLUMN     "updatedAt" TIMESTAMPTZ(3),
+ADD COLUMN     "updatedBy" INTEGER;

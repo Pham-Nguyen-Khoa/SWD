@@ -2,6 +2,7 @@ const authRoot = 'auth';
 const user = 'account';
 const health = 'health';
 const vaccinationEvent = 'vaccinationEvent';
+const medicine = 'medicine';
 
 const baseRoutes = (root: string) => {
     return {
@@ -83,6 +84,10 @@ export const routesV1 = {
             ...baseRoutes(`${vaccinationEvent}`),
             allClass: '/class',
             success: '/:id/success'
+        },
+        medicine: {
+            ...baseRoutes(`${medicine}`),
+            medicineClassify : '/medicine-classify',
         }
     }
 

@@ -24,10 +24,10 @@ export class ResultVaccinationEventNurseService {
         if (!vaccinationEventEntity) {
             return errorResponse(400, 'Không tìm thấy cuộc tiêm chủng nào nó id này');
         }
-        const nowTime = new Date();
-        if (nowTime < vaccinationEventEntity.scheduledAt) {
-            return errorResponse(400, 'Chưa đến thời gian tiêm chủng, không thể ghi nhận kết quả.');
-        }
+        // const nowTime = new Date();
+        // if (nowTime < vaccinationEventEntity.scheduledAt) {
+        //     return errorResponse(400, 'Chưa đến thời gian tiêm chủng, không thể ghi nhận kết quả.');
+        // }
         if (vaccinationResult) {
             return errorResponse(400, 'Đã có kết quả ghi nhận cho cuộc tiêm chủng này')
         }
