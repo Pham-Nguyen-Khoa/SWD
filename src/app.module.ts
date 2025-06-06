@@ -14,6 +14,8 @@ import { HealthNurseModule } from './modules/nurse/health/health.nurse.module';
 import { VaccinationEventModule } from './modules/manager/vaccinationEvent/vaccinationEvent.module';
 import { VaccinationEventNurseModule } from './modules/nurse/vaccinationEvent/vaccinationEvent.module';
 import { VaccinationEventParentModule } from './modules/parent/vaccinationEvent/vaccinationEvent.module';
+import { MedicineManagerModule } from './modules/manager/medicine/medicine.manager.module';
+import { UploadModule } from './modules/common/cloudinary/upload/upload.module';
 
 @Module({
   imports: [
@@ -37,6 +39,9 @@ import { VaccinationEventParentModule } from './modules/parent/vaccinationEvent/
     VaccinationEventNurseModule,
     // Manager 
     VaccinationEventModule,
+    MedicineManagerModule,
+
+    UploadModule,
 
     /* ---------------- End Module---------------- */
 

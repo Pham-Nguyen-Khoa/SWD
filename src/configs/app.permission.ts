@@ -246,6 +246,24 @@ export const resourcesV1 = {
             displayName: 'Get All Vaccination Event',
             parent: 'Vaccination Event',
         },
+
+        // Medicine
+        CREATE_MEDICINE: {
+            name: 'Create Medicine',
+            displayName: 'Create Medicine',
+            parent: 'Medicine',
+        },
+        GET_ALL_MEDICINE_CLASSIFY: {
+            name: 'Get All  Medicine Classify ',
+            displayName: 'Get All  Medicine Classify',
+            parent: 'Medicine',
+        },
+        CREATE_MEDICINE_CLASSIFY: {
+            name: 'Create Medicine Classify ',
+            displayName: 'Create Medicine Classify',
+            parent: 'Medicine',
+        },
+
     }
 
     // End Admin

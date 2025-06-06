@@ -27,9 +27,9 @@ export class UpdateResultVaccinationNurseService {
         } else if (vaccinationResult.length === 0) {
             return errorResponse(400, `Cuộc tiêm chủng này chưa hề có kết quả ghi nhận `)
         }
-        if (vaccinationEvent.status === "CANCELED") {
-            return errorResponse(400, 'Cuộc tiêm chủng này đã bị hủy bỏ')
-        }
+        // if (vaccinationEvent.status === "CANCELED") {
+        //     return errorResponse(400, 'Cuộc tiêm chủng này đã bị hủy bỏ')
+        // }
         if (vaccinationEvent.status === "SUCCESSED") {
             return errorResponse(400, 'Cuộc tiêm chủng này hoàn tất')
         }

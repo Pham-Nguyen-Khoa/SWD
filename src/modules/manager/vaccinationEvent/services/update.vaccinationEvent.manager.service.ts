@@ -27,17 +27,17 @@ export class UpdateVaccinationEventManagerService {
         if (vaccinationEvent.status === "CONFIRMED") {
             return errorResponse(400, 'Cuộc tiêm chủng này đã được xác nhận và gửi thông báo đến phụ huynh học sinh')
         }
-        if (data.scheduledAt) {
-            const newDate = DateHelper.parseDateStringToDate(data.scheduledAt);
-            const now = new Date();
+        // if (data.scheduledAt) {
+        //     const newDate = DateHelper.parseDateStringToDate(data.scheduledAt);
+        //     const now = new Date();
 
-            // So sánh ngày phải >= 5 ngày sau thời điểm hiện tại
-            const minDate = new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000); // 5 ngày sau
-            if (newDate < minDate) {
-                return errorResponse(400, 'Ngày tiêm chủng phải cách hiện tại ít nhất 5 ngày');
-            }
+        //     // So sánh ngày phải >= 5 ngày sau thời điểm hiện tại
+        //     const minDate = new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000); // 5 ngày sau
+        //     if (newDate < minDate) {
+        //         return errorResponse(400, 'Ngày tiêm chủng phải cách hiện tại ít nhất 5 ngày');
+        //     }
 
-        }
+        // }
         await this.prisma.vaccinationEvent.update({
             where: { id },
             data: {

@@ -16,15 +16,15 @@ export class SendNotificationResultVaccinationEventNurseService {
 
     async sendNotification(id: number, reqUser) {
         // Check đã gửi thông báo chưa
-        const checkSend = await this.prisma.vaccinationResult.findFirst({
-            where: {
-                vaccinationEventID: id,
-                isSend: true
-            }
-        })
-        if (checkSend) {
-            return errorResponse(400, 'Cuộc tiêm chủng này đã được gửi thông báo đến phụ huynh trước đó ')
-        }
+        // const checkSend = await this.prisma.vaccinationResult.findFirst({
+        //     where: {
+        //         vaccinationEventID: id,
+        //         isSend: true
+        //     }
+        // })
+        // if (checkSend) {
+        //     return errorResponse(400, 'Cuộc tiêm chủng này đã được gửi thông báo đến phụ huynh trước đó ')
+        // }
         const vaccinationEvent = await this.prisma.vaccinationEvent.findUnique({
             where: { id },
             select: {

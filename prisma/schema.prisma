@@ -301,3 +301,47 @@ enum InjectionStatus {
   SUCCESS
   SKIPPED
 }
+
+model Medicine {
+  id          Int              @id @default(autoincrement())
+  name        String
+  image       String
+  description String?
+  stock       Int
+  type        MedicineType
+  usage       String?
+  classifyID  Int
+  classify    MedicineClassify @relation(fields: [classifyID], references: [id])
+  createdAt   DateTime?        @default(now()) @db.Timestamptz(3)
+  createdBy   Int?
+  updatedAt   DateTime?        @updatedAt @db.Timestamptz(3)
+  updatedBy   Int?
+}
+
+model MedicineClassify {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  createdAt DateTime?  @default(now()) @db.Timestamptz(3)
+  createdBy Int?
+  updatedAt DateTime?  @updatedAt @db.Timestamptz(3)
+  updatedBy Int?
+  medicines Medicine[]
+}
+
+model MedicineSupply {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  stock       Int
+  usage       String?
+  createdAt   DateTime? @default(now()) @db.Timestamptz(3)
+  createdBy   Int?
+  updatedAt   DateTime? @updatedAt @db.Timestamptz(3)
+  updatedBy   Int?
+}
+
+enum MedicineType {
+  PELLETS
+  BOTTLE
+  JAR
+}
