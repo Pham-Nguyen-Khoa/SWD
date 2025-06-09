@@ -37,15 +37,12 @@ export class ResultVaccinationEventNurseService {
 
 
         const result = data.result;
-        console.log(result)
-        // console.log(reqUser.id)
         const vaccinationResults = result.map((res) => ({
             vaccinationEventID: id,
             studentID: res.studentID,
             status: res.status,
             result: res.result,
             note: res.note,
-            respondedAt: new Date(),
             createdBy: reqUser.id
 
         }))

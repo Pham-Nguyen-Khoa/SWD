@@ -10,6 +10,7 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { CreateMedicineManagerService } from "../services/create.medicine.manager.service";
 import { CreateMedicineDTO } from "../dtos/create.medicine.manager.dto";
 import { GetAllMedicineClassifyManagerService } from "../services/getAllMedicineClassify.manager.service";
+import { GetAllMedicineClassifyrQuery } from "../dtos/getAll.medicineClassify.query";
 
 
 
@@ -26,8 +27,8 @@ export class GetAllMedicineClassifyManagerController {
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(2)
     @Get(routesV1.manager.medicine.medicineClassify)
-    async getAll() {
-        return await this.getAllMedicineClassifyManagerService.getAll()
+    async getAll(@Query() query: GetAllMedicineClassifyrQuery) {
+        return await this.getAllMedicineClassifyManagerService.getAll(query)
     }
 }
 

@@ -63,8 +63,8 @@ export const routesV1 = {
         },
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
-            accepted: `/:id/accepted`,
-            declined: `/:id/declined`,
+            accepted: `/:id/:studentID/accepted`,
+            declined: `/:id/:studentID/declined`,
             resultVaccinationEvent: `/${vaccinationEvent}/result`
         }
     },
@@ -87,7 +87,8 @@ export const routesV1 = {
         },
         medicine: {
             ...baseRoutes(`${medicine}`),
-            medicineClassify : '/medicine-classify',
+            medicineClassify: '/medicine-classify',
+            detailMedicineClassify: '/medicine-classify/:id',
         }
     }
 

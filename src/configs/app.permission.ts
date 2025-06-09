@@ -253,9 +253,29 @@ export const resourcesV1 = {
             displayName: 'Create Medicine',
             parent: 'Medicine',
         },
+        UPDATE_MEDICINE: {
+            name: 'Update Medicine',
+            displayName: 'Update Medicine',
+            parent: 'Medicine',
+        },
         GET_ALL_MEDICINE_CLASSIFY: {
             name: 'Get All  Medicine Classify ',
             displayName: 'Get All  Medicine Classify',
+            parent: 'Medicine',
+        },
+        GET_DETAIL_MEDICINE_CLASSIFY: {
+            name: 'Get Detail  Medicine Classify ',
+            displayName: 'Get Detail  Medicine Classify',
+            parent: 'Medicine',
+        },
+        DELETE_MEDICINE_CLASSIFY: {
+            name: 'Delete  Medicine Classify ',
+            displayName: 'Delete  Medicine Classify',
+            parent: 'Medicine',
+        },
+        DELETE_MEDICINE: {
+            name: 'Delete  Medicine  ',
+            displayName: 'Delete  Medicine ',
             parent: 'Medicine',
         },
         CREATE_MEDICINE_CLASSIFY: {
