@@ -11,12 +11,13 @@ export class DeclinedVaccinationEventParentService {
     constructor(
         private readonly prisma: PrismaService
     ) { }
-    async declined(id: number, data: DeclinedVaccinationEventParentDto, reqUser) {
-
+    async declined(id: number, data: DeclinedVaccinationEventParentDto, studentID: number, reqUser) {
         try {
             const parentID = await this.prisma.parent.findUnique({ where: { accountID: reqUser.id } })
-            const response = await this.prisma.vaccinationResponse.findUnique({
-                where: { id }, include: {
+            const response = await this.prisma.vaccinationResponse.findFirst({
+                where: {
+                    vaccinationEventID: id, studentID
+                }, include: {
                     student: {
                         select: {
                             parentId: true

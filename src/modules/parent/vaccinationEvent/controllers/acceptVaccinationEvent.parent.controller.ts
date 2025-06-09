@@ -28,11 +28,18 @@ export class AcceptedVaccinationEventParentController {
         example: 1,
         type: Number
     })
+    @ApiParam({
+        name: "studentID",
+        description: "ID của học sinh",
+        example: 1,
+        type: Number
+    })
+
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(4)
     @Put(routesV1.parent.vaccinationEvent.accepted)
-    async accepted(@Param('id') id: string, @GetUser() user) {
-        return await this.acceptedVaccinationEventParentService.accepted(+id, user)
+    async accepted(@Param('id') id: string, @Param('studentID') studentID: string, @GetUser() user) {
+        return await this.acceptedVaccinationEventParentService.accepted(+id, +studentID, user)
     }
 }
 

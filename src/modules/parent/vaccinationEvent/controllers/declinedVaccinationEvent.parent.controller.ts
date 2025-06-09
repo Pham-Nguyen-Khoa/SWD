@@ -28,11 +28,17 @@ export class DeclinedVaccinationEventParentController {
         example: 1,
         type: Number
     })
+    @ApiParam({
+        name: "studentID",
+        description: "ID của học sinh",
+        example: 1,
+        type: Number
+    })
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(4)
     @Put(routesV1.parent.vaccinationEvent.declined)
-    async declined(@Param('id') id: string, @Body() note: DeclinedVaccinationEventParentDto, @GetUser() user) {
-        return await this.declinedVaccinationEventParentService.declined(+id, note, user)
+    async declined(@Param('id') id: string, @Param('studentID') studentID: string, @Body() note: DeclinedVaccinationEventParentDto, @GetUser() user) {
+        return await this.declinedVaccinationEventParentService.declined(+id, note, +studentID, user)
     }
 }
 
