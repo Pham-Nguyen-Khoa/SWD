@@ -58,17 +58,21 @@ export class GetAllVaccinationEventManagerService {
                 studentPendingCount
             }
         }
+        let mostRecentVaccination: any = {}
+        let result: any = {}
+        if (vaccinationEvents.length > 0) {
+            mostRecentVaccination = {
+                id: vaccinationEvents[0].id,
+                scheduledAt: vaccinationEvents[0].scheduledAt,
+                name: vaccinationEvents[0].name,
+                description: vaccinationEvents[0].description,
+            }
+            result = {
+                mostRecentVaccination,
+                vaccinationEvents,
+            }
+        }
 
-        const mostRecentVaccination = {
-            id: vaccinationEvents[0].id,
-            scheduledAt: vaccinationEvents[0].scheduledAt,
-            name: vaccinationEvents[0].name,
-            description: vaccinationEvents[0].description,
-        }
-        const result = {
-            mostRecentVaccination,
-            vaccinationEvents,
-        }
         return successResponse(200, result, 'Lấy Danh sách các cuộc tiêm chủng thành công')
     }
 }

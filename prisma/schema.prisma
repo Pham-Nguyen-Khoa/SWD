@@ -316,6 +316,7 @@ model Medicine {
   createdBy   Int?
   updatedAt   DateTime?        @updatedAt @db.Timestamptz(3)
   updatedBy   Int?
+  RequestItem RequestItem[]
 }
 
 model MedicineClassify {
@@ -329,19 +330,58 @@ model MedicineClassify {
 }
 
 model MedicineSupply {
-  id          Int       @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
+  image       String
   name        String
   description String?
   stock       Int
   usage       String?
-  createdAt   DateTime? @default(now()) @db.Timestamptz(3)
+  category    String?
+  createdAt   DateTime?     @default(now()) @db.Timestamptz(3)
   createdBy   Int?
-  updatedAt   DateTime? @updatedAt @db.Timestamptz(3)
+  updatedAt   DateTime?     @updatedAt @db.Timestamptz(3)
   updatedBy   Int?
+  RequestItem RequestItem[]
 }
 
 enum MedicineType {
   PELLETS
   BOTTLE
   JAR
+}
+
+model MedicineSupplyRequest {
+  id        Int           @id @default(autoincrement())
+  note      String?
+  status    RequestStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+  createdBy Int?
+  items     RequestItem[]
+}
+
+model RequestItem {
+  id               Int          @id @default(autoincrement())
+  requestId        Int
+  medicineID       Int?
+  medicineSupplyID Int?
+  quantity         Int
+  urgency          UrgencyLevel @default(NORMAL)
+  note             String?
+
+  request        MedicineSupplyRequest @relation(fields: [requestId], references: [id])
+  medicine       Medicine?             @relation(fields: [medicineID], references: [id])
+  medicineSupply MedicineSupply?       @relation(fields: [medicineSupplyID], references: [id])
+
+  // @@check("medicineId IS NOT NULL OR medicalSupplyId IS NOT NULL")
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum UrgencyLevel {
+  NORMAL
+  URGENT
 }

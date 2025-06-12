@@ -203,6 +203,37 @@ export const resourcesV1 = {
             displayName: 'Send Notification Result Vaccination Event',
             parent: 'Vaccination Event',
         },
+        // Medicine 
+        GET_ALL_MEDICINE: {
+            name: 'Get All Medicine',
+            displayName: 'Get All Medicine',
+            parent: 'Medicine',
+        },
+        GET_ALL_MEDICINE_SUPPLY: {
+            name: 'Get All Medicine Supply',
+            displayName: 'Get All Medicine Supply',
+            parent: 'Medicine',
+        },
+        GET_ALL_MEDICINE_CLASSIFY: {
+            name: 'Get All  Medicine Classify ',
+            displayName: 'Get All  Medicine Classify',
+            parent: 'Medicine',
+        },
+        SEND_REQUEST_MANAGER: {
+            name: 'Send Request Manager ',
+            displayName: 'Send Request Manager',
+            parent: 'Medicine',
+        },
+        GET_ALL_SEND_REQUEST_MANAGER: {
+            name: 'Get All Send Request Manager ',
+            displayName: 'Get All Send Request Manager',
+            parent: 'Medicine',
+        },
+        GET_DETAIL_SEND_REQUEST_MANAGER: {
+            name: 'Get Detail Send Request Manager ',
+            displayName: 'Get Detail Send Request Manager',
+            parent: 'Medicine',
+        },
     },
     Manager: {
         root: "Manager",
@@ -282,6 +313,34 @@ export const resourcesV1 = {
             name: 'Create Medicine Classify ',
             displayName: 'Create Medicine Classify',
             parent: 'Medicine',
+        },
+
+        // Medicine Supply
+        CREATE_MEDICINE_SUPPLY: {
+            name: 'Create Medicine Supply ',
+            displayName: 'Create Medicine Supply',
+            parent: 'Medicine Supply',
+        },
+        UPDATE_MEDICINE_SUPPLY: {
+            name: 'Update Medicine Supply ',
+            displayName: 'Update Medicine Supply',
+            parent: 'Medicine Supply',
+        },
+        GET_ALL_MEDICINE_SUPPLY: {
+            name: 'Get All  Medicine Supply  ',
+            displayName: 'Get All  Medicine Supply ',
+            parent: 'Medicine Supply',
+        },
+        DELETE_MEDICINE_SUPPLY: {
+            name: 'Delete  Medicine Supply  ',
+            displayName: 'Delete  Medicine Supply ',
+            parent: 'Medicine Supply',
+        },
+        // Request 
+        GET_ALL_REQUEST: {
+            name: 'Get All  Request',
+            displayName: 'Get All  Request',
+            parent: 'Request',
         },
 
     }
