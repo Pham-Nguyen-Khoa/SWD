@@ -6,9 +6,6 @@ import { JWTGuard } from "src/modules/auth/guards/jwt.guard";
 import { Roles } from "src/modules/auth/guards/roles.decorator";
 import { RolesGuard } from "src/modules/auth/guards/roles.guard";
 import { GetUser } from "src/modules/auth/guards/get-user.decorator";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { CreateMedicineManagerService } from "../services/create.medicine.manager.service";
-import { CreateMedicineDTO } from "../dtos/create.medicine.manager.dto";
 import { GetAllMedicineClassifyManagerService } from "../services/getAllMedicineClassify.manager.service";
 import { GetAllMedicineClassifyrQuery } from "../dtos/getAll.medicineClassify.query";
 

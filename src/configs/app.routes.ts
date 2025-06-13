@@ -3,6 +3,8 @@ const user = 'account';
 const health = 'health';
 const vaccinationEvent = 'vaccinationEvent';
 const medicine = 'medicine';
+const medicineSupply = 'medicineSupply';
+const request = 'request';
 
 const baseRoutes = (root: string) => {
     return {
@@ -77,19 +79,35 @@ export const routesV1 = {
             ...baseRoutes(`${vaccinationEvent}`),
             result: `/:id/result`,
             sendResult: `/:id/notification/send-result`
+        },
+        medicine: {
+            ...baseRoutes(`${medicine}`),
+            medicineClassify: '/medicine-classify',
+            medicineSupply: '/medicine-supply',
+            sendRequest: `/${medicine}/send-request`,
+            getDetailSendRequest: `/${medicine}/send-request/:id`
+
         }
     },
     manager: {
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
             allClass: '/class',
-            success: '/:id/success'
+            success: '/:id/success',
+            medicines: 'medicines'
         },
         medicine: {
             ...baseRoutes(`${medicine}`),
             medicineClassify: '/medicine-classify',
             detailMedicineClassify: '/medicine-classify/:id',
+        },
+        medicineSupply: {
+            ...baseRoutes(`${medicineSupply}`),
+        },
+        request: {
+            ...baseRoutes(`${request}`),
         }
+
     }
 
 }

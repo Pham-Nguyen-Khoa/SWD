@@ -8,4 +8,9 @@ export class DateHelper {
   static formatDateToDateString(date: Date): string {
     return date.toISOString().split('T')[0];
   }
+
+  static formatDateToDDMMYYYY(date: string): string {
+    const [year, month, day] = date.split('-');
+    return `${day}-${month}-${year}`;
+  }
 }
