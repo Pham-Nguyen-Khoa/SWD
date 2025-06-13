@@ -1,10 +1,32 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from "class-validator";
 
 export enum VaccinationTargetType {
     SCHOOL = 'SCHOOL',
     GRADE = 'GRADE',
     CLASS = 'CLASS',
+}
+
+class VaccineEventStockDto {
+    @ApiPropertyOptional({ example: '1', description: 'ID thuốc' })
+    @IsOptional()
+    @IsInt()
+    medicineID?: number;
+
+    @ApiPropertyOptional({ example: '1', description: 'ID Vật tư chọn' })
+    @IsOptional()
+    @IsInt()
+    medicineSupplyID?: number;
+
+    @ApiProperty({ example: '12', description: 'Số lượng dự kiến' })
+    @IsInt()
+    quantityPlanned: number;
+
+    @ApiProperty({ example: 'Không đủ thì báo thêm', description: 'Ghi chú thêm' })
+    @IsOptional()
+    @IsString()
+    notes?: string;
 }
 
 
@@ -30,6 +52,27 @@ export class CreateVaccinationEventDTO {
     @IsArray()
     @IsOptional()
     targetIds?: number[];
+
+
+    @ApiProperty({
+        description: 'Danh sách thuốc hoặc vật tư cần yêu cầu',
+        type: [VaccineEventStockDto],
+        example: [
+            {
+                medicineID: 1,
+                quantityPlanned: 200,
+                notes: 'Thiếu thì báo thêm'
+            },
+            {
+                medicineSupplyID: 3,
+                quantityPlanned: 5,
+            }
+        ]
+    })
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => VaccineEventStockDto)
+    items: VaccineEventStockDto[];
 
 
 }

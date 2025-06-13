@@ -93,7 +93,8 @@ export const routesV1 = {
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
             allClass: '/class',
-            success: '/:id/success'
+            success: '/:id/success',
+            medicines: 'medicines'
         },
         medicine: {
             ...baseRoutes(`${medicine}`),

@@ -277,6 +277,11 @@ export const resourcesV1 = {
             displayName: 'Get All Vaccination Event',
             parent: 'Vaccination Event',
         },
+        GET_ALL_MEDICINE_AND_SUPPLY: {
+            name: 'Get All  Medicine and Supply  ',
+            displayName: 'Get All  Medicine and Supply ',
+            parent: 'Vaccination Event',
+        },
 
         // Medicine
         CREATE_MEDICINE: {
@@ -340,6 +345,21 @@ export const resourcesV1 = {
         GET_ALL_REQUEST: {
             name: 'Get All  Request',
             displayName: 'Get All  Request',
+            parent: 'Request',
+        },
+        GET_DETAIL_REQUEST: {
+            name: 'Get Detail Request',
+            displayName: 'Get Detail Request',
+            parent: 'Request',
+        },
+        APPROVED_REQUEST: {
+            name: 'Approved Request',
+            displayName: 'Approved Request',
+            parent: 'Request',
+        },
+        REJECTED_REQUEST: {
+            name: 'Rejected Request',
+            displayName: 'Rejected Request',
             parent: 'Request',
         },
 

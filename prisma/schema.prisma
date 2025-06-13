@@ -238,6 +238,20 @@ model VaccinationEvent {
   targets             VaccinationTarget[]
   vaccinationResponse VaccinationResponse[]
   vaccinationResult   VaccinationResult[]
+  VaccineStock        VaccineEventStock[]
+}
+
+model VaccineEventStock {
+  id                 Int              @id @default(autoincrement())
+  vaccinationEventID Int
+  medicineID         Int?
+  medicineSupplyID   Int?
+  quantityPlanned    Int
+  quantityUsed       Int              @default(0)
+  notes              String?
+  vaccinationEvent   VaccinationEvent @relation(fields: [vaccinationEventID], references: [id])
+  medicine           Medicine?        @relation(fields: [medicineID], references: [id])
+  medicineSupply     MedicineSupply?  @relation(fields: [medicineSupplyID], references: [id])
 }
 
 model VaccinationTarget {
@@ -303,20 +317,21 @@ enum InjectionStatus {
 }
 
 model Medicine {
-  id          Int              @id @default(autoincrement())
-  name        String
-  image       String
-  description String?
-  stock       Int
-  type        MedicineType
-  usage       String?
-  classifyID  Int
-  classify    MedicineClassify @relation(fields: [classifyID], references: [id])
-  createdAt   DateTime?        @default(now()) @db.Timestamptz(3)
-  createdBy   Int?
-  updatedAt   DateTime?        @updatedAt @db.Timestamptz(3)
-  updatedBy   Int?
-  RequestItem RequestItem[]
+  id                Int                 @id @default(autoincrement())
+  name              String
+  image             String
+  description       String?
+  stock             Int
+  type              MedicineType
+  usage             String?
+  classifyID        Int
+  classify          MedicineClassify    @relation(fields: [classifyID], references: [id])
+  createdAt         DateTime?           @default(now()) @db.Timestamptz(3)
+  createdBy         Int?
+  updatedAt         DateTime?           @updatedAt @db.Timestamptz(3)
+  updatedBy         Int?
+  RequestItem       RequestItem[]
+  VaccineEventStock VaccineEventStock[]
 }
 
 model MedicineClassify {
@@ -330,18 +345,19 @@ model MedicineClassify {
 }
 
 model MedicineSupply {
-  id          Int           @id @default(autoincrement())
-  image       String
-  name        String
-  description String?
-  stock       Int
-  usage       String?
-  category    String?
-  createdAt   DateTime?     @default(now()) @db.Timestamptz(3)
-  createdBy   Int?
-  updatedAt   DateTime?     @updatedAt @db.Timestamptz(3)
-  updatedBy   Int?
-  RequestItem RequestItem[]
+  id                Int                 @id @default(autoincrement())
+  image             String
+  name              String
+  description       String?
+  stock             Int
+  usage             String?
+  category          String?
+  createdAt         DateTime?           @default(now()) @db.Timestamptz(3)
+  createdBy         Int?
+  updatedAt         DateTime?           @updatedAt @db.Timestamptz(3)
+  updatedBy         Int?
+  RequestItem       RequestItem[]
+  VaccineEventStock VaccineEventStock[]
 }
 
 enum MedicineType {
