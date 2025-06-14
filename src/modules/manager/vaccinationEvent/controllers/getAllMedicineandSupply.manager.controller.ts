@@ -24,7 +24,7 @@ export class GetAllMedicineAndSupplyNurseController {
     @ApiOperation({ summary: resourcesV1.Manager.GET_ALL_MEDICINE_AND_SUPPLY.displayName })
     @ApiBearerAuth()
     @UseGuards(JWTGuard, RolesGuard)
-    @Roles(2)
+    @Roles(2, 3)
     @Get(routesV1.manager.vaccinationEvent.medicines)
     async getAll() {
         return await this.getAllMedicineAndSupplyManagerService.getAll()

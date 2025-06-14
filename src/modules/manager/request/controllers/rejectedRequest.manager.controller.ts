@@ -28,7 +28,7 @@ export class RejectedRequestManagerController {
     })
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(2)
-    @Put(routesV1.manager.request.getOne)
+    @Put(routesV1.manager.request.rejected)
     async reject(@Param('id') id: string) {
         return await this.rejectedRequestManagerService.reject(+id)
     }

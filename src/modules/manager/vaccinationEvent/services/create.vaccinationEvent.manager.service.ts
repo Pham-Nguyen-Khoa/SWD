@@ -34,6 +34,16 @@ export class CreateVaccinationEventManagerService {
         if (newDate < minDate) {
             return errorResponse(400, 'Ngày tiêm chủng phải cách hiện tại ít nhất 5 ngày');
         }
+        // check ton tai chua
+        const vaccinationEventEntity = await this.prisma.vaccinationEvent.findFirst({
+            where: {
+                academicYearID: academicYear.id,
+                name: data.name
+            }
+        })
+        if (vaccinationEventEntity) {
+            return errorResponse(400, 'Cuộc tiêm chủng đã tồn tại');
+        }
 
         const vaccinationEvent = await this.prisma.vaccinationEvent.create({
             data: {
@@ -62,23 +72,28 @@ export class CreateVaccinationEventManagerService {
                 targetID: id
             }));
 
-            await this.prisma.vaccinationTarget.createMany({
-                data: targetsToCreate,
-                skipDuplicates: true
-            });
-            const vaccineEventStockData = data.items.map((item) => (
-                {
-                    vaccinationEventID: vaccinationEvent.id,
-                    medicineID: item.medicineID,
-                    medicineSupplyID: item.medicineSupplyID,
-                    quantityPlanned: item.quantityPlanned,
-                    notes: item.notes
-                }
-            ))
-            await this.prisma.vaccineEventStock.createMany({
-                data: vaccineEventStockData,
-                skipDuplicates: true
-            })
+            try {
+                await this.prisma.vaccinationTarget.createMany({
+                    data: targetsToCreate,
+                    skipDuplicates: true
+                });
+                const vaccineEventStockData = data.items.map((item) => (
+                    {
+                        vaccinationEventID: vaccinationEvent.id,
+                        medicineID: item.medicineID,
+                        medicineSupplyID: item.medicineSupplyID,
+                        quantityPlanned: item.quantityPlanned,
+                        notes: item.notes
+                    }
+                ))
+                console.log(vaccineEventStockData)
+                await this.prisma.vaccineEventStock.createMany({
+                    data: vaccineEventStockData,
+                    skipDuplicates: true
+                })
+            } catch (error) {
+                console.log(error)
+            }
         } else {
             return errorResponse(400, 'Loại mục tiêu không hợp lệ hoặc thiếu danh sách targetIds.');
         }

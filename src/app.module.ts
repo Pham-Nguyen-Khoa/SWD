@@ -19,6 +19,7 @@ import { UploadModule } from './modules/common/cloudinary/upload/upload.module';
 import { MedicineNurseModule } from './modules/nurse/medicine/medicine.nurse.module';
 import { MedicineSupplyManagerModule } from './modules/manager/medicineSupply/medicineSupply.manager.module';
 import { RequestModule } from './modules/manager/request/request.manager.module';
+import { MedicalEventNurseModule } from './modules/nurse/medicalEvent/medicalEvent.nurse.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { RequestModule } from './modules/manager/request/request.manager.module'
     HealthNurseModule,
     VaccinationEventNurseModule,
     MedicineNurseModule,
+    MedicalEventNurseModule,
     // Manager 
     VaccinationEventModule,
     MedicineManagerModule,

@@ -49,6 +49,7 @@ model Student {
   vaccinationResponse VaccinationResponse[]
   vaccinationResult   VaccinationResult[]
   healthProfile       HealthProfile?
+  MedicalEvent        MedicalEvent[]
 }
 
 model Class {
@@ -400,4 +401,43 @@ enum RequestStatus {
 enum UrgencyLevel {
   NORMAL
   URGENT
+}
+
+model MedicalEvent {
+  id               Int                  @id @default(autoincrement())
+  studentID        Int
+  type             String
+  occurredAt       DateTime
+  description      String
+  status           MedicalEventStatus   @default(PENDING)
+  severity         MedicalEventSeverity @default(NORMAL)
+  student          Student              @relation(fields: [studentID], references: [id])
+  createdBy        Int?
+  updatedAt        DateTime?            @updatedAt @db.Timestamptz(3)
+  updatedBy        Int?
+  HospitalTransfer HospitalTransfer[]
+}
+
+enum MedicalEventStatus {
+  PENDING
+  PROCESSING
+  HOSPITALIZED
+  HOSPITALDISCHARGE
+  COMPLETED
+}
+
+enum MedicalEventSeverity {
+  NORMAL
+  HOSPITAL
+}
+
+model HospitalTransfer {
+  id             Int          @id @default(autoincrement())
+  medicalEventID Int
+  hospitalName   String
+  transferredAt  DateTime     @db.Timestamptz(3)
+  MedicalEvent   MedicalEvent @relation(fields: [medicalEventID], references: [id])
+  createdBy      Int?
+  updatedAt      DateTime?    @updatedAt @db.Timestamptz(3)
+  updatedBy      Int?
 }
