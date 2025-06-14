@@ -20,3 +20,4 @@
 
 # ENTRYPOINT ["./docker-entrypoint.sh"]
 # CMD ["node", "dist/src/main.js"]
+CMD ["echo", "Dockerfile is now valid but not running the app."]
