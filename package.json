@@ -7,9 +7,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build && npm run copy-templates",
-    "copy-templates": "copyfiles -u 2 \"src/configs/template/**/*\" \"dist/configs\"",
+    "copy-templates": "copyfiles -u 2 \"src/configs/template/**/*\" \"dist/src/configs\"",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "node --max-old-space-size=1024 dist/main", 
+    "start": "node --max-old-space-size=1024 dist/src/main",
     "seed": "ts-node prisma/seed.ts",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
