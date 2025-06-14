@@ -234,6 +234,12 @@ export const resourcesV1 = {
             displayName: 'Get Detail Send Request Manager',
             parent: 'Medicine',
         },
+        // Medical Event 
+        CREATE_MEDICAL_EVENT: {
+            name: 'Create Medical Event',
+            displayName: 'Create Medical Event',
+            parent: 'Medical Event',
+        },
     },
     Manager: {
         root: "Manager",

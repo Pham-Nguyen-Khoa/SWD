@@ -13,10 +13,10 @@ export class SuccessVaccinationEventManagerService {
         if (!vaccinationEvent) {
             return errorResponse(400, 'Không tìm thấy cuộc tiêm chủng nào có id này')
         }
-        const now = new Date()
-        if (now < vaccinationEvent.scheduledAt) {
-            return errorResponse(400, 'Chưa đến lịch diễn ra cuộc tiêm chủng')
-        }
+        // const now = new Date()
+        // if (now < vaccinationEvent.scheduledAt) {
+        //     return errorResponse(400, 'Chưa đến lịch diễn ra cuộc tiêm chủng')
+        // }
         await this.prisma.vaccinationEvent.update({
             where: { id },
             data: {

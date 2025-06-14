@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/libs/prisma/prisma.service";
-import { ResultVaccinationEventNurseDto } from "../dtos/resultVaccinationEvent.nurse.dto";
+import { ResultVaccinationEventNurseDto, VaccinationResultDto } from "../dtos/resultVaccinationEvent.nurse.dto";
 import { errorResponse, successResponse } from "src/common/utils/response.util";
 
 
@@ -37,6 +37,15 @@ export class ResultVaccinationEventNurseService {
 
 
         const result = data.result;
+        const totalStudentSuccess = result.filter(res => res.status === "SUCCESS").length;
+        await this.prisma.vaccineEventStock.updateMany({
+            where: {
+                vaccinationEventID: id
+            },
+            data: {
+                quantityUsed: totalStudentSuccess
+            }
+        })
         const vaccinationResults = result.map((res) => ({
             vaccinationEventID: id,
             studentID: res.studentID,

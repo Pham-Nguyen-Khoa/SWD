@@ -27,7 +27,7 @@ export class ApprovedRequestManagerController {
     })
     @UseGuards(JWTGuard, RolesGuard)
     @Roles(2)
-    @Put(routesV1.manager.request.getOne)
+    @Put(routesV1.manager.request.approved)
     async approved(@Param('id') id: string) {
         return await this.approveRequestManagerService.approve(+id)
     }
