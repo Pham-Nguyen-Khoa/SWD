@@ -90,6 +90,9 @@ export const routesV1 = {
         },
         medicalEvent: {
             ...baseRoutes(`${medicalEvent}`),
+            sendMedicalEvent: `/${medicalEvent}/send-medicalEvent/:id`,
+            updateStatus: `/${medicalEvent}/change-status/:id`,
+
 
         }
     },

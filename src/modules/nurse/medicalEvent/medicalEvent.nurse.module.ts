@@ -10,11 +10,17 @@ import { GetDetailStudentAdminService } from "src/modules/admin/student/services
 import { StudentAdminModule } from "src/modules/admin/student/student.admin.module"
 import { GetDetailMedicalEventNurseController } from "./controllers/getDetail.medicalEvent.nurse.controller"
 import { GetDetailMedicalEventNurseService } from "./services/getDetail.medicalEvent.nurse.service"
+import { SendNotificationMedicalEventNurseService } from "./services/sendNotificationMedicalEvent.nurse.service"
+import { SendNotificationMedicalEventNurseController } from "./controllers/sendNotificationMedicalEvent.nurse.controller"
+import { UpdateStatusMedicalEventNurseController } from "./controllers/update.status.medicalEvent.nurse.controller"
+import { UpdateStatusMedicalEventNurseService } from "./services/update.status.medicalEvent.nurse.service"
 
 const httpController = [
     CreateMedicalEventNurseController,
     GetAllMedicalEventNurseController,
-    GetDetailMedicalEventNurseController
+    GetDetailMedicalEventNurseController,
+    SendNotificationMedicalEventNurseController,
+    UpdateStatusMedicalEventNurseController
 
 ]
 
@@ -22,6 +28,8 @@ const Services = [
     CreateMedicalEventNurseService,
     GetAllMedicalEventNurseService,
     GetDetailMedicalEventNurseService,
+    SendNotificationMedicalEventNurseService,
+    UpdateStatusMedicalEventNurseService,
     MailService,
     JwtService
 ]

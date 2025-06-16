@@ -404,16 +404,17 @@ enum UrgencyLevel {
 }
 
 model MedicalEvent {
-  id               Int                  @id @default(autoincrement())
-  studentID        Int
-  type             String
-  occurredAt       DateTime
-  description      String
-  status           MedicalEventStatus   @default(PENDING)
-  severity         MedicalEventSeverity @default(NORMAL)
-  student          Student              @relation(fields: [studentID], references: [id])
+  id          Int                  @id @default(autoincrement())
+  studentID   Int
+  type        String
+  occurredAt  DateTime
+  description String
+  status      MedicalEventStatus   @default(PENDING)
+  severity    MedicalEventSeverity @default(NORMAL)
+  isSend      Boolean              @default(false)
+  student          Student           @relation(fields: [studentID], references: [id])
   createdBy        Int?
-  updatedAt        DateTime?            @updatedAt @db.Timestamptz(3)
+  updatedAt        DateTime?         @updatedAt @db.Timestamptz(3)
   updatedBy        Int?
   HospitalTransfer HospitalTransfer?
 }

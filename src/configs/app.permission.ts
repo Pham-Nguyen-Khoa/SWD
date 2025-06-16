@@ -240,6 +240,11 @@ export const resourcesV1 = {
             displayName: 'Create Medical Event',
             parent: 'Medical Event',
         },
+        UPDATE_STATUS_MEDICAL_EVENT: {
+            name: 'Update Status Medical Event',
+            displayName: 'Update Status Medical Event',
+            parent: 'Medical Event',
+        },
         GET_ALL_MEDICAL_EVENT: {
             name: 'Get All Medical Event',
             displayName: 'Get All Medical Event',
@@ -248,6 +253,11 @@ export const resourcesV1 = {
         GET_DETAIL_MEDICAL_EVENT: {
             name: 'Get Detail Medical Event',
             displayName: 'Get Detail Medical Event',
+            parent: 'Medical Event',
+        },
+        SEND_NOTIFICATION_MEDICAL_EVENT: {
+            name: 'Send Notification Medical Event',
+            displayName: 'Send Notification Medical Event',
             parent: 'Medical Event',
         },
     },
