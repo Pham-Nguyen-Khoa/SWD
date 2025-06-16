@@ -1,0 +1,91 @@
+doctype html
+html(lang="en")
+  head
+    title Thông tin học sinh nhập viện
+    style.
+      /* CSS cho email */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #4CAF50;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .info {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+
+      .info label {
+        font-weight: bold;
+        color: #4CAF50;
+      }
+
+      .info p {
+        margin: 5px 0;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+      }
+  body
+    .container
+      h1 Thông tin học sinh nhập viện
+
+      .info
+        label Tên phụ huynh:
+        p #{parentName}
+
+      .info
+        label Tên học sinh:
+        p #{studentName}
+
+      .info
+        label Bị gì (lý do nhập viện):
+        p #{description}
+
+      .info
+        label Nhập viện ở đâu:
+        p #{hospitalName}
+
+      .info
+        label Thời gian nhập viện:
+        p #{transferredAt}
+
+      .info
+        label Tên trường:
+        p Trường THCS Trần Hưng Đạo
+
+      .info
+        label Thông tin liên hệ trường:
+        p SĐT: 0123456789
+
+      .footer
+        p Xin chân thành cảm ơn!
+        p Đội ngũ y tế trường học THCS Trần Hưng Đạo

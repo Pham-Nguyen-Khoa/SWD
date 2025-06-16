@@ -415,7 +415,7 @@ model MedicalEvent {
   createdBy        Int?
   updatedAt        DateTime?            @updatedAt @db.Timestamptz(3)
   updatedBy        Int?
-  HospitalTransfer HospitalTransfer[]
+  HospitalTransfer HospitalTransfer?
 }
 
 enum MedicalEventStatus {
@@ -433,7 +433,7 @@ enum MedicalEventSeverity {
 
 model HospitalTransfer {
   id             Int          @id @default(autoincrement())
-  medicalEventID Int
+  medicalEventID Int          @unique
   hospitalName   String
   transferredAt  DateTime     @db.Timestamptz(3)
   MedicalEvent   MedicalEvent @relation(fields: [medicalEventID], references: [id])
