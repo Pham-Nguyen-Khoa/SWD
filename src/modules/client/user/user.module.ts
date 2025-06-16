@@ -4,15 +4,19 @@ import { GetProfileController } from './controllers/getProfile.user.controller';
 import { GetProfileService } from './services/getProfile.user.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserQueryService } from './services/user-query.service';
+import { ChangePasswordService } from './services/change-password.service';
+import { ChangePasswordController } from './controllers/change-password.controller';
 
 
 
 const httpController = [
-  GetProfileController
+  GetProfileController,
+  ChangePasswordController
 ]
 
 const Services = [
   GetProfileService,
+  ChangePasswordService,
   JwtService,
   UserQueryService
 ]

@@ -3,6 +3,7 @@ import { LoginDto } from "../dto/login.dto";
 import { PrismaService } from "src/libs/prisma/prisma.service";
 import { compare } from "bcrypt"
 import { JwtService } from "@nestjs/jwt";
+import { errorResponse, successResponse } from "src/common/utils/response.util";
 
 
 const EXPIRE_TIME = 3600 * 1000 * 24 * 7;
@@ -22,14 +23,15 @@ export class LoginService {
             }
         })
         if (!user) {
-            throw new HttpException({ message: "Tài khoản không tồn tại" }, HttpStatus.UNAUTHORIZED)
+            return errorResponse(400, "Tài khoản không tồn tại","NOT_FOUND")
         }
 
         // Kiểm tra password    
 
         const verify = await compare(data.password, user.password);
         if (!verify) {
-            throw new HttpException({ message: "Mật khẩu không đúng " }, HttpStatus.UNAUTHORIZED)
+            return errorResponse(400, "Mật khẩu không đúng","INCORRECT_PASWORD")
+
         }
 
 
@@ -47,7 +49,7 @@ export class LoginService {
         })
 
         const { password, ...result } = user
-        return {
+        const total = {
             user: result,
             backendToken: {
                 accessToken: accessToken,
@@ -55,5 +57,6 @@ export class LoginService {
                 expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME)
             }
         }
+        return successResponse(200, total, 'Đăng nhập thành công')
     }
 }

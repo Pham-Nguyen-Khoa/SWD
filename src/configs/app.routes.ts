@@ -55,7 +55,8 @@ export const routesV1 = {
     client: {
         user: {
             ...baseRoutes(`${user}`),
-            profile: `/${user}/profile`
+            profile: `/${user}/profile`,
+            changePassword: `/${user}/change-password`
         }
     },
     parent: {
