@@ -27,8 +27,8 @@ export class GetDetailMedicalEventNurseController {
         example: 1,
         type: Number
     })
-    // @UseGuards(JWTGuard, RolesGuard)
-    // @Roles(3)
+    @UseGuards(JWTGuard, RolesGuard)
+    @Roles(3)
     @Get(routesV1.nurse.medicalEvent.getOne)
     async getDetail(@Param('id') id: string) {
         return await this.getDetailMedicalEventNurseService.getDetail(+id)

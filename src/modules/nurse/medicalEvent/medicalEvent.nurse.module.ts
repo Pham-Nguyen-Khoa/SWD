@@ -12,12 +12,15 @@ import { GetDetailMedicalEventNurseController } from "./controllers/getDetail.me
 import { GetDetailMedicalEventNurseService } from "./services/getDetail.medicalEvent.nurse.service"
 import { SendNotificationMedicalEventNurseService } from "./services/sendNotificationMedicalEvent.nurse.service"
 import { SendNotificationMedicalEventNurseController } from "./controllers/sendNotificationMedicalEvent.nurse.controller"
+import { UpdateStatusMedicalEventNurseController } from "./controllers/update.status.medicalEvent.nurse.controller"
+import { UpdateStatusMedicalEventNurseService } from "./services/update.status.medicalEvent.nurse.service"
 
 const httpController = [
     CreateMedicalEventNurseController,
     GetAllMedicalEventNurseController,
     GetDetailMedicalEventNurseController,
-    SendNotificationMedicalEventNurseController
+    SendNotificationMedicalEventNurseController,
+    UpdateStatusMedicalEventNurseController
 
 ]
 
@@ -26,6 +29,7 @@ const Services = [
     GetAllMedicalEventNurseService,
     GetDetailMedicalEventNurseService,
     SendNotificationMedicalEventNurseService,
+    UpdateStatusMedicalEventNurseService,
     MailService,
     JwtService
 ]

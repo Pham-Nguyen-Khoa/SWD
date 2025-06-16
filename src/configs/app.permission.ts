@@ -240,6 +240,11 @@ export const resourcesV1 = {
             displayName: 'Create Medical Event',
             parent: 'Medical Event',
         },
+        UPDATE_STATUS_MEDICAL_EVENT: {
+            name: 'Update Status Medical Event',
+            displayName: 'Update Status Medical Event',
+            parent: 'Medical Event',
+        },
         GET_ALL_MEDICAL_EVENT: {
             name: 'Get All Medical Event',
             displayName: 'Get All Medical Event',
