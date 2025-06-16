@@ -80,16 +80,6 @@ export class CreateMedicalEventNurseService {
                     createdBy: reqUser.id
                 }
             })
-            const sendData = {
-                parentEmail: studentEntity.ParentInfo.email,
-                parentName: studentEntity.ParentInfo.fullname,
-                studentName: studentEntity.account.fullname,
-                description: description,
-                hospitalName: hospitalName,
-                transferredAt: DateHelper.formatDateToDDMMYYYYHHmm(new Date(transferredAt))
-            }
-            this.mailer.sendMedicalEventHospital(sendData.parentEmail, sendData.parentName, sendData.studentName, sendData.description, sendData.hospitalName, sendData.transferredAt)
-            return successResponse(200, "Tạo sự kiện thành công và đã gửi thông báo đến phụ huynh học sinh")
         }
         return successResponse(200, "Tạo sự kiện thành công ")
 

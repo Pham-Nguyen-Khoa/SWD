@@ -250,6 +250,11 @@ export const resourcesV1 = {
             displayName: 'Get Detail Medical Event',
             parent: 'Medical Event',
         },
+        SEND_NOTIFICATION_MEDICAL_EVENT: {
+            name: 'Send Notification Medical Event',
+            displayName: 'Send Notification Medical Event',
+            parent: 'Medical Event',
+        },
     },
     Manager: {
         root: "Manager",
