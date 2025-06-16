@@ -114,28 +114,6 @@ export class GetProfileService {
                 }
             })
         }
-        return resultProfile
-        // const user = await this.prisma.user.findUnique({
-        //     where: {
-        //         id: reqUser.id,
-        //     },
-        //     select: {
-        //         id: true,
-        //         fullname: true,
-        //         email: true,
-        //         createdAt: true,
-        //         updatedAt: true,
-        //         role: {
-        //             select: {
-        //                 name: true
-        //             },
-        //         }
-        //     },
-        // })
-        // if (!user) {
-        //     return notFound("UserId không tìm thấy")
-        // }
-        // return successResponse(200, user, 'Lấy thông tin người dùng thành công')
-
+        return successResponse(200, resultProfile, 'Lấy thông tin thành công')
     }
 }

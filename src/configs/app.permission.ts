@@ -39,6 +39,11 @@ export const resourcesV1 = {
             name: 'Get profile',
             displayName: 'Get profile',
             parent: 'User',
+        },
+        CHANGE_PASSWORD: {
+            name: 'Change Password',
+            displayName: 'Change Password',
+            parent: 'User',
         }
     },
     // End User
