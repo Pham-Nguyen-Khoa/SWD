@@ -113,7 +113,6 @@ export const routesV1 = {
             approved: `/:id/approved`,
             rejected: `/:id/rejected`,
         }
-
     }
 
 }

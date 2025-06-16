@@ -110,4 +110,23 @@ export class MailService {
         // Gửi mail
         return this.sendMail(parentEmail, `Kết quả tiêm chủng của bé ${studentName} - ${vaccinationName}`, html);
     }
+
+
+
+    async sendMedicalEventHospital(parentEmail: string, parentName: string, studentName: string, description: string, hospitalName: string, transferredAt: string) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/medical-Event-hospital.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+
+        const html = pug.renderFile(templatePath, {
+            parentName,
+            studentName,
+            description,
+            hospitalName,
+            transferredAt,
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Thông báo nhập viện em ${studentName}`, html);
+    }
 }

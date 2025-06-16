@@ -39,5 +39,6 @@ const Services = [
     imports: [PrismaModule],
     controllers: [...httpController],
     providers: [...Services],
+    exports: [GetDetailStudentAdminService]
 })
 export class StudentAdminModule { }
