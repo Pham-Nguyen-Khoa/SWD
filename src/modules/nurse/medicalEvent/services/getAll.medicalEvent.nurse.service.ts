@@ -18,6 +18,9 @@ export class GetAllMedicalEventNurseService {
         try {
 
             const medicalEventEnitites = await this.prisma.medicalEvent.findMany({
+                orderBy: {
+                    id: "desc"
+                },
                 select: {
                     id: true,
                     studentID: true,

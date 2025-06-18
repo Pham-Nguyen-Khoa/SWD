@@ -24,9 +24,9 @@ export class SendNotificationMedicalEventNurseService {
         if (!medicalEvent) {
             return errorResponse(400, "Không tìm thấy ID của sự kiện y tế")
         }
-        if (medicalEvent.isSend) {
-            return errorResponse(400, 'Đã gửi thông báo cho phụ huynh rồi')
-        }
+        // if (medicalEvent.isSend) {
+        //     return errorResponse(400, 'Đã gửi thông báo cho phụ huynh rồi')
+        // }
 
         const studentEntity = await this.prisma.student.findUnique({
             where: {

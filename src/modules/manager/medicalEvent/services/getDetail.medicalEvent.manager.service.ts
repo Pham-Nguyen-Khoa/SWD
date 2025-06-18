@@ -7,7 +7,7 @@ import { GetDetailStudentAdminService } from "src/modules/admin/student/services
 
 @Injectable()
 
-export class GetDetailMedicalEventNurseService {
+export class GetDetailMedicalEventManagerService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly getDetailStudentAdminService: GetDetailStudentAdminService
@@ -41,8 +41,20 @@ export class GetDetailMedicalEventNurseService {
             return errorResponse(400, 'Không tìm thấy sự kiện y tế có id này')
         }
         const studentInfo = await this.getDetailStudentAdminService.getDetail(medicalEventEntity?.studentID);
+        let nurseInfo: any = {}
+        if (medicalEventEntity.createdBy) {
+            nurseInfo = await this.prisma.account.findUnique({
+                where: {
+                    id: medicalEventEntity.createdBy
+                },
+                select: {
+                    fullname: true,
+                }
+            })
+        }
         const data = {
             medicalEventEntity,
+            nurseInfo,
             studentInfo
         }
         return successResponse(200, data, 'Lấy thông tin chi tiết sự kiện y tế thành công')
