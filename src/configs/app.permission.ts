@@ -163,6 +163,23 @@ export const resourcesV1 = {
             displayName: 'Student Of Parent',
             parent: 'Health',
         },
+
+        // Medicine Request
+        CREATE_MEDICINE_REQUEST: {
+            name: 'Create Medicine Request',
+            displayName: 'Create Medicine Request',
+            parent: 'Medicine Request',
+        },
+        GET_ALL_MEDICINE_REQUEST: {
+            name: 'Get All Medicine Request',
+            displayName: 'Get All Medicine Request',
+            parent: 'Medicine Request',
+        },
+        DELETE_MEDICINE_REQUEST: {
+            name: 'Delete Medicine Request',
+            displayName: 'Delete Medicine Request',
+            parent: 'Medicine Request',
+        },
     },
     Nurse: {
         root: "Nurse",
@@ -245,9 +262,19 @@ export const resourcesV1 = {
             displayName: 'Create Medical Event',
             parent: 'Medical Event',
         },
+        CREATE_TREATMENT: {
+            name: 'Create Treatment',
+            displayName: 'Create Treatment',
+            parent: 'Medical Event',
+        },
         UPDATE_STATUS_MEDICAL_EVENT: {
             name: 'Update Status Medical Event',
             displayName: 'Update Status Medical Event',
+            parent: 'Medical Event',
+        },
+        UPDATE_MEDICAL_EVENT: {
+            name: 'Update  Medical Event',
+            displayName: 'Update  Medical Event',
             parent: 'Medical Event',
         },
         GET_ALL_MEDICAL_EVENT: {
@@ -260,11 +287,17 @@ export const resourcesV1 = {
             displayName: 'Get Detail Medical Event',
             parent: 'Medical Event',
         },
+        DELETE_MEDICAL_EVENT: {
+            name: 'Delete Medical Event',
+            displayName: 'Delete Medical Event',
+            parent: 'Medical Event',
+        },
         SEND_NOTIFICATION_MEDICAL_EVENT: {
             name: 'Send Notification Medical Event',
             displayName: 'Send Notification Medical Event',
             parent: 'Medical Event',
         },
+
     },
     Manager: {
         root: "Manager",
@@ -392,6 +425,17 @@ export const resourcesV1 = {
             name: 'Rejected Request',
             displayName: 'Rejected Request',
             parent: 'Request',
+        },
+        // Medical Event 
+        GET_ALL_MEDICAL_EVENT: {
+            name: 'Get All Medical Event',
+            displayName: 'Get All Medical Event',
+            parent: 'Medical Event',
+        },
+        GET_DETAIL_MEDICAL_EVENT: {
+            name: 'Get Detail Medical Event',
+            displayName: 'Get Detail Medical Event',
+            parent: 'Medical Event',
         },
 
     }

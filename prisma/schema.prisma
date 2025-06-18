@@ -50,6 +50,7 @@ model Student {
   vaccinationResult   VaccinationResult[]
   healthProfile       HealthProfile?
   MedicalEvent        MedicalEvent[]
+  MedicineRequest     MedicineRequest[]
 }
 
 model Class {
@@ -202,17 +203,18 @@ model HealthChronicDiseases {
 }
 
 model Parent {
-  id        Int       @id @default(autoincrement())
-  fullname  String
-  email     String    @unique
-  phone     String
-  accountID Int       @unique
-  createdAt DateTime? @default(now()) @db.Timestamptz(3)
-  createdBy Int?
-  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
-  updatedBy Int?
-  account   Account   @relation(fields: [accountID], references: [id])
-  student   Student[]
+  id              Int               @id @default(autoincrement())
+  fullname        String
+  email           String            @unique
+  phone           String
+  accountID       Int               @unique
+  createdAt       DateTime?         @default(now()) @db.Timestamptz(3)
+  createdBy       Int?
+  updatedAt       DateTime?         @updatedAt @db.Timestamptz(3)
+  updatedBy       Int?
+  account         Account           @relation(fields: [accountID], references: [id])
+  student         Student[]
+  MedicineRequest MedicineRequest[]
 }
 
 enum EventStatus {
@@ -333,6 +335,7 @@ model Medicine {
   updatedBy         Int?
   RequestItem       RequestItem[]
   VaccineEventStock VaccineEventStock[]
+  Treatment         Treatment[]
 }
 
 model MedicineClassify {
@@ -359,6 +362,7 @@ model MedicineSupply {
   updatedBy         Int?
   RequestItem       RequestItem[]
   VaccineEventStock VaccineEventStock[]
+  Treatment         Treatment[]
 }
 
 enum MedicineType {
@@ -404,19 +408,36 @@ enum UrgencyLevel {
 }
 
 model MedicalEvent {
-  id          Int                  @id @default(autoincrement())
-  studentID   Int
-  type        String
-  occurredAt  DateTime
-  description String
-  status      MedicalEventStatus   @default(PENDING)
-  severity    MedicalEventSeverity @default(NORMAL)
-  isSend      Boolean              @default(false)
-  student          Student           @relation(fields: [studentID], references: [id])
+  id               Int                  @id @default(autoincrement())
+  studentID        Int
+  type             String
+  occurredAt       DateTime
+  description      String
+  status           MedicalEventStatus   @default(PENDING)
+  severity         MedicalEventSeverity @default(NORMAL)
+  isSend           Boolean              @default(false)
+  student          Student              @relation(fields: [studentID], references: [id])
   createdBy        Int?
-  updatedAt        DateTime?         @updatedAt @db.Timestamptz(3)
+  updatedAt        DateTime?            @updatedAt @db.Timestamptz(3)
   updatedBy        Int?
   HospitalTransfer HospitalTransfer?
+  Treatment        Treatment[]
+}
+
+model Treatment {
+  id               Int             @id @default(autoincrement())
+  medicalEventID   Int
+  medicineID       Int?
+  medicineSupplyID Int?
+  medical          MedicalEvent    @relation(fields: [medicalEventID], references: [id])
+  medicine         Medicine?       @relation(fields: [medicineID], references: [id])
+  medicineSupply   MedicineSupply? @relation(fields: [medicineSupplyID], references: [id])
+  quantity         Int
+  dosage           String?
+  createdAt        DateTime?       @default(now()) @db.Timestamptz(3)
+  createdBy        Int?
+  updatedAt        DateTime?       @updatedAt @db.Timestamptz(3)
+  updatedBy        Int?
 }
 
 enum MedicalEventStatus {
@@ -441,4 +462,39 @@ model HospitalTransfer {
   createdBy      Int?
   updatedAt      DateTime?    @updatedAt @db.Timestamptz(3)
   updatedBy      Int?
+}
+
+enum MedicineRequestStatus {
+  PENDING // Phụ huynh mới gửi, chờ xác nhận
+  CONFIRMED // Y tá đã xác nhận
+  COMPLETED // Hết thời gian uống thuốc
+  REJECTED // Y tá từ chối
+}
+
+model MedicineRequest {
+  id                  Int                   @id @default(autoincrement())
+  studentID           Int
+  parentID            Int
+  note                String?
+  status              MedicineRequestStatus @default(PENDING)
+  student             Student               @relation(fields: [studentID], references: [id])
+  parent              Parent                @relation(fields: [parentID], references: [id])
+  createdAt           DateTime?             @default(now()) @db.Timestamptz(3)
+  confirmedAt         DateTime?             @db.Timestamptz(3)
+  createdBy           Int?
+  updatedAt           DateTime?             @updatedAt @db.Timestamptz(3)
+  updatedBy           Int?
+  MedicineRequestItem MedicineRequestItem[]
+}
+
+model MedicineRequestItem {
+  id              Int             @id @default(autoincrement())
+  requestID       Int
+  medicineName    String
+  quantitySent    Int
+  dosage          String
+  usageTimes      String[]
+  startDate       DateTime
+  endDate         DateTime
+  MedicineRequest MedicineRequest @relation(fields: [requestID], references: [id])
 }

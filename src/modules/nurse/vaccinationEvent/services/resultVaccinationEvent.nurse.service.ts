@@ -12,7 +12,7 @@ export class ResultVaccinationEventNurseService {
     async result(id: number, data: ResultVaccinationEventNurseDto, reqUser) {
         const [vaccinationEventEntity, vaccinationResult] = await Promise.all([
             await this.prisma.vaccinationEvent.findUnique({
-                where: { id }
+                where: { id },
             }),
             await this.prisma.vaccinationResult.findFirst({
                 where: {
@@ -46,6 +46,37 @@ export class ResultVaccinationEventNurseService {
                 quantityUsed: totalStudentSuccess
             }
         })
+        const vacccineEventStock = await this.prisma.vaccineEventStock.findMany({
+            where: { vaccinationEventID: id }
+        })
+        // Cập nhật số lượng thuốc trong kho 
+        for (const item of vacccineEventStock) {
+            const quantityUsed = item.quantityUsed || 0;
+
+            // Nếu là thuốc
+            if (item.medicineID) {
+                await this.prisma.medicine.update({
+                    where: { id: item.medicineID },
+                    data: {
+                        stock: {
+                            decrement: quantityUsed,
+                        },
+                    },
+                });
+            }
+
+            // Nếu là vật tư
+            if (item.medicineSupplyID) {
+                await this.prisma.medicineSupply.update({
+                    where: { id: item.medicineSupplyID },
+                    data: {
+                        stock: {
+                            decrement: quantityUsed,
+                        },
+                    },
+                });
+            }
+        }
         const vaccinationResults = result.map((res) => ({
             vaccinationEventID: id,
             studentID: res.studentID,

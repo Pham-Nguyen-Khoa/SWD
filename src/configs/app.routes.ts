@@ -6,6 +6,7 @@ const medicine = 'medicine';
 const medicineSupply = 'medicineSupply';
 const request = 'request';
 const medicalEvent = 'medicalEvent';
+const medicineRequest = 'medicineRequest';
 
 const baseRoutes = (root: string) => {
     return {
@@ -70,6 +71,10 @@ export const routesV1 = {
             accepted: `/:id/:studentID/accepted`,
             declined: `/:id/:studentID/declined`,
             resultVaccinationEvent: `/${vaccinationEvent}/result`
+        },
+        medicineRequest: {
+            ...baseRoutes(`${medicineRequest}`),
+
         }
     },
     nurse: {
@@ -93,8 +98,7 @@ export const routesV1 = {
             ...baseRoutes(`${medicalEvent}`),
             sendMedicalEvent: `/${medicalEvent}/send-medicalEvent/:id`,
             updateStatus: `/${medicalEvent}/change-status/:id`,
-
-
+            createTreatment: `/${medicalEvent}/treatment/:id`,
         }
     },
     manager: {
@@ -116,6 +120,9 @@ export const routesV1 = {
             ...baseRoutes(`${request}`),
             approved: `/:id/approved`,
             rejected: `/:id/rejected`,
+        },
+        medicalEvent: {
+            ...baseRoutes(`${medicalEvent}`)
         }
     }
 
