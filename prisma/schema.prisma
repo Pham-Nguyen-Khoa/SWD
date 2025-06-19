@@ -466,7 +466,8 @@ model HospitalTransfer {
 
 enum MedicineRequestStatus {
   PENDING // Phụ huynh mới gửi, chờ xác nhận
-  CONFIRMED // Y tá đã xác nhận
+  CONFIRMED_RECEIVED // Y tá đã xác nhận
+  CONFIRMED_NOT_RECEIVED // nhận thuốc
   COMPLETED // Hết thời gian uống thuốc
   REJECTED // Y tá từ chối
 }
@@ -479,6 +480,7 @@ model MedicineRequest {
   status              MedicineRequestStatus @default(PENDING)
   student             Student               @relation(fields: [studentID], references: [id])
   parent              Parent                @relation(fields: [parentID], references: [id])
+  receivedAt          DateTime?             @db.Timestamptz(3)
   createdAt           DateTime?             @default(now()) @db.Timestamptz(3)
   confirmedAt         DateTime?             @db.Timestamptz(3)
   createdBy           Int?

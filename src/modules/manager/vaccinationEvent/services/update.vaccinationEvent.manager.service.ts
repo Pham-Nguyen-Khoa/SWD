@@ -36,7 +36,6 @@ export class UpdateVaccinationEventManagerService {
         //     if (newDate < minDate) {
         //         return errorResponse(400, 'Ngày tiêm chủng phải cách hiện tại ít nhất 5 ngày');
         //     }
-
         // }
         await this.prisma.vaccinationEvent.update({
             where: { id },

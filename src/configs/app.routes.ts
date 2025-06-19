@@ -74,7 +74,6 @@ export const routesV1 = {
         },
         medicineRequest: {
             ...baseRoutes(`${medicineRequest}`),
-
         }
     },
     nurse: {
@@ -99,6 +98,12 @@ export const routesV1 = {
             sendMedicalEvent: `/${medicalEvent}/send-medicalEvent/:id`,
             updateStatus: `/${medicalEvent}/change-status/:id`,
             createTreatment: `/${medicalEvent}/treatment/:id`,
+        },
+        medicineRequest: {
+            ...baseRoutes(`${medicineRequest}`),
+            accepted: `/${medicineRequest}/accepted/:id`,
+            rejected: `/${medicineRequest}/rejected/:id`,
+            received: `/${medicineRequest}/received/:id`,
         }
     },
     manager: {

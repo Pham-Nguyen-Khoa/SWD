@@ -22,6 +22,7 @@ import { RequestModule } from './modules/manager/request/request.manager.module'
 import { MedicalEventNurseModule } from './modules/nurse/medicalEvent/medicalEvent.nurse.module';
 import { MedicalEventManagerModule } from './modules/manager/medicalEvent/medicalEvent.manager.module';
 import { MedicineRequestParentModule } from './modules/parent/medicineRequest/medicineRequest.parent.module';
+import { MedicineRequestNurseModule } from './modules/nurse/medicineRequest/medicineRequest.nurse.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { MedicineRequestParentModule } from './modules/parent/medicineRequest/me
     VaccinationEventNurseModule,
     MedicineNurseModule,
     MedicalEventNurseModule,
+    MedicineRequestNurseModule,
     // Manager 
     VaccinationEventModule,
     MedicineManagerModule,
