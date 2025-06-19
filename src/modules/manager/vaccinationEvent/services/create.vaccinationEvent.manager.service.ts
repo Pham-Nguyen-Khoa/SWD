@@ -77,23 +77,24 @@ export class CreateVaccinationEventManagerService {
                     data: targetsToCreate,
                     skipDuplicates: true
                 });
-                const vaccineEventStockData = data.items.map((item) => (
-                    {
-                        vaccinationEventID: vaccinationEvent.id,
-                        medicineID: item.medicineID,
-                        medicineSupplyID: item.medicineSupplyID,
-                        quantityPlanned: item.quantityPlanned,
-                        notes: item.notes
-                    }
-                ))
-                console.log(vaccineEventStockData)
-                await this.prisma.vaccineEventStock.createMany({
-                    data: vaccineEventStockData,
-                    skipDuplicates: true
-                })
+
             } catch (error) {
                 console.log(error)
             }
+            const vaccineEventStockData = data.items.map((item) => (
+                {
+                    vaccinationEventID: vaccinationEvent.id,
+                    medicineID: item.medicineID,
+                    medicineSupplyID: item.medicineSupplyID,
+                    quantityPlanned: item.quantityPlanned,
+                    notes: item.notes
+                }
+            ))
+            console.log(vaccineEventStockData)
+            await this.prisma.vaccineEventStock.createMany({
+                data: vaccineEventStockData,
+                skipDuplicates: true
+            })
         } else {
             return errorResponse(400, 'Loại mục tiêu không hợp lệ hoặc thiếu danh sách targetIds.');
         }

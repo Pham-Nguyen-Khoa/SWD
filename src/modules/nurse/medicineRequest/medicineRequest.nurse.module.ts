@@ -11,13 +11,16 @@ import { AcceptedMedicineRequestNurseService } from "./services/accept.medicineR
 import { RejectMedicineRequestNurseController } from "./controllers/reject.medicineRequest.nurse.controller"
 import { RejectedMedicineRequestNurseService } from "./services/reject.medicineRequest.nurse.service"
 import { MailService } from "src/modules/common/mail/mail.service"
+import { RecievedMedicineRequestNurseService } from "./services/received.medicineRequest.nurse.service"
+import { ReceivedMedicineRequestNurseController } from "./controllers/received.medicineRequest.nurse.controller"
 
 
 const httpController = [
     GetAllMedicineRequestNurseController,
     GetDetailMedicineRequestNurseController,
     AcceptMedicineRequestNurseController,
-    RejectMedicineRequestNurseController
+    RejectMedicineRequestNurseController,
+    ReceivedMedicineRequestNurseController
 ]
 
 const Services = [
@@ -25,6 +28,7 @@ const Services = [
     GetDetailMedicineRequestNurseService,
     AcceptedMedicineRequestNurseService,
     RejectedMedicineRequestNurseService,
+    RecievedMedicineRequestNurseService,
     MailService,
     JwtService
 ]

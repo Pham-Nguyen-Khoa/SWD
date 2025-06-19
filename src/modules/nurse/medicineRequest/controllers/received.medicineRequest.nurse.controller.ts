@@ -8,6 +8,7 @@ import { RolesGuard } from "src/modules/auth/guards/roles.guard";
 import { GetUser } from "src/modules/auth/guards/get-user.decorator";
 import { GetDetailMedicineRequestNurseService } from "../services/getDetail.medicineRequest.nurse.service";
 import { RejectedMedicineRequestNurseService } from "../services/reject.medicineRequest.nurse.service";
+import { RecievedMedicineRequestNurseService } from "../services/received.medicineRequest.nurse.service";
 
 
 
@@ -16,8 +17,10 @@ import { RejectedMedicineRequestNurseService } from "../services/reject.medicine
 @ApiTags(`${resourcesV1.Nurse.root} - ${resourcesV1.Nurse.RECIEVED_MEDICINE_REQUEST.parent}`)
 @Controller(routesV1.versionNurse)
 
-export class RejectMedicineRequestNurseController {
+export class ReceivedMedicineRequestNurseController {
     constructor(
+        private readonly recievedMedicineRequestNurseService: RecievedMedicineRequestNurseService
+
     ) { }
     @ApiOperation({ summary: resourcesV1.Nurse.RECIEVED_MEDICINE_REQUEST.displayName })
     @ApiBearerAuth()
@@ -31,6 +34,7 @@ export class RejectMedicineRequestNurseController {
     @Roles(3)
     @Put(routesV1.nurse.medicineRequest.received)
     async receivedMedicineRequest(@Param('id') id: string, @GetUser() user) {
+        return await this.recievedMedicineRequestNurseService.received(+id, user)
     }
 }
 
