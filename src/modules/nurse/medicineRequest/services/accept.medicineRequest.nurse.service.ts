@@ -45,6 +45,7 @@ export class AcceptedMedicineRequestNurseService {
             await this.prisma.medicineRequest.update({
                 where: { id },
                 data: {
+                    status: "CONFIRMED_NOT_RECEIVED",
                     confirmedAt: new Date(),
                     updatedBy: reqUser.id
                 }
