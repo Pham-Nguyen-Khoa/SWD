@@ -1,0 +1,83 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title Thông báo từ chối gửi thuốc
+    style.
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        line-height: 1.7;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+      .header-denial h1 {
+        font-size: 26px;
+        color: #F44336; /* Màu đỏ cho từ chối */
+        margin-bottom: 10px;
+        border-bottom: 2px solid #F44336;
+        padding-bottom: 5px;
+      }
+      .content p {
+        margin: 15px 0;
+        font-size: 16px;
+        color: #555;
+      }
+      .content strong {
+        color: #333;
+      }
+      .button-denial {
+        display: inline-block;
+        background-color: #F44336;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid #F44336;
+      }
+      .button-denial:hover {
+        background-color: #e53935;
+        border-color: #e53935;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+        color: #777;
+      }
+      .footer p {
+        margin: 5px 0;
+      }
+      .footer a {
+        color: #F44336;
+        text-decoration: none;
+      }
+  body
+    .container
+      .header-denial
+        h1 Thông báo từ chối gửi thuốc
+      .content
+        p Kính gửi Quý phụ huynh,
+        p Thông báo đến Quý phụ huynh rằng yêu cầu gửi thuốc cho bé <strong>#{studentName}</strong> không thể được thực hiện do một số lý do không thể tránh khỏi.
+        p Chúng tôi rất tiếc vì sự bất tiện này và mong Quý phụ huynh thông cảm.
+        p Nếu có bất kỳ câu hỏi nào, xin vui lòng liên hệ với bộ phận y tế để được hỗ trợ thêm.
+        p SĐT: <strong>0382417490</strong>
+      .footer
+        p Cảm ơn Quý phụ huynh đã hợp tác.
+        p Email được gửi từ hệ thống quản lý y tế học đường - Trường THCS Trần Hưng Đạo.

@@ -297,6 +297,32 @@ export const resourcesV1 = {
             displayName: 'Send Notification Medical Event',
             parent: 'Medical Event',
         },
+        // Medicine  Request
+        GET_ALL_MEDICINE_REQUEST: {
+            name: 'Get All Medicine Request',
+            displayName: 'Get All Medicine Request',
+            parent: 'Medicine Request',
+        },
+        GET_DETAIl_MEDICINE_REQUEST: {
+            name: 'Get Detail Medicine Request',
+            displayName: 'Get Detail Medicine Request',
+            parent: 'Medicine Request',
+        },
+        ACCEPT_MEDICINE_REQUEST: {
+            name: 'Accept Medicine Request',
+            displayName: 'Accept Medicine Request',
+            parent: 'Medicine Request',
+        },
+        REJECT_MEDICINE_REQUEST: {
+            name: 'Reject Medicine Request',
+            displayName: 'Reject Medicine Request',
+            parent: 'Medicine Request',
+        },
+        RECIEVED_MEDICINE_REQUEST: {
+            name: 'Recieved Medicine Request',
+            displayName: 'Recieved Medicine Request',
+            parent: 'Medicine Request',
+        },
 
     },
     Manager: {

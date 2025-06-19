@@ -22,27 +22,27 @@ export class UpdateMedicalEventNurseService {
             return errorResponse(400, 'Chưa có dữ liệu để cập nhật')
         }
         try {
-            await this.prisma.medicalEvent.update({
-                where: { id },
-                data: {
-                    type: data.type,
-                    occurredAt: new Date(data.occurredAt),
-                    description: data.description,
-                    updatedBy: reqUser.id
-                }
-            })
-            if (data.hospitalName && data.transferredAt && (medicalEvent.status === "HOSPITALIZED" || medicalEvent.status === "HOSPITALDISCHARGE")) {
-                await this.prisma.hospitalTransfer.update({
-                    where: {
-                        medicalEventID: id
-                    },
-                    data: {
-                        hospitalName: data.hospitalName,
-                        transferredAt: new Date(data.transferredAt),
-                        updatedBy: reqUser.id
-                    }
-                })
-            }
+            // await this.prisma.medicalEvent.update({
+            //     where: { id },
+            //     data: {
+            //         type: data.type,
+            //         occurredAt: new Date(data.occurredAt),
+            //         description: data.description,
+            //         updatedBy: reqUser.id
+            //     }
+            // })
+            // if (data.hospitalName && data.transferredAt && (medicalEvent.status === "HOSPITALIZED" || medicalEvent.status === "HOSPITALDISCHARGE")) {
+            //     await this.prisma.hospitalTransfer.update({
+            //         where: {
+            //             medicalEventID: id
+            //         },
+            //         data: {
+            //             hospitalName: data.hospitalName,
+            //             transferredAt: new Date(data.transferredAt),
+            //             updatedBy: reqUser.id
+            //         }
+            //     })
+            // }
             if (medicalEvent.status === "PROCESSING") {
                 const treatmentEntity = await this.prisma.treatment.findMany({
                     where: {

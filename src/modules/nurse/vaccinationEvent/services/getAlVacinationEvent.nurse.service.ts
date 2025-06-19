@@ -10,7 +10,9 @@ export class GetAllVaccinationEventNurseService {
     async getAll() {
         const vaccinationEvents: any = await this.prisma.vaccinationEvent.findMany({
             where: {
-                status: "CONFIRMED"
+                status: {
+                    in: ["CONFIRMED", "SUCCESSED"]
+                }
             },
             orderBy: {
                 scheduledAt: "asc"

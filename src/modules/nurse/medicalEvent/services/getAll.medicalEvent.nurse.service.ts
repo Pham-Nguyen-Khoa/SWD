@@ -27,6 +27,7 @@ export class GetAllMedicalEventNurseService {
                     type: true,
                     occurredAt: true,
                     status: true,
+                    severity: true,
                 }
             })
             const medicalWithStudentInfo = await Promise.all(

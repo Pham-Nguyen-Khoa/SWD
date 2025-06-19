@@ -129,4 +129,30 @@ export class MailService {
         // Gửi mail
         return this.sendMail(parentEmail, `Thông báo nhập viện em ${studentName}`, html);
     }
+
+    async sendAcceptedMedicineRequest(parentEmail: string, studentName: string) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/medicine-request-accepted.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+
+        const html = pug.renderFile(templatePath, {
+            studentName
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Thông báo tiếp nhận đơn thuốc`, html);
+    }
+
+    async sendRejecetMedicineRequest(parentEmail: string, studentName: string) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/medicine-request-rejected.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+
+        const html = pug.renderFile(templatePath, {
+            studentName,
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Thông báo từ chối tiếp nhận đơn thuốc`, html);
+    }
 }
