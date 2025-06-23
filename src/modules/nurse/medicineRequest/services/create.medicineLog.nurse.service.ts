@@ -56,11 +56,10 @@ export class CreateMedicineLogNurseService {
 
         const takenAt = new Date();
         takenAt.setHours(hour, minute, 0, 0);
-
         await this.prisma.medicineLog.create({
             data: {
                 medicineRequestItemID: id,
-                takenAt: new Date(),
+                takenAt: takenAt,
                 givenBy: reqUser.id,
                 note: dto.note || null,
             }

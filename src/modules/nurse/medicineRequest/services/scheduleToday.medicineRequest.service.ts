@@ -62,6 +62,7 @@ export class ScheduleTodayMedicineRequestNurseService {
                 const matchedLog = item.MedicineLog.find(log => {
                     const h = log.takenAt.getHours();
                     const m = log.takenAt.getMinutes();
+
                     return h === targetHour && m === targetMinute;
                 });
 
