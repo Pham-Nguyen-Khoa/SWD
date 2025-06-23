@@ -8,19 +8,20 @@ datasource db {
 }
 
 model Account {
-  id        Int       @id @default(autoincrement())
-  fullname  String
-  email     String    @unique
-  password  String
-  status    String    @default("ACTIVE")
-  roleID    Int
-  createdAt DateTime? @default(now()) @db.Timestamptz(3)
-  createdBy Int?
-  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
-  updatedBy Int?
-  role      Role      @relation(fields: [roleID], references: [id])
-  Parent    Parent?
-  Student   Student?
+  id            Int             @id @default(autoincrement())
+  fullname      String
+  email         String          @unique
+  password      String
+  status        String          @default("ACTIVE")
+  roleID        Int
+  createdAt     DateTime?       @default(now()) @db.Timestamptz(3)
+  createdBy     Int?
+  updatedAt     DateTime?       @updatedAt @db.Timestamptz(3)
+  updatedBy     Int?
+  role          Role            @relation(fields: [roleID], references: [id])
+  Parent        Parent?
+  Student       Student?
+  AIQuestionLog AIQuestionLog[]
 }
 
 model Role {
@@ -524,9 +525,10 @@ model AIPrompt {
 
 model AIQuestionLog {
   id        Int      @id @default(autoincrement())
-  parentID  Int
+  accountID Int?
   question  String
   answer    String
+  account   Account? @relation(fields: [accountID], references: [id])
   createdAt DateTime @default(now())
   createdBy Int?
 }

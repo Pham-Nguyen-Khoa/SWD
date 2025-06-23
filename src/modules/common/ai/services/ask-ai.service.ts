@@ -12,50 +12,49 @@ import { firstValueFrom } from 'rxjs';
 @Injectable()
 
 export class AskAIService {
-    private readonly apiKey: string;
-
+    private openai = new OpenAI({
+        apiKey: process.env.OPENROUTER_API_KEY,
+        baseURL: 'https://openrouter.ai/api/v1',
+    });
     constructor(
         private readonly prisma: PrismaService,
-        private readonly httpService: HttpService
     ) {
-        const apiKey = process.env.HUGGINGFACE_API_KEY;
-        if (!apiKey) {
-            throw new Error('HUGGINGFACE_API_KEY is not defined in .env');
-        }
-        this.apiKey = apiKey;
     }
 
     // Phương thức để gọi API và trả lời câu hỏi
     async ask(data: AskAIDTO) {
-        // const url = 'https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta';
-        const url = 'https://huggingface.co/models/NousResearch/Nous-Hermes-2-Mistral-7B-DPO';
-        const headers = {
-            'Authorization': `Bearer ${this.apiKey}`,
-        };
-        const AIPrompt = await this.prisma.aIPrompt.findFirst();
-        const prompt = `${AIPrompt?.content} Câu hỏi của người dùng: ${data.message}`
+        const aiPrompt = await this.prisma.aIPrompt.findFirst();
+        const prompt = `${aiPrompt?.content} Câu hỏi của người dùng: ${data.message}`
 
-        try {
-            const response = await firstValueFrom(
-                this.httpService.post(
-                    url,
-                    { inputs: prompt },
-                    { headers }
-                )
-            );
 
-            console.log('HF response:', response.data);
+        const response = await this.openai.chat.completions.create({
+            // model: 'mistralai/mistral-7b-instruct', // model miễn phí
+            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            messages: [{ role: 'user', content: prompt }],
+            stream: true, // bật chế độ stream
+        });
 
-            // Một số model trả về object, một số trả về array
-            const generated = Array.isArray(response.data)
-                ? response.data[0]?.generated_text
-                : response.data?.generated_text;
 
-            return generated ?? 'No response from model.';
-        } catch (error) {
-            console.error('Error calling Hugging Face API:', error.response?.data || error.message);
-            throw new Error('Error calling Hugging Face API');
+
+        let fullResponse = '';
+
+        for await (const chunk of response) {
+            const content = chunk.choices?.[0]?.delta?.content;
+            if (content) fullResponse += content;
         }
+        if (data.accountID) {
+            fullResponse = fullResponse.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+            await this.prisma.aIQuestionLog.create({
+                data: {
+                    accountID: parseInt(data.accountID),
+                    question: data.message,
+                    answer: fullResponse
+                }
+            })
+
+        }
+        return successResponse(200, fullResponse || 'Không có phản hồi.', "AI phản hồi thành công")
+
     }
 
 }

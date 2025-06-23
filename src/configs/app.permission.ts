@@ -29,6 +29,11 @@ export const resourcesV1 = {
         displayName: 'Ask AI',
         parent: 'AI',
     },
+    GET_ALL_CHAT: {
+        name: 'Get all chat',
+        displayName: 'Get all chat',
+        parent: 'AI',
+    },
     // End Auth 
 
 
