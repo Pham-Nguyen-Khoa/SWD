@@ -13,22 +13,42 @@ import { RejectedMedicineRequestNurseService } from "./services/reject.medicineR
 import { MailService } from "src/modules/common/mail/mail.service"
 import { RecievedMedicineRequestNurseService } from "./services/received.medicineRequest.nurse.service"
 import { ReceivedMedicineRequestNurseController } from "./controllers/received.medicineRequest.nurse.controller"
+import { ScheduleTodayMedicineRequestNurseService } from "./services/scheduleToday.medicineRequest.service"
+import { ScheduleTodayMedicineRequestNurseController } from "./controllers/scheduleToday.medicineRequest.controller"
+import { CreateMedicineLogNurseController } from "./controllers/create.medicineLog.nurse.controller"
+import { CreateMedicineLogNurseService } from "./services/create.medicineLog.nurse.service"
+import { GetAllLowStockNurseService } from "./services/low-stock.medicineRequest.nurse.service"
+import { GetAllLowStockNurseController } from "./controllers/low-stock.medicineRequest.nurse.controller"
+import { UpdateQuantityMedicineNurseService } from "./services/update-quantity.Request.nurse.service"
+import { UpdateQuantityMedicineNurseController } from "./controllers/update-quantity.Request.nurse.controller"
+import { BenefitMedicineRequestNurseService } from "./services/benefit.medicineRequest.nurse.service"
+import { BenefitMedicineRequestNurseController } from "./controllers/benefit.medicineRequest.nurse.controller"
 
 
 const httpController = [
+    ScheduleTodayMedicineRequestNurseController,
+    GetAllLowStockNurseController,
+    UpdateQuantityMedicineNurseController,
     GetAllMedicineRequestNurseController,
     GetDetailMedicineRequestNurseController,
     AcceptMedicineRequestNurseController,
     RejectMedicineRequestNurseController,
-    ReceivedMedicineRequestNurseController
+    ReceivedMedicineRequestNurseController,
+    CreateMedicineLogNurseController,
+    BenefitMedicineRequestNurseController
 ]
 
 const Services = [
+    ScheduleTodayMedicineRequestNurseService,
+    GetAllLowStockNurseService,
+    UpdateQuantityMedicineNurseService,
     GetAllMedicineRequestNurseService,
     GetDetailMedicineRequestNurseService,
     AcceptedMedicineRequestNurseService,
     RejectedMedicineRequestNurseService,
     RecievedMedicineRequestNurseService,
+    CreateMedicineLogNurseService,
+    BenefitMedicineRequestNurseService,
     MailService,
     JwtService
 ]

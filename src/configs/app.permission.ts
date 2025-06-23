@@ -24,6 +24,11 @@ export const resourcesV1 = {
         displayName: 'Change Password',
         parent: 'Auth',
     },
+    ASK_AI: {
+        name: 'Ask AI',
+        displayName: 'Ask AI',
+        parent: 'AI',
+    },
     // End Auth 
 
 
@@ -107,6 +112,17 @@ export const resourcesV1 = {
             displayName: 'Get Detail Student',
             parent: 'Student',
         },
+        // AI 
+        UPDATE_AI_PROMPT: {
+            name: 'Update AI PROMPT',
+            displayName: 'Update AI PROMPT',
+            parent: 'AI',
+        },
+        GET_AI_PROMPT: {
+            name: 'Get AI PROMPT',
+            displayName: 'Get AI PROMPT',
+            parent: 'AI',
+        },
     },
     Parent: {
         root: "Parent",
@@ -170,9 +186,29 @@ export const resourcesV1 = {
             displayName: 'Create Medicine Request',
             parent: 'Medicine Request',
         },
+        STOP_MEDICINE_REQUEST: {
+            name: 'Stop Medicine Request',
+            displayName: 'Stop Medicine Request',
+            parent: 'Medicine Request',
+        },
+        ACCEPT_BENEFIT_MEDICINE_REQUEST: {
+            name: 'Accept Benefit Medicine Request',
+            displayName: 'Accept Benefit Medicine Request',
+            parent: 'Medicine Request',
+        },
+        REJECT_BENEFIT_MEDICINE_REQUEST: {
+            name: 'Reject Benefit Medicine Request',
+            displayName: 'Reject Benefit Medicine Request',
+            parent: 'Medicine Request',
+        },
         GET_ALL_MEDICINE_REQUEST: {
             name: 'Get All Medicine Request',
             displayName: 'Get All Medicine Request',
+            parent: 'Medicine Request',
+        },
+        GET_DETAIL_MEDICINE_REQUEST: {
+            name: 'Get Detail Medicine Request',
+            displayName: 'Get Detail Medicine Request',
             parent: 'Medicine Request',
         },
         DELETE_MEDICINE_REQUEST: {
@@ -298,9 +334,19 @@ export const resourcesV1 = {
             parent: 'Medical Event',
         },
         // Medicine  Request
+        SCHEDULE_TODAY_MEDICINE_REQUEST: {
+            name: 'Schedule Today Medicine Request',
+            displayName: 'Schedule Today Medicine Request',
+            parent: 'Medicine Request',
+        },
         GET_ALL_MEDICINE_REQUEST: {
             name: 'Get All Medicine Request',
             displayName: 'Get All Medicine Request',
+            parent: 'Medicine Request',
+        },
+        GET_ALL_LOW_STOCK: {
+            name: 'Get All Low Stock',
+            displayName: 'Get All Low Stock',
             parent: 'Medicine Request',
         },
         GET_DETAIl_MEDICINE_REQUEST: {
@@ -313,6 +359,11 @@ export const resourcesV1 = {
             displayName: 'Accept Medicine Request',
             parent: 'Medicine Request',
         },
+        CREATE_MEDICINE_LOG: {
+            name: 'Create Medicine Log',
+            displayName: 'Create Medicine Log',
+            parent: 'Medicine Request',
+        },
         REJECT_MEDICINE_REQUEST: {
             name: 'Reject Medicine Request',
             displayName: 'Reject Medicine Request',
@@ -321,6 +372,16 @@ export const resourcesV1 = {
         RECIEVED_MEDICINE_REQUEST: {
             name: 'Recieved Medicine Request',
             displayName: 'Recieved Medicine Request',
+            parent: 'Medicine Request',
+        },
+        UPDATE_QUANTITY_MEDICINE_REQUEST: {
+            name: 'Update Quantity Medicine Request',
+            displayName: 'Update Quantity Medicine Request',
+            parent: 'Medicine Request',
+        },
+        BENEFIT_MEDICINE_REQUEST: {
+            name: 'Benefit Medicine Request',
+            displayName: 'Benefit Medicine Request',
             parent: 'Medicine Request',
         },
 

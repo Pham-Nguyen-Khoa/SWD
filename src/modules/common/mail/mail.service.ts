@@ -155,4 +155,34 @@ export class MailService {
         // Gửi mail
         return this.sendMail(parentEmail, `Thông báo từ chối tiếp nhận đơn thuốc`, html);
     }
+
+
+    async sendBenefitMedicineRequest(parentEmail: string, studentName: string, medicines: string[]) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/suggest_stop_medicines.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+
+        const html = pug.renderFile(templatePath, {
+            studentName,
+            medicines
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Thông báo đề xuất tạm ngưng uống thuốc cho học sinh`, html);
+    }
+
+    async sendLowStockNotified(parentEmail: string, studentName: string, medicineName: string, quantityRemaining: number) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/low-stock-notification.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+
+        const html = pug.renderFile(templatePath, {
+            studentName,
+            medicineName,
+            quantityRemaining
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Thông báo số lượng thuốc sắp hết`, html);
+    }
 }

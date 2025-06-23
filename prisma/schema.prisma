@@ -480,6 +480,8 @@ model MedicineRequest {
   status              MedicineRequestStatus @default(PENDING)
   student             Student               @relation(fields: [studentID], references: [id])
   parent              Parent                @relation(fields: [parentID], references: [id])
+  isBenefit           Boolean               @default(false)
+  acceptedBenefit     Boolean               @default(false)
   receivedAt          DateTime?             @db.Timestamptz(3)
   createdAt           DateTime?             @default(now()) @db.Timestamptz(3)
   confirmedAt         DateTime?             @db.Timestamptz(3)
@@ -490,13 +492,41 @@ model MedicineRequest {
 }
 
 model MedicineRequestItem {
-  id              Int             @id @default(autoincrement())
-  requestID       Int
-  medicineName    String
-  quantitySent    Int
-  dosage          String
-  usageTimes      String[]
-  startDate       DateTime
-  endDate         DateTime
-  MedicineRequest MedicineRequest @relation(fields: [requestID], references: [id])
+  id                 Int             @id @default(autoincrement())
+  requestID          Int
+  medicineName       String
+  quantitySent       Int
+  quantityRemaining  Int
+  isLowStockNotified Boolean         @default(false)
+  dosage             String
+  usageTimes         String[]
+  startDate          DateTime
+  endDate            DateTime
+  MedicineRequest    MedicineRequest @relation(fields: [requestID], references: [id])
+  MedicineLog        MedicineLog[]
+}
+
+model MedicineLog {
+  id                    Int                 @id @default(autoincrement())
+  medicineRequestItemID Int
+  takenAt               DateTime
+  givenBy               Int
+  note                  String?
+  medicineRequestItem   MedicineRequestItem @relation(fields: [medicineRequestItemID], references: [id])
+}
+
+model AIPrompt {
+  id        Int       @id @default(autoincrement())
+  content   String
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
+  updatedBy Int?
+}
+
+model AIQuestionLog {
+  id        Int      @id @default(autoincrement())
+  parentID  Int
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+  createdBy Int?
 }

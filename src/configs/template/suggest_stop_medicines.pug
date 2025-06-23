@@ -1,0 +1,75 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title Đề xuất tạm ngưng uống thuốc
+    style.
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        padding: 40px 0;
+        color: #2c3e50;
+      }
+      .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 32px;
+        max-width: 640px;
+        margin: auto;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        border-left: 6px solid #3498db;
+      }
+      h2 {
+        color: #3498db;
+        margin-bottom: 20px;
+      }
+      .medicine-list {
+        margin-top: 16px;
+        padding-left: 20px;
+      }
+      .medicine-list li {
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+      .info {
+        margin: 16px 0;
+      }
+      .button {
+        display: inline-block;
+        margin-top: 24px;
+        padding: 12px 24px;
+        background-color: #3498db;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        transition: background-color 0.3s ease;
+      }
+      .button:hover {
+        background-color: #2e86c1;
+      }
+      .footer {
+        margin-top: 32px;
+        font-size: 14px;
+        color: #7f8c8d;
+        border-top: 1px solid #ecf0f1;
+        padding-top: 16px;
+      }
+
+  body
+    .container
+      h2 Đề xuất tạm ngưng uống thuốc cho học sinh
+      p Kính gửi quý phụ huynh,
+      p.info Y tá nhà trường xin thông báo rằng sức khỏe của học sinh 
+        strong #{studentName}
+        |  đã ổn định. Dưới đây là danh sách thuốc được đề xuất tạm ngưng sử dụng:
+
+      ul.medicine-list
+        each medicine in medicines
+          li #{medicine}
+
+      p.info Quý phụ huynh vui lòng đăng nhập vào hệ thống để xem chi tiết và phản hồi về đề xuất này.
+
+      .footer
+        p Trân trọng,<br/>Phòng y tế trường học

@@ -1,5 +1,6 @@
 const authRoot = 'auth';
 const user = 'account';
+const ai = 'ai_prompt';
 const health = 'health';
 const vaccinationEvent = 'vaccinationEvent';
 const medicine = 'medicine';
@@ -51,6 +52,9 @@ export const routesV1 = {
             createStudent: `/student`,
             updateStudent: `/student/:idStudent`
         },
+        ai: {
+            ...baseRoutes(`${ai}`),
+        }
 
     },
     client: {
@@ -58,6 +62,11 @@ export const routesV1 = {
             ...baseRoutes(`${user}`),
             profile: `/${user}/profile`,
             changePassword: `/${user}/change-password`
+        }
+    },
+    common: {
+        ai: {
+            ...baseRoutes(`${ai}`),
         }
     },
     parent: {
@@ -74,6 +83,8 @@ export const routesV1 = {
         },
         medicineRequest: {
             ...baseRoutes(`${medicineRequest}`),
+            accepted: `${medicineRequest}/accepted/:id`,
+            rejected: `${medicineRequest}/rejected/:id`,
         }
     },
     nurse: {
@@ -104,6 +115,10 @@ export const routesV1 = {
             accepted: `/${medicineRequest}/accepted/:id`,
             rejected: `/${medicineRequest}/rejected/:id`,
             received: `/${medicineRequest}/received/:id`,
+            benefit: `/${medicineRequest}/benefit/:id`,
+            schedule: `/${medicineRequest}/schedule`,
+            lowStock: `/${medicineRequest}/low-stock`,
+            updateQuantity: `/${medicineRequest}/medicine-item/:id/update-quantity`,
         }
     },
     manager: {

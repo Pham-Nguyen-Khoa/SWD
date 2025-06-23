@@ -27,6 +27,8 @@ export class GetAllMedicineRequestNurseService {
                         status: true,
                         createdAt: true,
                         receivedAt: true,
+                        isBenefit: true,
+                        acceptedBenefit: true
                     }
                 }),
                 await this.prisma.medicineRequest.count({}),
