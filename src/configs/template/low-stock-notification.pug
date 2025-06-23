@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title Thông báo thuốc sắp hết
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .header {
+        font-size: 20px;
+        font-weight: bold;
+        color: #d9534f;
+        margin-bottom: 20px;
+      }
+      .content {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .footer {
+        margin-top: 30px;
+        font-size: 13px;
+        color: #999;
+      }
+  body
+    .container
+      .header 📢 Cảnh báo thuốc sắp hết
+      .content
+        p Kính gửi phụ huynh,
+        p
+          | Thuốc 
+          b #{medicineName}
+          |  của học sinh 
+          b #{studentName}
+          |  hiện chỉ còn 
+          b #{quantityRemaining} liều
+          | .
+        p Vui lòng đến trường để gửi thêm thuốc hoặc lên trang web y tế nhà trường để xác nhận rằng học sinh đã khoẻ và không cần uống tiếp.
+      .footer
+        p Email được gửi tự động từ hệ thống quản lý y tế học đường.

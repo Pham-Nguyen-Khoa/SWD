@@ -23,6 +23,8 @@ import { MedicalEventNurseModule } from './modules/nurse/medicalEvent/medicalEve
 import { MedicalEventManagerModule } from './modules/manager/medicalEvent/medicalEvent.manager.module';
 import { MedicineRequestParentModule } from './modules/parent/medicineRequest/medicineRequest.parent.module';
 import { MedicineRequestNurseModule } from './modules/nurse/medicineRequest/medicineRequest.nurse.module';
+import { AiAdminModule } from './modules/admin/AI/user.admin.module';
+import { AIModule } from './modules/common/ai/ai.module';
 
 @Module({
   imports: [
@@ -33,9 +35,11 @@ import { MedicineRequestNurseModule } from './modules/nurse/medicineRequest/medi
 
     /* ----------------Module---------------- */
     AuthModule,
+    AIModule,
     // Admin      
     UserAdminModule,
     StudentAdminModule,
+    AiAdminModule,
     // Client 
     UserModule,
     // Parent 

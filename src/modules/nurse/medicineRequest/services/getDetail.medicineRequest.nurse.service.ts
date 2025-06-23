@@ -18,7 +18,11 @@ export class GetDetailMedicineRequestNurseService {
                 id
             },
             include: {
-                MedicineRequestItem: true
+                MedicineRequestItem: {
+                    include: {
+                        MedicineLog: true
+                    }
+                },
             }
         })
         if (!medicineRequestEntity) {
@@ -27,7 +31,21 @@ export class GetDetailMedicineRequestNurseService {
         const studentInfo = await this.getDetailStudentAdminService.getDetail(medicineRequestEntity.studentID);
         const result = {
             studentInfo,
-            medicineRequestEntity
+            medicineRequestEntity,
+            // items: medicineRequestEntity.MedicineRequestItem.map(item => ({
+            //     medicineItemID: item.id,
+            //     medicineName: item.medicineName,
+            //     // isBenefit: medicineRequestEntity.isBenefit,
+            //     // acceptedBenefit: medicineRequestEntity.acceptedBenefit,
+            //     dosage: item.dosage,
+            //     quantity: item.quantitySent,
+            //     quantityRemaining: item.quantityRemaining,
+            //     usageTimes: item.usageTimes,
+            //     logs: item.MedicineLog.map(log => ({
+            //         takenAt: log.takenAt,
+            //         note: log.note
+            //     }))
+            // }))
         }
         return successResponse(200, result, 'Lấy thông tin chi tiết đơn thuốc phụ huynh gửi thành công')
 

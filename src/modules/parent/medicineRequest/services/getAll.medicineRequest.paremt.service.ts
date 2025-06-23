@@ -13,6 +13,7 @@ export class GetAllMedicineRequestParentService {
     ) { }
     async getAll(query: GetAllMedicineRequestParentQuery, reqUser) {
         // Lấy parent 
+        const { status, isBenefit = false } = query
         const parentEntity = await this.prisma.parent.findFirst({
             where: {
                 accountID: reqUser.id
@@ -28,8 +29,12 @@ export class GetAllMedicineRequestParentService {
         let whereClause: any = {
             parentID: parentEntity.id
         }
-        if (query) {
+        if (status) {
             whereClause.status = query.status
+        }
+        if (isBenefit) {
+            whereClause.isBenefit = isBenefit
+            whereClause.acceptedBenefit = false
         }
         const medicineRequestEntities = await this.prisma.medicineRequest.findMany({
             where: whereClause,

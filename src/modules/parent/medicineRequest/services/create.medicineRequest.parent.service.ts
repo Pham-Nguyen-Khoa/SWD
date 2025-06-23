@@ -52,6 +52,7 @@ export class CreateMedicineRequestParentService {
                 requestID: newMedicineRequest.id,
                 medicineName: medicine.medicineName,
                 quantitySent: parseInt(medicine.quantitySent),
+                quantityRemaining: parseInt(medicine.quantitySent),
                 dosage: medicine.dosage,
                 usageTimes: medicine.usageTimes,
                 startDate: DateHelper.parseDateStringToDate(medicine.startDate),
