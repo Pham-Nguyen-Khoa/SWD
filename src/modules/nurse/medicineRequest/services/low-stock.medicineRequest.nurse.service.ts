@@ -21,7 +21,7 @@ export class GetAllLowStockNurseService {
             endDate: { gte: today },
             MedicineRequest: {
                 status: 'CONFIRMED_RECEIVED',
-                student: {} // 👈 bạn sẽ gắn OR điều kiện search vào đây
+                student: {}
             }
         };
         if (search) {

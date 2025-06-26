@@ -1,0 +1,78 @@
+doctype html
+html
+  head
+    title Thông báo khám sức khỏe định kỳ
+    style.
+      .container {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        color: #2c3e50;
+      }
+      .header {
+        background-color: #27ae60;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .content {
+        padding: 20px;
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+        line-height: 1.6;
+      }
+      .footer {
+        margin-top: 30px;
+        font-style: italic;
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+      }
+      .checkup-list {
+        margin-top: 15px;
+        padding-left: 20px;
+      }
+      .checkup-list li {
+        margin-bottom: 8px;
+      }
+
+  body
+    .container
+      .header Khám sức khỏe định kỳ
+
+      .content
+        if role === 'Phụ huynh'
+          p Kính gửi #{role} #{fullname},
+        else
+          p Gửi em #{fullname},
+
+        p Trường xin thông báo rằng học sinh 
+          strong #{studentName}
+          |  sẽ tham gia buổi khám sức khỏe định kỳ theo kế hoạch.
+
+        p Dưới đây là các nội dung khám dự kiến:
+
+        ul.checkup-list
+          each item in checkupItems
+            li #{item}
+
+        p
+          | 📅 Thời gian khám: 
+          strong #{scheduledAt}
+
+        if role === 'Phụ huynh'
+          p Phụ huynh vui lòng truy cập hệ thống để xác nhận thông tin và theo dõi kết quả khám sức khỏe của học sinh.
+        else
+          p Các em học sinh lưu ý lịch khám và thông báo lại với phụ huynh để theo dõi kết quả.
+
+        p(style="margin-top: 30px") Trân trọng,
+        p Ban giám hiệu nhà trường
+
+      .footer
+        | Email được gửi từ hệ thống quản lý y tế học đường - Trường THCS Trần Hưng Đạo.

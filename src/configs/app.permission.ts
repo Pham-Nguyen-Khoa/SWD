@@ -185,6 +185,28 @@ export const resourcesV1 = {
             parent: 'Health',
         },
 
+        // CHECK_UP
+        GET_ALL_CHECK_UP: {
+            name: 'Get All Check Up',
+            displayName: 'Get All Check Up',
+            parent: 'Check Up',
+        },
+        GET_ALL_RESULT_CHECK_UP: {
+            name: 'Get All Result Check Up',
+            displayName: 'Get All Result Check Up',
+            parent: 'Check Up',
+        },
+        ACCEPTED_CHECK_UP: {
+            name: 'Accepted Check Up',
+            displayName: 'Accepted Check Up',
+            parent: 'Check Up',
+        },
+        DECLIEND_CHECK_UP: {
+            name: 'Declined Check Up',
+            displayName: 'Declined Check Up',
+            parent: 'Check Up',
+        },
+
         // Medicine Request
         CREATE_MEDICINE_REQUEST: {
             name: 'Create Medicine Request',
@@ -265,6 +287,32 @@ export const resourcesV1 = {
             name: 'Send Notification Result Vaccination Event',
             displayName: 'Send Notification Result Vaccination Event',
             parent: 'Vaccination Event',
+        },
+        // Check Up
+        GET_ALL_CHECK_UP: {
+            name: 'Get All Check Up',
+            displayName: 'Get All Check Up',
+            parent: 'Check Up',
+        },
+        STUDENT_RESULT_STATUS_CHECK_UP: {
+            name: 'Student Result Status Check Up',
+            displayName: 'Student Result Status Check Up',
+            parent: 'Check Up',
+        },
+        GET_CONTENTS_CHECK_UP: {
+            name: 'Get Contents  Check Up',
+            displayName: 'Get Contents  Check Up',
+            parent: 'Check Up',
+        },
+        GET_DETAIL_CHECK_UP: {
+            name: 'Get Detail Check Up',
+            displayName: 'Get Detail Check Up',
+            parent: 'Check Up',
+        },
+        RESULT_CHECK_UP: {
+            name: 'Result Check Up',
+            displayName: 'Result Check Up',
+            parent: 'Check Up',
         },
         // Medicine 
         GET_ALL_MEDICINE: {
@@ -528,6 +576,43 @@ export const resourcesV1 = {
             name: 'Get Detail Medical Event',
             displayName: 'Get Detail Medical Event',
             parent: 'Medical Event',
+        },
+
+        // Check Up
+        CREATE_CHECK_UP: {
+            name: 'Create CheckUp',
+            displayName: 'Create CheckUp',
+            parent: 'Check Up',
+        },
+        GET_ALL_CHECK_UP: {
+            name: 'Get All CheckUp',
+            displayName: 'Get All CheckUp',
+            parent: 'Check Up',
+        },
+        CONFIRM_CHECK_UP: {
+            name: 'Confirm Check Up',
+            displayName: 'Confirm Check Up',
+            parent: 'Check Up',
+        },
+        GET_DETAIL_CHECK_UP: {
+            name: 'Get Detail Check Up',
+            displayName: 'Get Detail Check Up',
+            parent: 'Check Up',
+        },
+        DELETE_CHECK_UP: {
+            name: 'Delete Check Up',
+            displayName: 'Delete Check Up',
+            parent: 'Check Up',
+        },
+        UPDATE_CHECK_UP: {
+            name: 'Update Check Up',
+            displayName: 'Update Check Up',
+            parent: 'Check Up',
+        },
+        SUCCESS_CHECK_UP: {
+            name: 'Success Check Up',
+            displayName: 'Success Check Up',
+            parent: 'Check Up',
         },
 
     }
