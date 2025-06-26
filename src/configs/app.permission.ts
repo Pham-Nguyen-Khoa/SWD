@@ -604,6 +604,11 @@ export const resourcesV1 = {
             displayName: 'Delete Check Up',
             parent: 'Check Up',
         },
+        DETAIL_CHECK_UP: {
+            name: 'Detail Check Up',
+            displayName: 'Detail Check Up',
+            parent: 'Check Up',
+        },
         UPDATE_CHECK_UP: {
             name: 'Update Check Up',
             displayName: 'Update Check Up',

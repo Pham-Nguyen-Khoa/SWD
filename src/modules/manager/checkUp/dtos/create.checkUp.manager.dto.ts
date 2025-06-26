@@ -101,8 +101,8 @@ export class CreateHealthCheckupDTO {
         description: 'Danh sách nội dung kiểm tra sức khỏe',
         type: [HealthCheckupContentDto],
         example: [
-            { name: 'Đo cân nặng' },
-            { name: 'Đo thị lực', description: 'Kiểm tra mắt trái, mắt phải' }
+            { name: 'Đo cân nặng', inputType: "Number" },
+            { name: 'Đo thị lực', description: 'Kiểm tra mắt trái, mắt phải', inputType: "TEXT" }
         ]
     })
     @IsArray()
