@@ -11,6 +11,14 @@ import { GetContentsCheckUpNurseController } from "./controllers/getContents.che
 import { GetCheckupContentsService } from "./services/getContents.checkUp.nurse.service"
 import { ResultCheckUpNurseService } from "./services/resultCheckUp.nurse.controller"
 import { ResultCheckUpNurseController } from "./controllers/resultCheckUp.nurse.controller"
+import { GetDetailCheckUpNurseService } from "./services/getDetail.checkUp.nurse.service"
+import { GetDetailCheckUpNurseController } from "./controllers/getDetail.checkUp.nurse.controller"
+import { GetResultsCheckUpNurseService } from "./services/getResults.nurse.service"
+import { GetResultsCheckUpNurseController } from "./controllers/getResults.nurse.controller"
+import { GetDetailResultCheckUpNurseController } from "./controllers/getDetail.result.checkUp.nurse.controller"
+import { GetDetailResultCheckUpNurseService } from "./services/getDetail.result.checkUp.nurse.service"
+import { SendNotificationResultCheckUpNurseService } from "./services/sendNotificationResult.checkUp.nurse.service"
+import { SendNotificationResultCheckUpNurseController } from "./controllers/sendNotificationResult.checkUp.nurse.controller"
 
 
 
@@ -18,7 +26,11 @@ const httpController = [
     GetAllCheckUpNurseController,
     StudentResultStatusCheckUpNurseController,
     GetContentsCheckUpNurseController,
-    ResultCheckUpNurseController
+    ResultCheckUpNurseController,
+    GetDetailCheckUpNurseController,
+    GetResultsCheckUpNurseController,
+    GetDetailResultCheckUpNurseController,
+    SendNotificationResultCheckUpNurseController
 ]
 
 const Services = [
@@ -26,6 +38,10 @@ const Services = [
     StudentResultStatusCheckUpNurseService,
     GetCheckupContentsService,
     ResultCheckUpNurseService,
+    GetDetailCheckUpNurseService,
+    GetResultsCheckUpNurseService,
+    GetDetailResultCheckUpNurseService,
+    SendNotificationResultCheckUpNurseService,
     MailService,
     JwtService
 ]

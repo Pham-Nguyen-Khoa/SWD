@@ -222,4 +222,27 @@ export class MailService {
 
         return this.sendMail(to, title, html);
     }
+
+
+    async sendNotificationResultHealthCheckupParent(checkUpTitle: string, scheduledAt: string, parentEmail: string, parentName: string, studentName: string, status: string, overallNotes: string, overallResult?: string, checkupDetails?: any) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/checkUp-result.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+
+        const html = pug.renderFile(templatePath, {
+            checkUpTitle,
+            scheduledAt,
+            parentName,
+            studentName,
+            status,
+            overallNotes,
+            overallResult,
+            checkupDetails
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Kết quả tiêm chủng của bé ${studentName} - ${checkUpTitle}`, html);
+    }
+
+
 }

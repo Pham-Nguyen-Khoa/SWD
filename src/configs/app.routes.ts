@@ -107,9 +107,11 @@ export const routesV1 = {
         checkUp: {
             ...baseRoutes(`${checkUp}`),
             result: `${checkUp}/:id/result`,
+            detailResult: `${checkUp}/:id/result/:studentID`,
             studentResultStatus: `${checkUp}/:id/students-result-status`,
             contents: `${checkUp}/:id/contents`,
-            sendResult: `/:id/notification/send-result`
+            sendResult: `${checkUp}/:id/notification/send-result`
+
         },
         medicine: {
             ...baseRoutes(`${medicine}`),
