@@ -196,6 +196,16 @@ export const resourcesV1 = {
             displayName: 'Get All Result Check Up',
             parent: 'Check Up',
         },
+        GET_DETAIL_CHECK_UP: {
+            name: 'Get Detail Check Up',
+            displayName: 'Get Detail  Check Up',
+            parent: 'Check Up',
+        },
+        GET_RESULT_CHECK_UP: {
+            name: 'Get Result Check Up',
+            displayName: 'Get  Result Check Up',
+            parent: 'Check Up',
+        },
         ACCEPTED_CHECK_UP: {
             name: 'Accepted Check Up',
             displayName: 'Accepted Check Up',
