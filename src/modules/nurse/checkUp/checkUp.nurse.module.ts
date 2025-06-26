@@ -51,5 +51,7 @@ const Services = [
     imports: [PrismaModule, StudentAdminModule],
     controllers: [...httpController],
     providers: [...Services],
+    exports: [GetDetailCheckUpNurseService,GetDetailResultCheckUpNurseService]
+
 })
 export class checkUpNurseModule { }

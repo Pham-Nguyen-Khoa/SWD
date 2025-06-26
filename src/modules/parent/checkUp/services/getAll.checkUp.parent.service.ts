@@ -46,8 +46,8 @@ export class GetAllCheckUpParentService {
                     }
                 }
             })
-            const pendingResponses = checkUpReponse.filter(r => r.status === 'PENDING');
-            return successResponse(200, pendingResponses, 'Lấy danh sách các thông báo khám sức khỏe định kỳ thành công')
+            // const pendingResponses = checkUpReponse.filter(r => r.status === 'PENDING');
+            return successResponse(200, checkUpReponse, 'Lấy danh sách các thông báo khám sức khỏe định kỳ thành công')
         } catch (error) {
             return errorResponse(400, 'Lấy danh sách thông báo khám sức khỏe định kỳ thất bại')
         }

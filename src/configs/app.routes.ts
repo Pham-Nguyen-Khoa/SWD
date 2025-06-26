@@ -84,6 +84,7 @@ export const routesV1 = {
         },
         checkUp: {
             ...baseRoutes(`${checkUp}`),
+            detailResult: `${checkUp}/:id/result/:studentID`,
             accepted: `${checkUp}/:id/:studentID/accepted`,
             declined: `${checkUp}/:id/:studentID/declined`,
             resultVaccinationEvent: `/${checkUp}/result`

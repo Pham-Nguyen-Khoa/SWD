@@ -46,8 +46,8 @@ export class GetAllVaccinationEventParentService {
                     }
                 }
             })
-            const pendingResponses = vacccinationReponse.filter(r => r.status === 'PENDING');
-            return successResponse(200, pendingResponses, 'Lấy danh sách các thông báo tiêm chủng thành công')
+            // const pendingResponses = vacccinationReponse.filter(r => r.status === 'PENDING');
+            return successResponse(200, vacccinationReponse, 'Lấy danh sách các thông báo tiêm chủng thành công')
         } catch (error) {
             return errorResponse(400, 'Lấy danh sách thông báo tiêm chủng thất bại')
         }
