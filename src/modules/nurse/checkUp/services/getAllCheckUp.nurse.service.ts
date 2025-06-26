@@ -1,31 +1,33 @@
 import { Injectable } from "@nestjs/common";
-import { errorResponse, successResponse } from "src/common/utils/response.util";
+import { successResponse } from "src/common/utils/response.util";
 import { PrismaService } from "src/libs/prisma/prisma.service";
 
 @Injectable()
-export class GetAllVaccinationEventManagerService {
+export class GetAllVaccinationEventNurseService {
     constructor(
         private readonly prisma: PrismaService
     ) { }
     async getAll() {
-        const vaccinationEvents: any = await this.prisma.vaccinationEvent.findMany({
+        const checkUpEvents: any = await this.prisma.healthCheckup.findMany({
             where: {
                 status: {
-                    not: 'DELETED',
-                },
+                    in: ["CONFIRMED", "SUCCESSED"]
+                }
             },
             orderBy: {
                 scheduledAt: "asc"
             },
             include: {
-                targets: true
+                HealthCheckupTarget: true
             }
         })
-
-        for (const target of vaccinationEvents) {
+        if (checkUpEvents.length === 0) {
+            return successResponse(200, 'Không có sự kiện khám sức khỏe định kỳ nào ')
+        }
+        for (const target of checkUpEvents) {
             let formattedTargets: any[] = [];
-            if (target.targets[0].targetType === 'CLASS') {
-                const classIDs = target.targets.map(t => t.targetID);
+            if (target.HealthCheckupTarget[0].targetType === 'CLASS') {
+                const classIDs = target.HealthCheckupTarget.map(t => t.targetID);
 
                 const classes = await this.prisma.class.findMany({
                     where: {
@@ -39,17 +41,17 @@ export class GetAllVaccinationEventManagerService {
                     className: cls.name,
                     grade: cls.grade
                 }));
-            } else if (target.targets[0].targetType === 'GRADE') {
-                formattedTargets = target.targets.map(t => ({
+            } else if (target.HealthCheckupTarget[0].targetType === 'GRADE') {
+                formattedTargets = target.HealthCheckupTarget.map(t => ({
                     grade: t.targetID
                 }));
-            } else if (target.targets[0].targetType === 'SCHOOL') {
+            } else if (target.HealthCheckupTarget[0].targetType === 'SCHOOL') {
                 formattedTargets = [];
             }
-            target.targets = formattedTargets;
-            const resultResponse = await this.prisma.vaccinationResponse.findMany({
+            target.targets = formattedTargets
+            const resultResponse = await this.prisma.healthCheckupResponse.findMany({
                 where: {
-                    vaccinationEventID: target.id
+                    healthCheckUpID: target.id
                 }
             })
             const totalStudent = resultResponse.length;
@@ -62,22 +64,18 @@ export class GetAllVaccinationEventManagerService {
                 studentsDeclinedCount,
                 studentPendingCount
             }
-        }
-        let mostRecentVaccination: any = {}
-        let result: any = {}
-        if (vaccinationEvents.length > 0) {
-            mostRecentVaccination = {
-                id: vaccinationEvents[0].id,
-                scheduledAt: vaccinationEvents[0].scheduledAt,
-                name: vaccinationEvents[0].name,
-                description: vaccinationEvents[0].description,
-            }
-            result = {
-                mostRecentVaccination,
-                vaccinationEvents,
-            }
-        }
 
-        return successResponse(200, result, 'Lấy Danh sách các cuộc tiêm chủng thành công')
+        }
+        const mostRecentCheckUp = {
+            id: checkUpEvents[0].id,
+            scheduledAt: checkUpEvents[0].scheduledAt,
+            title: checkUpEvents[0].title,
+            description: checkUpEvents[0].description,
+        }
+        const result = {
+            mostRecentCheckUp,
+            checkUpEvents,
+        }
+        return successResponse(200, result, 'Lấy Danh sách các cuộc khám sức khỏe định kỳ thành công')
     }
 }

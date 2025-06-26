@@ -185,4 +185,41 @@ export class MailService {
         // Gửi mail
         return this.sendMail(parentEmail, `Thông báo số lượng thuốc sắp hết`, html);
     }
+
+
+
+
+    async sendCheckUpNoticeMail(
+        {
+            to,
+            fullname,
+            role,
+            scheduledAt,
+            body,
+            title,
+            checkupItems
+        }: {
+            to: string;
+            fullname: string;
+            role: string;
+            scheduledAt: string;
+            title: string;
+            body: string;
+            checkupItems: string[]
+        }
+    ) {
+        const templatePath = join(process.cwd(), 'src/configs/template/checkUp-notification.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+        console.log(title)
+        const html = pug.renderFile(templatePath, {
+            role,
+            fullname,
+            scheduledAt,
+            body,
+            title,
+            checkupItems
+        });
+
+        return this.sendMail(to, title, html);
+    }
 }

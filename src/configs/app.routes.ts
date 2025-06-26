@@ -7,6 +7,7 @@ const medicine = 'medicine';
 const medicineSupply = 'medicineSupply';
 const request = 'request';
 const medicalEvent = 'medicalEvent';
+const checkUp = 'check-up';
 const medicineRequest = 'medicineRequest';
 
 const baseRoutes = (root: string) => {
@@ -81,6 +82,12 @@ export const routesV1 = {
             declined: `/:id/:studentID/declined`,
             resultVaccinationEvent: `/${vaccinationEvent}/result`
         },
+        checkUp: {
+            ...baseRoutes(`${checkUp}`),
+            accepted: `${checkUp}/:id/:studentID/accepted`,
+            declined: `${checkUp}/:id/:studentID/declined`,
+            resultVaccinationEvent: `/${checkUp}/result`
+        },
         medicineRequest: {
             ...baseRoutes(`${medicineRequest}`),
             accepted: `${medicineRequest}/accepted/:id`,
@@ -95,6 +102,13 @@ export const routesV1 = {
         vaccinationEvent: {
             ...baseRoutes(`${vaccinationEvent}`),
             result: `/:id/result`,
+            sendResult: `/:id/notification/send-result`
+        },
+        checkUp: {
+            ...baseRoutes(`${checkUp}`),
+            result: `${checkUp}/:id/result`,
+            studentResultStatus: `${checkUp}/:id/students-result-status`,
+            contents: `${checkUp}/:id/contents`,
             sendResult: `/:id/notification/send-result`
         },
         medicine: {
@@ -143,6 +157,11 @@ export const routesV1 = {
         },
         medicalEvent: {
             ...baseRoutes(`${medicalEvent}`)
+        },
+        checkUp: {
+            ...baseRoutes(`${checkUp}`),
+            success: `${checkUp}/:id/success`,
+
         }
     }
 

@@ -25,6 +25,9 @@ import { MedicineRequestParentModule } from './modules/parent/medicineRequest/me
 import { MedicineRequestNurseModule } from './modules/nurse/medicineRequest/medicineRequest.nurse.module';
 import { AiAdminModule } from './modules/admin/AI/user.admin.module';
 import { AIModule } from './modules/common/ai/ai.module';
+import { CheckUpManagerModule } from './modules/manager/checkUp/checkUp.manager.module';
+import { CheckUpParentModule } from './modules/parent/checkUp/checkUp.module';
+import { checkUpNurseModule } from './modules/nurse/checkUp/checkUp.nurse.module';
 
 @Module({
   imports: [
@@ -46,18 +49,21 @@ import { AIModule } from './modules/common/ai/ai.module';
     HealthParentModule,
     VaccinationEventParentModule,
     MedicineRequestParentModule,
+    CheckUpParentModule,
     // Nurse 
     HealthNurseModule,
     VaccinationEventNurseModule,
     MedicineNurseModule,
     MedicalEventNurseModule,
     MedicineRequestNurseModule,
+    checkUpNurseModule,
     // Manager 
     VaccinationEventModule,
     MedicineManagerModule,
     MedicineSupplyManagerModule,
     RequestModule,
     MedicalEventManagerModule,
+    CheckUpManagerModule,
 
 
     UploadModule,

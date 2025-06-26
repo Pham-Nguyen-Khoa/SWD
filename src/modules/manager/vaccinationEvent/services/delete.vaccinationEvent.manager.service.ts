@@ -18,16 +18,30 @@ export class DeleteVaccinationEventManagerService {
             return errorResponse(400, `Không tìm thấy thông tin tiêm chủng nào có id ${vaccinationEventID}`)
         }
         if (vaccinationEvent.status == "DRAFT") {
-            await this.prisma.vaccinationTarget.deleteMany({
-                where: { vaccinationEventID }
-            })
-            await this.prisma.vaccinationEvent.delete({
-                where: { id: vaccinationEventID }
+            await this.prisma.$transaction([
+                this.prisma.vaccinationTarget.deleteMany({
+                    where: { vaccinationEventID }
+                }),
+                this.prisma.vaccineEventStock.deleteMany({
+                    where: { vaccinationEventID }
+                }),
+                this.prisma.vaccinationEvent.delete({
+                    where: { id: vaccinationEventID }
+                })
+            ])
+
+        } else if (vaccinationEvent.status == "SUCCESSED") {
+            this.prisma.vaccinationEvent.update({
+                where: { id: vaccinationEventID },
+                data: {
+                    status: "DELETED"
+                }
             })
         } else {
-            return successResponse(200, 'Cuộc tiêm chủng đã được phát hành không thể xóa ')
+            return errorResponse(400, 'Cuộc tiêm chủng đã được phát hành không thể xóa ')
         }
         return successResponse(200, 'Cuộc tiêm chủng đã được xóa thành công')
+
 
     }
 }
