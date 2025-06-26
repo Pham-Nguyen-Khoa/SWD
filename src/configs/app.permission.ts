@@ -294,6 +294,16 @@ export const resourcesV1 = {
             displayName: 'Get All Check Up',
             parent: 'Check Up',
         },
+        GET_RESULTS_CHECK_UP: {
+            name: 'Get Results Check Up',
+            displayName: 'Get Results Check Up',
+            parent: 'Check Up',
+        },
+        GET_DETAIL_RESULT_CHECK_UP: {
+            name: 'Get Detail Result Check Up',
+            displayName: 'Get Detail Result Check Up',
+            parent: 'Check Up',
+        },
         STUDENT_RESULT_STATUS_CHECK_UP: {
             name: 'Student Result Status Check Up',
             displayName: 'Student Result Status Check Up',
@@ -312,6 +322,11 @@ export const resourcesV1 = {
         RESULT_CHECK_UP: {
             name: 'Result Check Up',
             displayName: 'Result Check Up',
+            parent: 'Check Up',
+        },
+        SEND_NOTIFICATION_RESULT_CHECK_UP: {
+            name: 'Send Notification Result Check Up',
+            displayName: 'Send Notification Result Check Up',
             parent: 'Check Up',
         },
         // Medicine 
