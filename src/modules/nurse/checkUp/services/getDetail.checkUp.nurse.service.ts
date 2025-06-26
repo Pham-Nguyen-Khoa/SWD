@@ -10,7 +10,7 @@ enum CheckUpTargetType {
 }
 
 @Injectable()
-export class GetDetailCheckUpManagerService {
+export class GetDetailCheckUpNurseService {
     constructor(
         private readonly prisma: PrismaService
     ) { }
@@ -19,7 +19,7 @@ export class GetDetailCheckUpManagerService {
             where: { id },
             include: {
                 HealthCheckupTarget: true,
-                HealthCheckupContent: true
+                HealthCheckupContent: true,
             }
         });
 
@@ -99,54 +99,6 @@ export class GetDetailCheckUpManagerService {
             studentsDeclinedCount,
             studentPendingCount
         }
-
-        const healthCheckUpStock = await this.prisma.healthCheckupStock.findMany({
-            where: {
-                healthCheckUpID: id,
-            },
-            select: {
-                id: true,
-                quantityPlanned: true,
-                quantityUsed: true,
-                notes: true,
-                medicine: {
-                    select: {
-                        name: true,
-                        image: true,
-                    },
-                },
-                medicineSupply: {
-                    select: {
-                        name: true,
-                        image: true,
-                    },
-                },
-            },
-        });
-        const formattedData = healthCheckUpStock.map(item => {
-            if (item.medicine) {
-                return {
-                    id: item.id,
-                    quantityPlanned: item.quantityPlanned,
-                    quantityUsed: item.quantityUsed,
-                    notes: item.notes,
-                    name: item.medicine.name,
-                    image: item.medicine.image,
-                    type: 'medicine',
-                };
-            } else if (item.medicineSupply) {
-                return {
-                    id: item.id,
-                    quantityPlanned: item.quantityPlanned,
-                    quantityUsed: item.quantityUsed,
-                    notes: item.notes,
-                    name: item.medicineSupply.name,
-                    image: item.medicineSupply.image,
-                    type: 'supply',
-                };
-            }
-            return {}; // Trường hợp không có dữ liệu
-        });
         const result = {
             id: healthCheckUpEvent.id,
             title: healthCheckUpEvent.title,
@@ -157,7 +109,6 @@ export class GetDetailCheckUpManagerService {
             targetType,
             targets: formattedTargets,
             content: healthCheckUpEvent.HealthCheckupContent,
-            vaccineEventStock: formattedData,
             studentResponseEntity,
             studentResponseCount
         }

@@ -24,7 +24,7 @@ const httpController = [
     GetDetailCheckUpManagerController,
     DeleteCheckUpManagerController,
     UpdateCheckUpManagerController,
-    SuccessCheckUpManagerController
+    SuccessCheckUpManagerController,
 ]
 const Services = [
     CreateCheckUpManagerService,
