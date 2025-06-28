@@ -21,7 +21,7 @@ export class GetDetailStudentAdminController {
     })
 
     // @UseGuards(JWTGuard, RolesGuard)
-    @Roles(1)
+    @Roles(1,5)
     @Get(routesV1.admin.user.updateStudent)
     async getDetailStudentAdminController(@Param('idStudent') id: string) {
         return await this.getDetailStudentService.getDetail(+id)
