@@ -40,7 +40,7 @@ export class UpdateStatusMedicalEventNurseService {
                 break;
             }
             default: {
-                statusUpdate = "PENDING"
+                statusUpdate = "COMPLETED"
             }
         }
         try {
