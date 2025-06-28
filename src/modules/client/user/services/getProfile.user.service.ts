@@ -59,6 +59,7 @@ export class GetProfileService {
 
                 },
                 select: {
+                    id: true,
                     student_code: true,
                     dateOfBirth: true,
                     gender: true,
@@ -91,6 +92,7 @@ export class GetProfileService {
             })
             // Làm phẳng dữ liệu:
             resultProfile = {
+                id: studentProfile?.id,
                 student_code: studentProfile?.student_code,
                 dateOfBirth: studentProfile?.dateOfBirth,
                 gender: studentProfile?.gender,
