@@ -25,6 +25,7 @@ export class GetAllMedicalEventNurseService {
                     id: true,
                     studentID: true,
                     type: true,
+                    description: true,
                     occurredAt: true,
                     status: true,
                     severity: true,

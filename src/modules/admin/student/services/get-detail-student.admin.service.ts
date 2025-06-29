@@ -38,6 +38,7 @@ export class GetDetailStudentAdminService {
         // Lịch sử checkUp
         const healthCheckUpHistory = await this.prisma.healthCheckup.findMany({
             where: {
+                status: "SUCCESSED",
                 HealthCheckupResponse: {
                     some: {
                         studentID: id,
@@ -93,6 +94,7 @@ export class GetDetailStudentAdminService {
         // Lịch sử Tiêm chủng
         const vaccinationEventHistory = await this.prisma.vaccinationEvent.findMany({
             where: {
+                status: "SUCCESSED",
                 vaccinationResponse: {
                     some: {
                         studentID: id,
