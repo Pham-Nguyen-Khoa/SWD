@@ -18,7 +18,25 @@ export class SendNotificationMedicalEventNurseService {
         const medicalEvent = await this.prisma.medicalEvent.findUnique({
             where: { id },
             include: {
-                HospitalTransfer: true
+                HospitalTransfer: true,
+                Treatment: {
+                    select: {
+                        quantity: true,
+                        dosage: true,
+                        medicine: {
+                            select: {
+                                name: true,
+                                image: true
+                            }
+                        },
+                        medicineSupply: {
+                            select: {
+                                name: true,
+                                image: true
+                            }
+                        }
+                    }
+                },
             }
         })
         if (!medicalEvent) {
@@ -62,6 +80,15 @@ export class SendNotificationMedicalEventNurseService {
                 transferredAt: DateHelper.formatDateToDDMMYYYYHHmm(new Date(medicalEvent?.HospitalTransfer?.transferredAt))
             }
             this.mailer.sendMedicalEventHospital(sendData.parentEmail, sendData.parentName, sendData.studentName, sendData.description, sendData.hospitalName, sendData.transferredAt)
+        } else {
+            const sendData = {
+                parentEmail: studentEntity.ParentInfo.email,
+                parentName: studentEntity.ParentInfo.fullname,
+                studentName: studentEntity.account.fullname,
+                description: medicalEvent.description,
+                treatment: medicalEvent.Treatment
+            }
+            this.mailer.sendMedicalEventNormal(sendData.parentEmail, sendData.parentName, sendData.studentName, sendData.description, sendData.treatment)
         }
         await this.prisma.medicalEvent.update({
             where: { id },
