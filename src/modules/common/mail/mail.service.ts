@@ -1,3 +1,4 @@
+import { DateHelper } from 'src/helpers/date.helper';
 // mail.service.ts
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
@@ -260,6 +261,25 @@ export class MailService {
 
         // Gửi mail
         return this.sendMail(parentEmail, `Kết quả tiêm chủng của bé ${studentName} - ${checkUpTitle}`, html);
+    }
+
+
+
+
+    async healthCheckupMeetingNotification(scheduledAt: string, parentEmail: string, parentName: string, studentName: string, reason: string) {
+        // Đường dẫn đến template pug
+        const templatePath = join(process.cwd(), 'src/configs/template/health-checkup-meeting-notification.pug');
+        // const templatePath = join(__dirname, '../../../configs/template/parent-registration.pug');
+        const formattedTime = DateHelper.formatScheduledAt(scheduledAt);
+        const html = pug.renderFile(templatePath, {
+            formattedTime,
+            parentName,
+            studentName,
+            reason,
+        });
+
+        // Gửi mail
+        return this.sendMail(parentEmail, `Thông báo lịch hẹn trao đổi sức khỏe học sinh ${studentName}`, html);
     }
 
 

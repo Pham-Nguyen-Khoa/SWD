@@ -28,6 +28,8 @@ import { AIModule } from './modules/common/ai/ai.module';
 import { CheckUpManagerModule } from './modules/manager/checkUp/checkUp.manager.module';
 import { CheckUpParentModule } from './modules/parent/checkUp/checkUp.module';
 import { checkUpNurseModule } from './modules/nurse/checkUp/checkUp.nurse.module';
+import { SettingModule } from './modules/admin/setting/setting.module';
+import { MeetingParentModule } from './modules/parent/meeting/meeting.module';
 
 @Module({
   imports: [
@@ -49,6 +51,7 @@ import { checkUpNurseModule } from './modules/nurse/checkUp/checkUp.nurse.module
     HealthParentModule,
     VaccinationEventParentModule,
     MedicineRequestParentModule,
+    MeetingParentModule,
     CheckUpParentModule,
     // Nurse 
     HealthNurseModule,
@@ -67,13 +70,15 @@ import { checkUpNurseModule } from './modules/nurse/checkUp/checkUp.nurse.module
 
 
     UploadModule,
+    SettingModule,
 
     /* ---------------- End Module---------------- */
 
     /* Cron tự động*/
     ScheduleModule.forRoot(),
     ScheduledModule,
-    PrismaModule
+    PrismaModule,
+    SettingModule
   ],
   controllers: [],
   providers: [],

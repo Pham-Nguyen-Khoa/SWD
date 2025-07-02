@@ -19,6 +19,20 @@ import { GetDetailResultCheckUpNurseController } from "./controllers/getDetail.r
 import { GetDetailResultCheckUpNurseService } from "./services/getDetail.result.checkUp.nurse.service"
 import { SendNotificationResultCheckUpNurseService } from "./services/sendNotificationResult.checkUp.nurse.service"
 import { SendNotificationResultCheckUpNurseController } from "./controllers/sendNotificationResult.checkUp.nurse.controller"
+import { CreateIsMeetingNurseService } from "./services/createMeeting.nurse.service"
+import { CreateMeetingNurseController } from "./controllers/createMeeting.nurse.controller"
+import { CheckMeetingNurseService } from "./services/checkMeeting.nurse.service"
+import { CheckMeetingCheckUpNurseController } from "./controllers/checkMeeting.nurse.controller"
+import { CompleteMeetingNurseService } from "./services/completeMeeting.nurse.service"
+import { CompleteIsMeetingNurseController } from "./controllers/completeMeeting.nurse.controller"
+import { GetAllStudentIsMeetingNurseController } from "./controllers/getAllStudentIsMeeting.nurse.controller"
+import { GetAllStudentIsMeetingNurseService } from "./services/getAllStudentIsMeeting.nurse.service"
+import { GetAllIsMeetingNurseController } from "./controllers/getAllIsMeeting.nurse.controller"
+import { GetAllIsMeetingNurseService } from "./services/getAllIsMeeting.nurse.controller"
+import { DeleteStudentIsMeetingNurseService } from "./services/deleteStudentIsMeeting.nurse.service"
+import { DeleteStudentIsMeetingNurseController } from "./controllers/deleteStudentIsMeeting.nurse.controller"
+import { DeleteIsMeetingNurseController } from "./controllers/deleteIsMeeting.nurse.controller"
+import { DeleteIsMeetingNurseService } from "./services/deleteIsMeeting.nurse.service"
 
 
 
@@ -26,11 +40,18 @@ const httpController = [
     GetAllCheckUpNurseController,
     StudentResultStatusCheckUpNurseController,
     GetContentsCheckUpNurseController,
+    GetAllStudentIsMeetingNurseController,
+    GetAllIsMeetingNurseController,
+    DeleteStudentIsMeetingNurseController,
+    DeleteIsMeetingNurseController,
+    CreateMeetingNurseController,
+    CheckMeetingCheckUpNurseController,
+    CompleteIsMeetingNurseController,
     ResultCheckUpNurseController,
     GetDetailCheckUpNurseController,
     GetResultsCheckUpNurseController,
     GetDetailResultCheckUpNurseController,
-    SendNotificationResultCheckUpNurseController
+    SendNotificationResultCheckUpNurseController,
 ]
 
 const Services = [
@@ -42,6 +63,13 @@ const Services = [
     GetResultsCheckUpNurseService,
     GetDetailResultCheckUpNurseService,
     SendNotificationResultCheckUpNurseService,
+    CheckMeetingNurseService,
+    GetAllStudentIsMeetingNurseService,
+    GetAllIsMeetingNurseService,
+    DeleteStudentIsMeetingNurseService,
+    DeleteIsMeetingNurseService,
+    CreateIsMeetingNurseService,
+    CompleteMeetingNurseService,
     MailService,
     JwtService
 ]
@@ -51,7 +79,7 @@ const Services = [
     imports: [PrismaModule, StudentAdminModule],
     controllers: [...httpController],
     providers: [...Services],
-    exports: [GetDetailCheckUpNurseService,GetDetailResultCheckUpNurseService]
+    exports: [GetDetailCheckUpNurseService, GetDetailResultCheckUpNurseService]
 
 })
 export class checkUpNurseModule { }

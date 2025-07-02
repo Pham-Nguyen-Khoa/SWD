@@ -38,5 +38,6 @@ const Services = [
     imports: [PrismaModule],
     controllers: [...httpController],
     providers: [...Services],
+    exports: [StudentParentService]
 })
 export class HealthParentModule { }

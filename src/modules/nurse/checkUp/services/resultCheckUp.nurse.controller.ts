@@ -53,11 +53,12 @@ export class ResultCheckUpNurseService {
             this.prisma.healthCheckupResult.create({
                 data: {
                     healthCheckUpID: checkupID,
-                    studentID: data.studentID,
-                    status: data.status,
-                    overallNotes: data.overallNotes || null,
-                    overallResult: data.overallResult,
-                    createdBy: reqUser.id
+                    studentID: data?.studentID,
+                    status: data?.status,
+                    isMeeting: data?.isMeeting,
+                    overallNotes: data?.overallNotes || null,
+                    overallResult: data?.overallResult,
+                    createdBy: reqUser?.id
                 }
             })
         );

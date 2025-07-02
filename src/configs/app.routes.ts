@@ -87,13 +87,17 @@ export const routesV1 = {
             detailResult: `${checkUp}/:id/result/:studentID`,
             accepted: `${checkUp}/:id/:studentID/accepted`,
             declined: `${checkUp}/:id/:studentID/declined`,
-            resultVaccinationEvent: `/${checkUp}/result`
+            resultVaccinationEvent: `/${checkUp}/result`,
+            meeting: `${checkUp}/meeting`,
+            acceptedMeeting: `${checkUp}/meeting/accept/:id`,
+            declinedMeeting: `${checkUp}/meeting/decline/:id`,
         },
         medicineRequest: {
             ...baseRoutes(`${medicineRequest}`),
             accepted: `${medicineRequest}/accepted/:id`,
             rejected: `${medicineRequest}/rejected/:id`,
-        }
+        },
+
     },
     nurse: {
         health: {
@@ -107,6 +111,11 @@ export const routesV1 = {
         },
         checkUp: {
             ...baseRoutes(`${checkUp}`),
+            isMeeting: `${checkUp}/meeting`,
+            studentIsMeeting: `${checkUp}/meeting/students`,
+            checkMeeting: `${checkUp}/meeting/check`,
+            deleteStudentIsMeeting: `${checkUp}/meeting/students/:id`,
+            deleteIsMeeting: `${checkUp}/meeting/:id`,
             result: `${checkUp}/:id/result`,
             detailResult: `${checkUp}/:id/result/:studentID`,
             studentResultStatus: `${checkUp}/:id/students-result-status`,
