@@ -15,6 +15,7 @@ export class GetDetailCheckUpNurseService {
         private readonly prisma: PrismaService
     ) { }
     async getDetail(id: number) {
+        console.log("hello")
         const healthCheckUpEvent = await this.prisma.healthCheckup.findUnique({
             where: { id },
             include: {

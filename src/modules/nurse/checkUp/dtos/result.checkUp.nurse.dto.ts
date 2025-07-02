@@ -6,8 +6,9 @@ import {
     IsString,
     ValidateNested,
     ArrayNotEmpty,
+    IsBoolean,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 
@@ -52,6 +53,17 @@ export class CheckUpResultDto {
     @Type(() => CheckupResultItemDto)
     results?: CheckupResultItemDto[];
 
+    @ApiPropertyOptional({
+        description: 'Có bất thường không?',
+        example: false,
+        type: Boolean
+    })
+    @IsOptional()
+    @IsBoolean()
+    @Transform(({ value }) => value === 'true' || value === true)
+    isMeeting?: boolean;
+
+
     @ApiProperty({
         example: 'SUCCESS',
         enum: InjectionStatus,
@@ -68,6 +80,8 @@ export class CheckUpResultDto {
     @IsOptional()
     @IsString()
     overallNotes?: string;
+
+
 
     @ApiPropertyOptional({
         example: 'GOOD',

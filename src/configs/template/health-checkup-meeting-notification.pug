@@ -1,0 +1,84 @@
+doctype html
+html
+  head
+    title Thông báo lịch hẹn trao đổi sức khỏe học sinh
+    style.
+      body {
+        background-color: #eaf2f8;
+        padding: 40px 0;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2c3e50;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        background: linear-gradient(to right, #2980b9, #6dd5fa);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .content {
+        padding: 25px;
+        line-height: 1.7;
+        font-size: 16px;
+      }
+      .highlight {
+        font-weight: bold;
+        color: #2980b9;
+      }
+      .note {
+        background-color: #f0f8ff;
+        padding: 10px;
+        border-left: 4px solid #2980b9;
+        margin: 15px 0;
+      }
+      .footer {
+        margin-top: 40px;
+        font-style: italic;
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+      }
+  body
+    .container
+      .header Thông báo lịch hẹn với phụ huynh
+
+      .content
+        p Kính gửi phụ huynh 
+          span.highlight #{parentName},
+
+        p Học sinh 
+          span.highlight #{studentName} 
+          | đã có một số kết quả kiểm tra sức khỏe cần được 
+          strong trao đổi thêm 
+          | với cán bộ y tế của trường.
+
+        .note
+          p 📅 
+            | <strong>Lịch hẹn:</strong> #{formattedTime}
+          if reason
+            p 📌 
+              | <strong>Lý do hẹn:</strong> #{reason}
+
+        p(style="margin-top: 20px")
+            | Nếu cần thay đổi lịch hẹn, vui lòng truy cập website hoặc ứng dụng của nhà trường để 
+            strong đồng ý 
+            | hoặc 
+            strong từ chối 
+            | lịch hẹn, hoặc liên hệ với nhà trường sớm nhất có thể để được hỗ trợ.
+
+        p(style="margin-top: 30px") Trân trọng,
+        p Ban giám hiệu nhà trường
+
+      .footer
+        | Email được gửi từ hệ thống quản lý y tế học đường – Trường THCS Trần Hưng Đạo.

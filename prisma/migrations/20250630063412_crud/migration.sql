@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "HealthCheckupMeetingRequest" ADD COLUMN     "createdBy" INTEGER,
+ADD COLUMN     "updatedBy" INTEGER,
+ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "createdAt" SET DATA TYPE TIMESTAMPTZ(3),
+ALTER COLUMN "updatedAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" SET DATA TYPE TIMESTAMPTZ(3);

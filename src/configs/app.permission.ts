@@ -253,6 +253,22 @@ export const resourcesV1 = {
             displayName: 'Delete Medicine Request',
             parent: 'Medicine Request',
         },
+        // Meeting
+        GET_ALL_MEETING: {
+            name: 'Get All Meeting',
+            displayName: 'Get All Meeting',
+            parent: 'Meeting',
+        },
+        ACCEPT_MEETING: {
+            name: 'Accept Meeting',
+            displayName: 'Accept Meeting',
+            parent: 'Meeting',
+        },
+        DECLINE_MEETING: {
+            name: 'Decline Meeting',
+            displayName: 'Decline Meeting',
+            parent: 'Meeting',
+        },
     },
     Nurse: {
         root: "Nurse",
@@ -302,6 +318,41 @@ export const resourcesV1 = {
         GET_ALL_CHECK_UP: {
             name: 'Get All Check Up',
             displayName: 'Get All Check Up',
+            parent: 'Check Up',
+        },
+        GET_STUDENT_IS_MEETING_CHECK_UP: {
+            name: 'Get All Student Is Meeting Check Up',
+            displayName: 'Get All Student Is Meeting Check Up',
+            parent: 'Check Up',
+        },
+        GET_IS_MEETING_CHECK_UP: {
+            name: 'Get Is Meeting Check Up',
+            displayName: 'Get Is Meeting Check Up',
+            parent: 'Check Up',
+        },
+        DELETE_STUDENT_IS_MEETING_CHECK_UP: {
+            name: 'Delete Student Is Meeting Check Up',
+            displayName: 'Delete Student Is Meeting Check Up',
+            parent: 'Check Up',
+        },
+        DELETE_IS_MEETING_CHECK_UP: {
+            name: 'Delete Is Meeting Check Up',
+            displayName: 'Delete Is Meeting Check Up',
+            parent: 'Check Up',
+        },
+        COMPLETE_IS_MEETING_CHECK_UP: {
+            name: 'Complete Is Meeting Check Up',
+            displayName: 'Complete Is Meeting Check Up',
+            parent: 'Check Up',
+        },
+        CREAT_IS_MEETING_CHECK_UP: {
+            name: 'Create Is Meeting Check Up',
+            displayName: 'Create Is Meeting Check Up',
+            parent: 'Check Up',
+        },
+        CHECK_MEETING_CHECK_UP: {
+            name: 'Check Meeting Check Up',
+            displayName: 'Check Meeting Check Up',
             parent: 'Check Up',
         },
         GET_RESULTS_CHECK_UP: {
