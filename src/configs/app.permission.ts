@@ -112,6 +112,11 @@ export const resourcesV1 = {
             displayName: 'Get All Student',
             parent: 'Student',
         },
+        GET_TOTAL_STUDENT: {
+            name: 'Get Total Student',
+            displayName: 'Get Total Student',
+            parent: 'Student',
+        },
         GET_DETAIL_STUDENT: {
             name: 'Get Detail Student',
             displayName: 'Get Detail Student',
@@ -547,6 +552,7 @@ export const resourcesV1 = {
             displayName: 'Get Detail Vaccination Event',
             parent: 'Vaccination Event',
         },
+
         GET_ALL_CLASS: {
             name: 'Get All Class',
             displayName: 'Get All Class',
