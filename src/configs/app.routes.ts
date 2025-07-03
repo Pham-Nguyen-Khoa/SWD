@@ -51,7 +51,8 @@ export const routesV1 = {
             changeStatus: `/${user}/change-status/:id/:status`,
             importStudent: `/import-student`,
             createStudent: `/student`,
-            updateStudent: `/student/:idStudent`
+            updateStudent: `/student/:idStudent`,
+            totalStudent: `/student/total`
         },
         ai: {
             ...baseRoutes(`${ai}`),

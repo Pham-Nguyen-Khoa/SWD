@@ -12,20 +12,24 @@ import { GetAllStudentAdminService } from './services/getAll-student.admin.servi
 import { GetAllStudentAdminController } from './controllers/getAll-student.admin.controller';
 import { GetDetailStudentAdminController } from './controllers/get-detail-student.admin.controller';
 import { GetDetailStudentAdminService } from './services/get-detail-student.admin.service';
+import { GetTotalStudentAdminController } from './controllers/total-student.admin.controller';
+import { GetTotalStudentAdminService } from './services/total-student.admin.service';
 
 
 
 
 const httpController = [
+    GetTotalStudentAdminController,
     ImportStudentAdminController,
     CreateStudentAdminController,
     UpdateStudentAdminController,
     GetAllStudentAdminController,
-    GetDetailStudentAdminController
+    GetDetailStudentAdminController,
 ]
 
 const Services = [
     ImportStudentService,
+    GetTotalStudentAdminService,
     CreateStudentAdminService,
     UpdateStudentAdminService,
     GetAllStudentAdminService,
