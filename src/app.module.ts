@@ -30,6 +30,8 @@ import { CheckUpParentModule } from './modules/parent/checkUp/checkUp.module';
 import { checkUpNurseModule } from './modules/nurse/checkUp/checkUp.nurse.module';
 import { SettingModule } from './modules/admin/setting/setting.module';
 import { MeetingParentModule } from './modules/parent/meeting/meeting.module';
+import { DashboardAdminModule } from './modules/admin/dashboard/dashboard.admin.module';
+import { ProfileParentModule } from './modules/parent/profile/profile.parent.module';
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { MeetingParentModule } from './modules/parent/meeting/meeting.module';
     UserAdminModule,
     StudentAdminModule,
     AiAdminModule,
+    DashboardAdminModule,
     // Client 
     UserModule,
     // Parent 
@@ -53,6 +56,7 @@ import { MeetingParentModule } from './modules/parent/meeting/meeting.module';
     MedicineRequestParentModule,
     MeetingParentModule,
     CheckUpParentModule,
+    ProfileParentModule,
     // Nurse 
     HealthNurseModule,
     VaccinationEventNurseModule,

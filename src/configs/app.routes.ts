@@ -1,3 +1,4 @@
+
 const authRoot = 'auth';
 const user = 'account';
 const ai = 'ai_prompt';
@@ -8,6 +9,7 @@ const medicineSupply = 'medicineSupply';
 const request = 'request';
 const medicalEvent = 'medicalEvent';
 const checkUp = 'check-up';
+const profile = 'profile';
 const medicineRequest = 'medicineRequest';
 
 const baseRoutes = (root: string) => {
@@ -98,6 +100,9 @@ export const routesV1 = {
             accepted: `${medicineRequest}/accepted/:id`,
             rejected: `${medicineRequest}/rejected/:id`,
         },
+        profile: {
+            ...baseRoutes(`${profile}`),
+        }
 
     },
     nurse: {

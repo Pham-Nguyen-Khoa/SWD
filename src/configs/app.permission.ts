@@ -173,6 +173,11 @@ export const resourcesV1 = {
             displayName: 'Accepted Vaccination Event',
             parent: 'Vaccination Event',
         },
+        UPDATE_PROFILE_PARENT: {
+            name: 'Update Profile Parent',
+            displayName: 'Update Profile Parent',
+            parent: 'Profile',
+        },
         DECLIEND_VACCINATION_EVENT: {
             name: 'Declined Vaccination Event',
             displayName: 'Declined Vaccination Event',
