@@ -11,6 +11,7 @@ const medicalEvent = 'medicalEvent';
 const checkUp = 'check-up';
 const profile = 'profile';
 const medicineRequest = 'medicineRequest';
+const dashboard = 'dashboard';
 
 const baseRoutes = (root: string) => {
     return {
@@ -58,6 +59,12 @@ export const routesV1 = {
         },
         ai: {
             ...baseRoutes(`${ai}`),
+        },
+        dashboard: {
+            ...baseRoutes(`${dashboard}`),
+            medicalEvent: `/${dashboard}/medicalEvent`,
+            healthProfile: `/${dashboard}/healthProfile`,
+
         }
 
     },

@@ -23,15 +23,18 @@ export class LoginService {
             }
         })
         if (!user) {
-            return errorResponse(400, "Tài khoản không tồn tại","NOT_FOUND")
+            return errorResponse(400, "Tài khoản không tồn tại", "NOT_FOUND")
         }
 
         // Kiểm tra password    
 
         const verify = await compare(data.password, user.password);
         if (!verify) {
-            return errorResponse(400, "Mật khẩu không đúng","INCORRECT_PASWORD")
+            return errorResponse(400, "Mật khẩu không đúng", "INCORRECT_PASWORD")
 
+        }
+        if (user.status === "BLOCK") {
+            return errorResponse(400, "Tài khoản đã bị vô hiệu hóa", "")
         }
 
 

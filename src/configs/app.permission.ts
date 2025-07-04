@@ -133,6 +133,17 @@ export const resourcesV1 = {
             displayName: 'Get AI PROMPT',
             parent: 'AI',
         },
+
+        MEDICAL_EVENT_DASHBOARD: {
+            name: 'Medical Event Dashboard',
+            displayName: 'Medical Event Dashboard',
+            parent: 'Dashboard',
+        },
+        HEALTH_PROFILE_DASHBOARD: {
+            name: 'Health Profile Dashboard',
+            displayName: 'Health Profile Dashboard',
+            parent: 'Dashboard',
+        }
     },
     Parent: {
         root: "Parent",
