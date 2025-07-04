@@ -37,13 +37,6 @@ export class GetDashboardMedicalEventQuery {
     @IsString()
     classID?: string;
 
-    @ApiPropertyOptional({
-        description: 'Lọc theo ID học sinh',
-        example: 'student_456'
-    })
-    @IsOptional()
-    @IsString()
-    studentId?: string;
 
 
 }
