@@ -133,6 +133,17 @@ export const resourcesV1 = {
             displayName: 'Get AI PROMPT',
             parent: 'AI',
         },
+
+        MEDICAL_EVENT_DASHBOARD: {
+            name: 'Medical Event Dashboard',
+            displayName: 'Medical Event Dashboard',
+            parent: 'Dashboard',
+        },
+        HEALTH_PROFILE_DASHBOARD: {
+            name: 'Health Profile Dashboard',
+            displayName: 'Health Profile Dashboard',
+            parent: 'Dashboard',
+        }
     },
     Parent: {
         root: "Parent",
@@ -172,6 +183,11 @@ export const resourcesV1 = {
             name: 'Accepted Vaccination Event',
             displayName: 'Accepted Vaccination Event',
             parent: 'Vaccination Event',
+        },
+        UPDATE_PROFILE_PARENT: {
+            name: 'Update Profile Parent',
+            displayName: 'Update Profile Parent',
+            parent: 'Profile',
         },
         DECLIEND_VACCINATION_EVENT: {
             name: 'Declined Vaccination Event',
